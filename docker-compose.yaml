@@ -1,0 +1,29 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:14.5-bullseye
+    container_name: FavorsDB
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Kazuki123
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+  service_pgadmin:
+    image: dpage/pgadmin4:6.11
+    container_name: container_pgadmin
+    ports:
+      - 8080:80
+    volumes:
+      - volume_pgadmin:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: kazukikagoshima2@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: Kazuki123
+
+volumes:
+  volume_postgres:
+    name: vpg
+  volume_pgadmin:
+    name: vpga
