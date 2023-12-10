@@ -1,0 +1,28 @@
+# .gitignore
+favors-env/
+# Virtual environment
+venv/
+
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Editor/IDE specific files
+.idea/
+.vscode/
+
+# Environment-specific files
+.env
+
+# Dependencies
+*.pyc
+*.pyo
+__pycache__/
+*.pyc
+
+# Optional: Exclude specific files or directories based on your project needs
+# my_secret_key.txt
+# logs/
+# data/
