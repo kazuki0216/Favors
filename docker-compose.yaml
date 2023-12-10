@@ -9,7 +9,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=Kazuki123
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./backend/database/data:/var/lib/postgresql/data
       - ./backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
   service_pgadmin:
     image: dpage/pgadmin4:6.11
