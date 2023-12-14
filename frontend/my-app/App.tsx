@@ -1,10 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Header from "./components/Header";
 
 export default function App() {
+  const [counter, setCounter] = useState<number>(0);
   return (
     <View style={styles.container}>
+      <Header />
       <Text style={styles.texts}>Favors</Text>
       <StatusBar style="auto" />
     </View>
@@ -14,9 +17,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#ffffff",
   },
   texts: {
     color: "white",
