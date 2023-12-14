@@ -21,7 +21,12 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: kazukikagoshima2@gmail.com
       PGADMIN_DEFAULT_PASSWORD: Kazuki123
-
+  react_native:
+    build: ./frontend/
+    volumes:
+      - ./myapp:/usr/src/app
+    ports:
+      - 3000:3000
 volumes:
   volume_postgres:
     name: vpg
