@@ -4,4 +4,7 @@ module.exports = {
     android: {},
   },
   assets: ["./assets/fonts/"],
+  resolver: {
+    assetExts: ["svg", "png"],
+  },
 };

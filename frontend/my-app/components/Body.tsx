@@ -2,40 +2,23 @@ import React from "react";
 import { useEffect, useState, Dispatch, SetStateAction, FC } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 
-const Header = () => {
+const Body = () => {
   return (
     <>
-      <View style={styles.header}>
-        <View style={styles.halfWidth}>
-          <Text style={styles.text}>Favors</Text>
-        </View>
-        <View style={[styles.halfWidth, styles.left_flex]}>
-          <View>
-            <Image
-              style={styles.logo}
-              source={require("../assets/search.png")}
-            />
-          </View>
-          <View>
-            <Image
-              style={styles.logo}
-              source={require("../assets/notification.png")}
-            />
-          </View>
-        </View>
+      <View style={styles.body}>
+        <Image
+          style={styles.logo}
+          source={require("../assets/home.png")}
+        />
+        <Text>This is the body</Text>
       </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
-    alignSelf: "stretch",
-    padding: 30,
-    backgroundColor: "#303242",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
+  body: {
+    alignItems: "center",
   },
   halfWidth: {
     flex: 1, // Take up equal space
@@ -69,10 +52,10 @@ const styles = StyleSheet.create({
     color: "red",
   },
   logo: {
-    width: 30,
+    width: 33,
     height: 25,
     color: "#fffff",
   },
 });
 
-export default Header;
+export default Body;
