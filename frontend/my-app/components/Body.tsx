@@ -6,11 +6,7 @@ const Body = () => {
   return (
     <>
       <View style={styles.body}>
-        <Image
-          style={styles.logo}
-          source={require("../assets/home.png")}
-        />
-        <Text>This is the body</Text>
+        <Text>This is the body section</Text>
       </View>
     </>
   );
@@ -18,7 +14,9 @@ const Body = () => {
 
 const styles = StyleSheet.create({
   body: {
+    margin: 0,
     alignItems: "center",
+    flex: 0.865,
   },
   halfWidth: {
     flex: 1, // Take up equal space

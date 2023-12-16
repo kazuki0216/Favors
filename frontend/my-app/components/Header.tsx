@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect, useState, Dispatch, SetStateAction, FC } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
+import Icon2 from "react-native-vector-icons/Ionicons";
 
 const Header = () => {
   return (
@@ -11,15 +13,14 @@ const Header = () => {
         </View>
         <View style={[styles.halfWidth, styles.left_flex]}>
           <View>
-            <Image
-              style={styles.logo}
-              source={require("../assets/search.png")}
-            />
+            <Icon name="search" size={28} color="#E2D7C6" style={styles.searchIcon}/>
           </View>
           <View>
-            <Image
+            <Icon2
+              name="notifications"
+              size={30}
+              color="#E2D7C6"
               style={styles.logo}
-              source={require("../assets/notification.png")}
             />
           </View>
         </View>
@@ -53,12 +54,13 @@ const styles = StyleSheet.create({
   left_flex: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
   left: {
     justifyContent: "space-between",
     textAlign: "center",
+    alignContent: "stretch",
     marginTop: 30,
     fontWeight: "bold",
     //fontFamily: "Preahvihear-Regular",
@@ -69,10 +71,11 @@ const styles = StyleSheet.create({
     color: "red",
   },
   logo: {
-    width: 30,
-    height: 25,
-    color: "#fffff",
+    marginLeft: 10,
   },
+  searchIcon: {
+    marginBottom:2
+  }
 });
 
 export default Header;
