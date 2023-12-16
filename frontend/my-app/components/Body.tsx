@@ -1,13 +1,38 @@
 import React from "react";
 import { useEffect, useState, Dispatch, SetStateAction, FC } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
 
 const Body = () => {
   return (
     <>
-      <View style={styles.body}>
-        <Text>This is the body section</Text>
-      </View>
+      <SafeAreaView style={styles.body}>
+        <ScrollView style={styles.card_section}>
+          <View style={styles.container}>
+            <View style={styles.card_styling}>
+              <Text>コーヒーのデリバリー</Text>
+            </View>
+            <View style={styles.card_styling}>
+              <Text>コーヒーのデリバリー</Text>
+            </View>
+            <View style={styles.card_styling}>
+              <Text>コーヒーのデリバリー</Text>
+            </View>
+            <View style={styles.card_styling}>
+              <Text>コーヒーのデリバリー</Text>
+            </View>
+            <View style={styles.card_styling}>
+              <Text>コーヒーのデリバリー</Text>
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     </>
   );
 };
@@ -16,7 +41,31 @@ const styles = StyleSheet.create({
   body: {
     margin: 0,
     alignItems: "center",
-    flex: 0.865,
+    justifyContent: "flex-end",
+    flex: 1,
+  },
+  card_section: {
+    flex: 0.95,
+    width: 350,
+    backgroundColor: "#7F8E6A",
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    display: "flex",
+    flexDirection: "column",
+    overflow: "scroll",
+    maxHeight: 600,
+    padding: 10,
+  },
+  container: {
+    alignItems: "center",
+  },
+  card_styling: {
+    backgroundColor: "#ffffff",
+    borderRadius: 20,
+    alignItems: "center",
+    width: 300,
+    height: 200,
+    marginTop: 10,
   },
   halfWidth: {
     flex: 1, // Take up equal space
