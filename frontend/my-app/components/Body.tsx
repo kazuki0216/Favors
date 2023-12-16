@@ -8,8 +8,9 @@ import {
   ScrollView,
   SafeAreaView,
   Button,
-  TouchableHighlight
+  TouchableHighlight,
 } from "react-native";
+import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Body = () => {
   return (
@@ -18,19 +19,24 @@ const Body = () => {
         <ScrollView style={styles.card_section}>
           <View style={styles.container}>
             <View style={styles.card_styling}>
-              <Text>コーヒーのデリバリー</Text>
+              <Icon3 name="account-circle-outline" size={40} />
+              <Text style={styles.text}>コーヒーのデリバリー</Text>
             </View>
             <View style={styles.card_styling}>
-              <Text>コーヒーのデリバリー</Text>
+              <Icon3 name="account-circle-outline" size={40} />
+              <Text style={styles.text}>コーヒーのデリバリー</Text>
             </View>
             <View style={styles.card_styling}>
-              <Text>コーヒーのデリバリー</Text>
+              <Icon3 name="account-circle-outline" size={40} />
+              <Text style={styles.text}>コーヒーのデリバリー</Text>
             </View>
             <View style={styles.card_styling}>
-              <Text>コーヒーのデリバリー</Text>
+              <Icon3 name="account-circle-outline" size={40} />
+              <Text style={styles.text}>コーヒーのデリバリー</Text>
             </View>
             <View style={styles.card_styling}>
-              <Text>コーヒーのデリバリー</Text>
+              <Icon3 name="account-circle-outline" size={40} />
+              <Text style={styles.text}>コーヒーのデリバリー</Text>
             </View>
           </View>
         </ScrollView>
@@ -70,11 +76,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   card_styling: {
+    display: "flex",
+    flexDirection: "row",
     backgroundColor: "#ffffff",
     borderRadius: 20,
-    alignItems: "center",
+    alignItems: "flex-start",
+    justifyContent: "space-evenly",
     width: 300,
-    height: 200,
+    height: 150,
     marginTop: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -85,41 +94,12 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 5,
   },
-  halfWidth: {
-    flex: 1, // Take up equal space
-  },
+
   text: {
-    justifyContent: "center",
-    textAlign: "center",
-    marginTop: 30,
-    width: 100,
     fontWeight: "bold",
-    //fontFamily: "Preahvihear-Regular",
     color: "#E2D7C6",
-    fontSize: 25,
-  },
-  left_flex: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  left: {
-    justifyContent: "space-between",
-    textAlign: "center",
-    marginTop: 30,
-    fontWeight: "bold",
-    //fontFamily: "Preahvihear-Regular",
-    color: "#E2D7C6",
-    fontSize: 15,
-  },
-  counter: {
-    color: "red",
-  },
-  logo: {
-    width: 33,
-    height: 25,
-    color: "#fffff",
+    marginTop: 10,
+    fontSize: 20,
   },
 });
 
