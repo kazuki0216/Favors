@@ -7,6 +7,8 @@ import {
   Image,
   ScrollView,
   SafeAreaView,
+  Button,
+  TouchableHighlight
 } from "react-native";
 
 const Body = () => {
@@ -43,6 +45,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
     flex: 1,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 1.25,
+    shadowRadius: 5,
+    elevation: 5,
   },
   card_section: {
     flex: 0.95,
@@ -66,6 +76,14 @@ const styles = StyleSheet.create({
     width: 300,
     height: 200,
     marginTop: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 2,
+    },
+    shadowOpacity: 1.25,
+    shadowRadius: 3,
+    elevation: 5,
   },
   halfWidth: {
     flex: 1, // Take up equal space
