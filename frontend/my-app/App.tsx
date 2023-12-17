@@ -20,3 +20,19 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+// .first-color { 
+// 	background: #2e94b9; 
+// }
+	
+// .second-color { 
+// 	background: #475053; 
+// }
+
+// .third-color { 
+// 	background: #acdcee; 
+// }
+
+// .fourth-color { 
+// 	background: #f0fbff; 
+// }

@@ -13,8 +13,43 @@ import {
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Body = () => {
+  const [selectedButton, setSelectedButton] = useState<string | null>(null);
+
+  const handlePress = (button: string) => {
+    setSelectedButton(button);
+  };
   return (
     <>
+      <View style={styles.view_button}>
+        <TouchableHighlight
+          activeOpacity={0.6}
+          underlayColor="#DDDDDD"
+          onPress={() => handlePress("投稿")}
+        >
+          <Text
+            style={[
+              styles.view_button_text,
+              selectedButton === "投稿" && { color: "#2e94b9", fontSize: 28 },
+            ]}
+          >
+            投稿
+          </Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          activeOpacity={0.6}
+          underlayColor="#DDDDDD"
+          onPress={() => handlePress("自分")}
+        >
+          <Text
+            style={[
+              styles.view_button_text,
+              selectedButton === "自分" && { color: "#2e94b9", fontSize: 28 },
+            ]}
+          >
+            自分
+          </Text>
+        </TouchableHighlight>
+      </View>
       <SafeAreaView style={styles.body}>
         <ScrollView style={styles.card_section}>
           <View style={styles.container}>
@@ -63,7 +98,7 @@ const styles = StyleSheet.create({
   card_section: {
     flex: 0.95,
     width: 350,
-    backgroundColor: "#7F8E6A",
+    backgroundColor: "#fecd51",
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     display: "flex",
@@ -93,13 +128,26 @@ const styles = StyleSheet.create({
     shadowOpacity: 1.25,
     shadowRadius: 3,
     elevation: 5,
+    marginBottom: 40,
   },
 
   text: {
     fontWeight: "bold",
-    color: "#E2D7C6",
+    color: "#475053",
     marginTop: 10,
     fontSize: 20,
+  },
+  view_button: {
+    display: "flex",
+    flexDirection: "row",
+    alignSelf: "stretch",
+    justifyContent: "space-evenly",
+    marginVertical: 15,
+  },
+  view_button_text: {
+    fontWeight: "bold",
+    fontSize: 25,
+    color: "#E2D7C6",
   },
 });
 
