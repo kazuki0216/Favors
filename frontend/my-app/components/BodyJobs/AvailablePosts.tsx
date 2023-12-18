@@ -12,44 +12,9 @@ import {
 } from "react-native";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 
-const Body = () => {
-  const [selectedButton, setSelectedButton] = useState<string | null>(null);
-
-  const handlePress = (button: string) => {
-    setSelectedButton(button);
-  };
+const AvailableJobs = () => {
   return (
     <>
-      <View style={styles.view_button}>
-        <TouchableHighlight
-          activeOpacity={0.6}
-          underlayColor="#DDDDDD"
-          onPress={() => handlePress("投稿")}
-        >
-          <Text
-            style={[
-              styles.view_button_text,
-              selectedButton === "投稿" && { color: "#004831", fontSize: 28 },
-            ]}
-          >
-            投稿
-          </Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          activeOpacity={0.6}
-          underlayColor="#DDDDDD"
-          onPress={() => handlePress("自分")}
-        >
-          <Text
-            style={[
-              styles.view_button_text,
-              selectedButton === "自分" && { color: "#004831", fontSize: 28 },
-            ]}
-          >
-            自分
-          </Text>
-        </TouchableHighlight>
-      </View>
       <SafeAreaView style={styles.body}>
         <ScrollView style={styles.card_section}>
           <View style={styles.container}>
@@ -80,6 +45,8 @@ const Body = () => {
   );
 };
 
+export default AvailableJobs;
+
 const styles = StyleSheet.create({
   body: {
     margin: 0,
@@ -99,7 +66,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.3,
     flex: 0.95,
     width: 350,
-    backgroundColor: "#004832", 
+    backgroundColor: "#004832",
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     display: "flex",
@@ -150,5 +117,3 @@ const styles = StyleSheet.create({
     color: "#E2D7C6",
   },
 });
-
-export default Body;

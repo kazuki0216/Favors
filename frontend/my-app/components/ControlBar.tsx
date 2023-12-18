@@ -15,7 +15,21 @@ type IconColors = {
   icon3: string;
 };
 
-const ControlBar = () => {
+interface Props {
+  homeNavigation: () => void;
+  addJobNavigation: () => void;
+  profileNavigation: () => void;
+  bookMarkNavigation: () => void;
+  messageNavigation: () => void;
+}
+
+const ControlBar: React.FC<Props> = ({
+  homeNavigation,
+  addJobNavigation,
+  profileNavigation,
+  bookMarkNavigation,
+  messageNavigation,
+}) => {
   const [iconColors, setIconColors] = useState<IconColors>({
     icon2: "#E2D7C6",
     icon4: "#E2D7C6",
@@ -31,7 +45,7 @@ const ControlBar = () => {
           acc[key as keyof IconColors] =
             key === iconName
               ? prevColors[key as keyof IconColors] === "#E2D7C6"
-                ? "#3CACBC"
+                ? "#004831"
                 : "#E2D7C6"
               : "#E2D7C6"; // Reset the color for other icons
           return acc;
@@ -45,23 +59,48 @@ const ControlBar = () => {
     <>
       <View style={styles.body}>
         <View style={styles.icons}>
-          <TouchableOpacity onPress={() => handlePress("icon2")}>
+          <TouchableOpacity
+            onPress={() => {
+              handlePress("icon2");
+              homeNavigation();
+            }}
+          >
             <Icon2 name="home-outline" size={38} color={iconColors.icon2} />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => handlePress("icon4")}>
+          <TouchableOpacity
+            onPress={() => {
+              handlePress("icon4");
+              messageNavigation();
+            }}
+          >
             <Icon4 name="chat" size={40} color={iconColors.icon4} />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => handlePress("icon5")}>
+          <TouchableOpacity
+            onPress={() => {
+              handlePress("icon5");
+              addJobNavigation();
+            }}
+          >
             <Icon5 name="plus" size={40} color={iconColors.icon5} />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => handlePress("icon")}>
+          <TouchableOpacity
+            onPress={() => {
+              handlePress("icon");
+              bookMarkNavigation();
+            }}
+          >
             <Icon name="bookmark-o" size={40} color={iconColors.icon} />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => handlePress("icon3")}>
+          <TouchableOpacity
+            onPress={() => {
+              handlePress("icon3");
+              profileNavigation();
+            }}
+          >
             <Icon3
               name="account-circle-outline"
               size={40}

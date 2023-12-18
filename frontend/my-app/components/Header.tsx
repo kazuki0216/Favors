@@ -8,12 +8,20 @@ const Header = () => {
   return (
     <>
       <View style={styles.header}>
-        <View style={styles.halfWidth}>
-          <Text style={styles.text}>Favors</Text>
+        <View style={styles.halfWidthR}>
+          <Image
+            source={require("../assets/favors-logo.png")}
+            style={styles.image_logo}
+          />
         </View>
         <View style={[styles.halfWidth, styles.left_flex]}>
           <View>
-            <Icon name="search" size={28} color="#E2D7C6" style={styles.searchIcon}/>
+            <Icon
+              name="search"
+              size={28}
+              color="#E2D7C6"
+              style={styles.searchIcon}
+            />
           </View>
           <View>
             <Icon2
@@ -31,31 +39,39 @@ const Header = () => {
 
 const styles = StyleSheet.create({
   header: {
+    position: "relative",
     alignSelf: "stretch",
-    padding: 30,
-    backgroundColor: "#303242",
+    paddingVertical: 30,
+    paddingBottom: 15,
+    backgroundColor: "#ffffff",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    borderBottomWidth: 1,
   },
   halfWidth: {
     flex: 1, // Take up equal space
-  },
-  text: {
-    justifyContent: "center",
-    textAlign: "center",
     marginTop: 30,
-    width: 100,
-    fontWeight: "bold",
-    //fontFamily: "Preahvihear-Regular",
-    color: "#E2D7C6",
-    fontSize: 25,
   },
+  halfWidthR: {
+    flex: 1, // Take up equal space
+    marginTop: 35,
+    position: "absolute"
+  },
+  image_logo: {
+    width: 120,
+    height: 50,
+    resizeMode: "contain",
+    marginLeft: 10,
+    marginTop: 15
+  },
+
   left_flex: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "flex-end",
+    marginRight: 20,
   },
   left: {
     justifyContent: "space-between",
@@ -74,8 +90,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   searchIcon: {
-    marginBottom:2
-  }
+    marginBottom: 2,
+  },
 });
 
 export default Header;
