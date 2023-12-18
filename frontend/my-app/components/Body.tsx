@@ -29,7 +29,7 @@ const Body = () => {
           <Text
             style={[
               styles.view_button_text,
-              selectedButton === "投稿" && { color: "#2e94b9", fontSize: 28 },
+              selectedButton === "投稿" && { color: "#004831", fontSize: 28 },
             ]}
           >
             投稿
@@ -43,7 +43,7 @@ const Body = () => {
           <Text
             style={[
               styles.view_button_text,
-              selectedButton === "自分" && { color: "#2e94b9", fontSize: 28 },
+              selectedButton === "自分" && { color: "#004831", fontSize: 28 },
             ]}
           >
             自分
@@ -96,9 +96,10 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   card_section: {
+    borderWidth: 0.3,
     flex: 0.95,
     width: 350,
-    backgroundColor: "#fecd51",
+    backgroundColor: "#004832", 
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     display: "flex",
@@ -130,10 +131,9 @@ const styles = StyleSheet.create({
     elevation: 5,
     marginBottom: 40,
   },
-
   text: {
     fontWeight: "bold",
-    color: "#475053",
+    color: "#004831",
     marginTop: 10,
     fontSize: 20,
   },

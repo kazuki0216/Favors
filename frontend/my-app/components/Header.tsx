@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <>
       <View style={styles.header}>
-        <View style={styles.halfWidth}>
+        <View style={styles.halfWidthR}>
           <Image
             source={require("../assets/favors-logo.png")}
             style={styles.image_logo}
@@ -39,27 +39,39 @@ const Header = () => {
 
 const styles = StyleSheet.create({
   header: {
+    position: "relative",
     alignSelf: "stretch",
-    padding: 30,
-    backgroundColor: "#2e94b9",
+    paddingVertical: 30,
+    paddingBottom: 15,
+    backgroundColor: "#ffffff",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    borderBottomWidth: 1,
   },
   halfWidth: {
     flex: 1, // Take up equal space
     marginTop: 30,
   },
+  halfWidthR: {
+    flex: 1, // Take up equal space
+    marginTop: 35,
+    position: "absolute"
+  },
   image_logo: {
     width: 120,
-    height: 30,
+    height: 50,
     resizeMode: "contain",
+    marginLeft: 10,
+    marginTop: 15
   },
+
   left_flex: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "flex-end",
+    marginRight: 20,
   },
   left: {
     justifyContent: "space-between",

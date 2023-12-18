@@ -31,7 +31,7 @@ const ControlBar = () => {
           acc[key as keyof IconColors] =
             key === iconName
               ? prevColors[key as keyof IconColors] === "#E2D7C6"
-                ? "#2e94b9"
+                ? "#004831"
                 : "#E2D7C6"
               : "#E2D7C6"; // Reset the color for other icons
           return acc;
