@@ -48,7 +48,7 @@ const AvailablePosts = () => {
               </View>
               <View style={styles.card_body}>
                 <Text style={styles.card_text}>
-                  木曜日２限目・鈴木教授の授業で出席のカードを押して、授業後に提出する感想用紙の提出をお願いします。
+                  木曜日２限目・鈴木教授の授業で出席のカードを押して、授業後に記入する感想用紙の提出をお願いします。
                 </Text>
               </View>
               <View style={styles.card_footer}>
@@ -167,7 +167,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-start",
     width: 300,
-    marginLeft: 10
+    marginLeft: 10,
+    marginTop: 5
   },
   card_body: {
     marginHorizontal: 25,

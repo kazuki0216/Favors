@@ -74,24 +74,14 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     justifyContent: "space-evenly",
     marginVertical: 15,
-    backgroundColor: "#d3d3d3",
-    padding: 10,
     marginHorizontal: 25,
     borderRadius: 10,
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 1,
-      height: 1.5,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 2,
   },
   view_button_text: {
     fontWeight: "bold",
     fontSize: 23,
-    color: "#006A4E",
-    
+    color: "#E2D7C6",
   },
 });
 
