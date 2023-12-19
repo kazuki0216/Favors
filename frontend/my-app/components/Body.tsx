@@ -11,12 +11,23 @@ import {
   TouchableHighlight,
 } from "react-native";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
+import AvailablePosts from "./BodyJobs/AvailablePosts";
+import MyJobs from "./BodyJobs/MyJobs";
 
 const Body = () => {
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
+  const [homePosts, setHomePosts] = useState<boolean>(true);
+  const [myPost, setMyPost] = useState<boolean>(false);
 
   const handlePress = (button: string) => {
     setSelectedButton(button);
+    if (button === "自分") {
+      setHomePosts(false);
+      setMyPost(true);
+    } else {
+      setHomePosts(true);
+      setMyPost(false);
+    }
   };
   return (
     <>
@@ -50,32 +61,8 @@ const Body = () => {
           </Text>
         </TouchableHighlight>
       </View>
-      <SafeAreaView style={styles.body}>
-        <ScrollView style={styles.card_section}>
-          <View style={styles.container}>
-            <View style={styles.card_styling}>
-              <Icon3 name="account-circle-outline" size={40} />
-              <Text style={styles.text}>コーヒーのデリバリー</Text>
-            </View>
-            <View style={styles.card_styling}>
-              <Icon3 name="account-circle-outline" size={40} />
-              <Text style={styles.text}>コーヒーのデリバリー</Text>
-            </View>
-            <View style={styles.card_styling}>
-              <Icon3 name="account-circle-outline" size={40} />
-              <Text style={styles.text}>コーヒーのデリバリー</Text>
-            </View>
-            <View style={styles.card_styling}>
-              <Icon3 name="account-circle-outline" size={40} />
-              <Text style={styles.text}>コーヒーのデリバリー</Text>
-            </View>
-            <View style={styles.card_styling}>
-              <Icon3 name="account-circle-outline" size={40} />
-              <Text style={styles.text}>コーヒーのデリバリー</Text>
-            </View>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+      {homePosts && !myPost && <AvailablePosts />}
+      {!homePosts && myPost && <MyJobs />}
     </>
   );
 };
@@ -99,7 +86,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.3,
     flex: 0.95,
     width: 350,
-    backgroundColor: "#004832", 
+    backgroundColor: "#004832",
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     display: "flex",
