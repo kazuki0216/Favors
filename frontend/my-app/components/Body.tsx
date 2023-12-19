@@ -68,73 +68,30 @@ const Body = () => {
 };
 
 const styles = StyleSheet.create({
-  body: {
-    margin: 0,
-    alignItems: "center",
-    justifyContent: "flex-end",
-    flex: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 1.25,
-    shadowRadius: 5,
-    elevation: 5,
-  },
-  card_section: {
-    borderWidth: 0.3,
-    flex: 0.95,
-    width: 350,
-    backgroundColor: "#004832",
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    display: "flex",
-    flexDirection: "column",
-    overflow: "scroll",
-    maxHeight: 600,
-    padding: 10,
-  },
-  container: {
-    alignItems: "center",
-  },
-  card_styling: {
-    display: "flex",
-    flexDirection: "row",
-    backgroundColor: "#ffffff",
-    borderRadius: 20,
-    alignItems: "flex-start",
-    justifyContent: "space-evenly",
-    width: 300,
-    height: 150,
-    marginTop: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 1,
-      height: 2,
-    },
-    shadowOpacity: 1.25,
-    shadowRadius: 3,
-    elevation: 5,
-    marginBottom: 40,
-  },
-  text: {
-    fontWeight: "bold",
-    color: "#004831",
-    marginTop: 10,
-    fontSize: 20,
-  },
   view_button: {
     display: "flex",
     flexDirection: "row",
     alignSelf: "stretch",
     justifyContent: "space-evenly",
     marginVertical: 15,
+    backgroundColor: "#d3d3d3",
+    padding: 10,
+    marginHorizontal: 25,
+    borderRadius: 10,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 1.5,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 2,
   },
   view_button_text: {
     fontWeight: "bold",
-    fontSize: 25,
-    color: "#E2D7C6",
+    fontSize: 23,
+    color: "#006A4E",
+    
   },
 });
 
