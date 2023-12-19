@@ -31,7 +31,7 @@ const ControlBar: React.FC<Props> = ({
   messageNavigation,
 }) => {
   const [iconColors, setIconColors] = useState<IconColors>({
-    icon2: "#E2D7C6",
+    icon2: "#004831",
     icon4: "#E2D7C6",
     icon5: "#E2D7C6",
     icon: "#E2D7C6",

@@ -15,7 +15,32 @@ import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 const MyJobs = () => {
   return (
     <>
-      
+      <SafeAreaView style={styles.body}>
+        <ScrollView style={styles.card_section}>
+          <View style={styles.container}>
+            <View style={styles.card_styling}>
+              <Icon3 name="account-circle-outline" size={40} />
+              <Text style={styles.text}>My Motherfucking Jobs!!!</Text>
+            </View>
+            <View style={styles.card_styling}>
+              <Icon3 name="account-circle-outline" size={40} />
+              <Text style={styles.text}>My Motherfucking Jobs!!!</Text>
+            </View>
+            <View style={styles.card_styling}>
+              <Icon3 name="account-circle-outline" size={40} />
+              <Text style={styles.text}>My Motherfucking Jobs!!!</Text>
+            </View>
+            <View style={styles.card_styling}>
+              <Icon3 name="account-circle-outline" size={40} />
+              <Text style={styles.text}>My Motherfucking Jobs!!!</Text>
+            </View>
+            <View style={styles.card_styling}>
+              <Icon3 name="account-circle-outline" size={40} />
+              <Text style={styles.text}>My Motherfucking Jobs!!!</Text>
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     </>
   );
 };

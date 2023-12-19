@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 
-const AvailableJobs = () => {
+const AvailablePosts = () => {
   return (
     <>
       <SafeAreaView style={styles.body}>
@@ -45,7 +45,7 @@ const AvailableJobs = () => {
   );
 };
 
-export default AvailableJobs;
+export default AvailablePosts;
 
 const styles = StyleSheet.create({
   body: {
