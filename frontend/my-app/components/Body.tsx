@@ -9,12 +9,19 @@ import {
   SafeAreaView,
   Button,
   TouchableHighlight,
+  Modal,
 } from "react-native";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 import AvailablePosts from "./BodyJobs/AvailablePosts";
 import MyJobs from "./BodyJobs/MyJobs";
+import ModalView from "./BodyJobs/Modal";
 
-const Body = () => {
+interface Props {
+  homeNavigation: () => void;
+  messageNavigation: () => void;
+}
+
+const Body: React.FC<Props> = ({ homeNavigation, messageNavigation }) => {
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
   const [homePosts, setHomePosts] = useState<boolean>(true);
   const [myPost, setMyPost] = useState<boolean>(false);
@@ -61,7 +68,12 @@ const Body = () => {
           </Text>
         </TouchableHighlight>
       </View>
-      {homePosts && !myPost && <AvailablePosts />}
+      {homePosts && !myPost && (
+        <AvailablePosts
+          homeNavigation={homeNavigation}
+          messageNavigation={messageNavigation}
+        />
+      )}
       {!homePosts && myPost && <MyJobs />}
     </>
   );

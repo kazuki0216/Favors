@@ -9,104 +9,74 @@ import {
   SafeAreaView,
   Button,
   TouchableHighlight,
+  Modal,
+  Pressable,
+  Alert,
 } from "react-native";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/Ionicons";
 import Icon1 from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
+import ModalView from "./Modal";
+import { PostBody } from "../../types/post";
+import dummyData from "../DummyData";
 
-const AvailablePosts = () => {
+interface Props {
+  homeNavigation: () => void;
+  messageNavigation:() => void
+}
+
+const AvailablePosts: React.FC<Props> = ({ homeNavigation, messageNavigation }) => {
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [selectedPost, setSelectedPost] = useState<PostBody | null>(null);
+  const [postFeed, setPostFeed] = useState<PostBody[] | []>(dummyData);
+
+  const renderPosts = postFeed.map((feed, index) => {
+    return (
+      <Pressable
+        onPress={() => {
+          setSelectedPost(postFeed[index]);
+          setModalVisible(true);
+        }}
+        key={index}
+      >
+        <View style={styles.card_styling}>
+          <View style={styles.card_header}>
+            <Icon3 name="account-circle-outline" size={40} />
+            <Text style={styles.text}>{feed.title}</Text>
+          </View>
+          <View style={styles.card_body}>
+            <Text style={styles.card_text}>{feed.description}</Text>
+          </View>
+          <View style={styles.card_footer}>
+            <View style={styles.location}>
+              <Icon name="location-sharp" size={19} color="#004831" />
+              <Text style={styles.footer_text}> {feed.location}</Text>
+            </View>
+            <View>
+              <Text>￥{feed.price}</Text>
+            </View>
+          </View>
+        </View>
+      </Pressable>
+    );
+  });
+
   return (
     <>
       <SafeAreaView style={styles.body}>
         <ScrollView style={styles.card_section}>
-          <View style={styles.container}>
-            <View style={styles.card_styling}>
-              <View style={styles.card_header}>
-                <Icon3 name="account-circle-outline" size={40} />
-                <Text style={styles.text}>コーヒーのデリバリー</Text>
-              </View>
-              <View style={styles.card_body}>
-                <Text style={styles.card_text}>
-                  Starbucks元町・中華街店舗でアイスのホワイトモカVentiサイズのピックアップをお願いいたします。
-                </Text>
-              </View>
-              <View style={styles.card_footer}>
-                <View style={styles.location}>
-                  <Icon name="location-sharp" size={19} color="#004831" />
-                  <Text style={styles.footer_text}> 慶應義塾大学</Text>
-                </View>
-                <View style={styles.contact}>
-                  <Text style={styles.contact_text}>Contact</Text>
-                  <Icon1 name="send" size={15} color="#004831" />
-                </View>
-              </View>
-            </View>
-            <View style={styles.card_styling}>
-              <View style={styles.card_header}>
-                <Icon3 name="account-circle-outline" size={40} />
-                <Text style={styles.text}>経済学Iの出席</Text>
-              </View>
-              <View style={styles.card_body}>
-                <Text style={styles.card_text}>
-                  木曜日２限目・鈴木教授の授業で出席のカードを押して、授業後に記入する感想用紙の提出をお願いします。
-                </Text>
-              </View>
-              <View style={styles.card_footer}>
-                <View style={styles.location}>
-                  <Icon name="location-sharp" size={19} color="#004831" />
-                  <Text style={styles.footer_text}> 早稲田大学</Text>
-                </View>
-                <View style={styles.contact}>
-                  <Text style={styles.contact_text}>Contact</Text>
-                  <Icon1 name="send" size={15} color="#004831" />
-                </View>
-              </View>
-            </View>
-            <View style={styles.card_styling}>
-              <View style={styles.card_header}>
-                <Icon3 name="account-circle-outline" size={40} />
-                <Text style={styles.text}>誕生日のサプライズ</Text>
-              </View>
-              <View style={styles.card_body}>
-                <Text style={styles.card_text}>
-                  Starbucks元町・中華街店舗でアイスのホワイトモカVentiサイズのピックアップをお願いいたします。
-                </Text>
-              </View>
-              <View style={styles.card_footer}>
-                <View style={styles.location}>
-                  <Icon name="location-sharp" size={19} color="#004831" />
-                  <Text style={styles.footer_text}> 慶應義塾大学</Text>
-                </View>
-                <View style={styles.contact}>
-                  <Text style={styles.contact_text}>Contact</Text>
-                  <Icon1 name="send" size={15} color="#004831" />
-                </View>
-              </View>
-            </View>
-            <View style={styles.card_styling}>
-              <View style={styles.card_header}>
-                <Icon3 name="account-circle-outline" size={40} />
-                <Text style={styles.text}>コーヒーのデリバリー</Text>
-              </View>
-              <View style={styles.card_body}>
-                <Text style={styles.card_text}>
-                  Starbucks元町・中華街店舗でアイスのホワイトモカVentiサイズのピックアップをお願いいたします。
-                </Text>
-              </View>
-              <View style={styles.card_footer}>
-                <View style={styles.location}>
-                  <Icon name="location-sharp" size={19} color="#004831" />
-                  <Text style={styles.footer_text}> 慶應義塾大学</Text>
-                </View>
-                <View style={styles.contact}>
-                  <Text style={styles.contact_text}>Contact</Text>
-                  <Icon1 name="send" size={15} color="#004831" />
-                </View>
-              </View>
-            </View>
-          </View>
+          <View style={styles.container}>{renderPosts}</View>
         </ScrollView>
       </SafeAreaView>
+      <ModalView
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        selectedPost={selectedPost}
+        setSelectedPost={setSelectedPost}
+        homeNavigation={homeNavigation}
+        messageNavigation={messageNavigation}
+      />
     </>
   );
 };
@@ -127,6 +97,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1.25,
     shadowRadius: 5,
     elevation: 5,
+    position: "relative",
   },
   card_section: {
     borderWidth: 0.3,
@@ -168,7 +139,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     width: 300,
     marginLeft: 10,
-    marginTop: 5
+    marginTop: 5,
   },
   card_body: {
     marginHorizontal: 25,
@@ -207,7 +178,7 @@ const styles = StyleSheet.create({
     color: "#004831",
     marginTop: 10,
     fontSize: 20,
-    marginLeft: 20
+    marginLeft: 20,
   },
   view_button: {
     display: "flex",

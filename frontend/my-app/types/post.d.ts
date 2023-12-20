@@ -1,8 +1,8 @@
-type PostBody = {
-    profile: string,
-    title: string,
-    description: string,
-    location: string,
-    coordinates: string,
-    price: number
-}
+export type PostBody = {
+  profile: string;
+  title: string;
+  description: string;
+  location: string;
+  coordinates: string;
+  price: number;
+};
