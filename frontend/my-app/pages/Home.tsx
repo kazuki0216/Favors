@@ -47,7 +47,7 @@ const Home: React.FC = () => {
     <>
       <View style={styles.container}>
         <Header />
-        <Body />
+        <Body homeNavigation={homeNavigation} messageNavigation={messageNavigation}/>
         <ControlBar 
         homeNavigation={homeNavigation}
         addJobNavigation={addJobNavigation}

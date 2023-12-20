@@ -10,6 +10,7 @@ import {
   Button,
   TouchableHighlight,
 } from "react-native";
+import ModalView from "../components/BodyJobs/Modal";
 
 import { useNavigation } from "@react-navigation/native";
 const Message = () => {
@@ -29,6 +30,7 @@ const Message = () => {
     </>
   );
 };
+//<ModalView/>
 
 export default Message;
 
