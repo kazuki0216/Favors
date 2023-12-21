@@ -2,6 +2,8 @@ import React, { Dispatch, useState, SetStateAction } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { PostBody } from "../../types/post";
 import Icon1 from "react-native-vector-icons/FontAwesome";
+import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/Ionicons";
 
 interface Props {
   modalVisible: boolean;
@@ -17,7 +19,7 @@ const ModalView: React.FC<Props> = ({
   selectedPost,
   setSelectedPost,
   homeNavigation,
-  messageNavigation
+  messageNavigation,
 }) => {
   if (selectedPost) {
     return (
@@ -33,22 +35,40 @@ const ModalView: React.FC<Props> = ({
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>{selectedPost.profile}</Text>
-              <Text style={styles.modalText}>{selectedPost.title}</Text>
-              <Text style={styles.modalText}>{selectedPost.description}</Text>
-              <Text style={styles.modalText}>{selectedPost.location}</Text>
-              <Text style={styles.modalText}>￥{selectedPost.price}</Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                  setSelectedPost(null);
-                  messageNavigation()
-                }}
-              >
-                <Text style={styles.contact_text}>Contact</Text>
-                <Icon1 name="send" size={15} color="#004831" />
-              </Pressable>
+              <Icon3 name="account-circle-outline" size={40} />
+              <Text style={styles.title}>{selectedPost.title}</Text>
+              <Text style={styles.description}>{selectedPost.description}</Text>
+
+              <View style={styles.footer}>
+                <View style={styles.location}>
+                  <Icon name="location-sharp" size={19} color="#004831" />
+                  <Text> {selectedPost.location}</Text>
+                </View>
+                <Text>￥{selectedPost.price}</Text>
+              </View>
+
+              <View style={styles.modal_button}>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                    setSelectedPost(null);
+                  }}
+                >
+                  <Text style={styles.contact_text}>Close Modal</Text>
+                </Pressable>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                    setSelectedPost(null);
+                    messageNavigation();
+                  }}
+                >
+                  <Text style={styles.contact_text}>Contact</Text>
+                  <Icon1 name="send" size={15} color="#004831" />
+                </Pressable>
+              </View>
             </View>
           </View>
         </Modal>
@@ -58,6 +78,29 @@ const ModalView: React.FC<Props> = ({
 };
 
 const styles = StyleSheet.create({
+  footer: {
+    display: "flex",
+    flexDirection: "row",
+    marginVertical: 20,
+  },
+  location: {
+    display: "flex",
+    flexDirection: "row",
+    marginRight: 140,
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 25,
+  },
+  description: {
+    marginTop: 15,
+    fontWeight: "500",
+  },
+  modal_button: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
   centeredView: {
     flex: 1,
     justifyContent: "center",
@@ -85,9 +128,10 @@ const styles = StyleSheet.create({
   button: {
     display: "flex",
     flexDirection: "row",
-    borderRadius: 20,
+    borderRadius: 5,
     padding: 10,
     elevation: 2,
+    margin: 5,
   },
   buttonClose: {
     backgroundColor: "#E2D7C6",
