@@ -17,7 +17,7 @@ const ModalView: React.FC<Props> = ({
   selectedPost,
   setSelectedPost,
   homeNavigation,
-  messageNavigation
+  messageNavigation,
 }) => {
   if (selectedPost) {
     return (
@@ -38,17 +38,28 @@ const ModalView: React.FC<Props> = ({
               <Text style={styles.modalText}>{selectedPost.description}</Text>
               <Text style={styles.modalText}>{selectedPost.location}</Text>
               <Text style={styles.modalText}>￥{selectedPost.price}</Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                  setSelectedPost(null);
-                  messageNavigation()
-                }}
-              >
-                <Text style={styles.contact_text}>Contact</Text>
-                <Icon1 name="send" size={15} color="#004831" />
-              </Pressable>
+              <View style={styles.modal_button}>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                    setSelectedPost(null);
+                  }}
+                >
+                  <Text style={styles.contact_text}>Close Modal</Text>
+                </Pressable>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                    setSelectedPost(null);
+                    messageNavigation();
+                  }}
+                >
+                  <Text style={styles.contact_text}>Contact</Text>
+                  <Icon1 name="send" size={15} color="#004831" />
+                </Pressable>
+              </View>
             </View>
           </View>
         </Modal>
@@ -58,6 +69,11 @@ const ModalView: React.FC<Props> = ({
 };
 
 const styles = StyleSheet.create({
+  modal_button: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
   centeredView: {
     flex: 1,
     justifyContent: "center",
@@ -85,9 +101,10 @@ const styles = StyleSheet.create({
   button: {
     display: "flex",
     flexDirection: "row",
-    borderRadius: 20,
+    borderRadius: 5,
     padding: 10,
     elevation: 2,
+    margin: 5
   },
   buttonClose: {
     backgroundColor: "#E2D7C6",

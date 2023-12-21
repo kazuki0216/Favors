@@ -26,6 +26,10 @@ const Body: React.FC<Props> = ({ homeNavigation, messageNavigation }) => {
   const [homePosts, setHomePosts] = useState<boolean>(true);
   const [myPost, setMyPost] = useState<boolean>(false);
 
+  useEffect(() => {
+    handlePress("投稿")
+  },[])
+
   const handlePress = (button: string) => {
     setSelectedButton(button);
     if (button === "自分") {
