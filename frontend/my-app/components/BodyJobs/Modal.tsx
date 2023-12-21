@@ -1,5 +1,13 @@
 import React, { Dispatch, useState, SetStateAction } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  ImageBackground,
+} from "react-native";
 import { PostBody } from "../../types/post";
 import Icon1 from "react-native-vector-icons/FontAwesome";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
@@ -23,61 +31,69 @@ const ModalView: React.FC<Props> = ({
 }) => {
   if (selectedPost) {
     return (
-      <View style={styles.centeredView}>
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-            setModalVisible(!modalVisible);
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.center}>
+          <View style={styles.modalView}>
+            <View style={styles.modal_profile}>
               <Icon3 name="account-circle-outline" size={40} />
-              <Text style={styles.title}>{selectedPost.title}</Text>
-              <Text style={styles.description}>{selectedPost.description}</Text>
-
-              <View style={styles.footer}>
-                <View style={styles.location}>
-                  <Icon name="location-sharp" size={19} color="#004831" />
-                  <Text> {selectedPost.location}</Text>
-                </View>
-                <Text>￥{selectedPost.price}</Text>
+              <Text style={styles.name}>{selectedPost.name}</Text>
+            </View>
+            <Text style={styles.title}>{selectedPost.title}</Text>
+            <Text style={styles.description}>{selectedPost.description}</Text>
+            <View style={styles.footer}>
+              <View style={styles.location}>
+                <Icon name="location-sharp" size={19} color="#004831" />
+                <Text> {selectedPost.location}</Text>
               </View>
+              <Text>￥{selectedPost.price}</Text>
+            </View>
 
-              <View style={styles.modal_button}>
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => {
-                    setModalVisible(!modalVisible);
-                    setSelectedPost(null);
-                  }}
-                >
-                  <Text style={styles.contact_text}>Close Modal</Text>
-                </Pressable>
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => {
-                    setModalVisible(!modalVisible);
-                    setSelectedPost(null);
-                    messageNavigation();
-                  }}
-                >
-                  <Text style={styles.contact_text}>Contact</Text>
-                  <Icon1 name="send" size={15} color="#004831" />
-                </Pressable>
-              </View>
+            <View style={styles.modal_button}>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                  setSelectedPost(null);
+                }}
+              >
+                <Text style={styles.contact_text}>Close Modal</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                  setSelectedPost(null);
+                  messageNavigation();
+                }}
+              >
+                <Text style={styles.contact_text}>Contact</Text>
+                <Icon1 name="send" size={15} color="#004831" />
+              </Pressable>
             </View>
           </View>
-        </Modal>
-      </View>
+        </View>
+      </Modal>
     );
   }
 };
 
 const styles = StyleSheet.create({
+  modal_profile: {
+    width: 290,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  name: { fontWeight: "bold", marginLeft: 20, fontSize: 20 },
   footer: {
     display: "flex",
     flexDirection: "row",
@@ -86,22 +102,25 @@ const styles = StyleSheet.create({
   location: {
     display: "flex",
     flexDirection: "row",
-    marginRight: 140,
+    width: 230,
   },
   title: {
     fontWeight: "bold",
-    fontSize: 25,
+    fontSize: 20,
+    marginTop: 10,
+    width: 280,
   },
   description: {
     marginTop: 15,
     fontWeight: "500",
+    width: 280,
   },
   modal_button: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
-  centeredView: {
+  center: {
     flex: 1,
     justifyContent: "center",
     position: "absolute",
@@ -109,6 +128,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     top: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)'
   },
   modalView: {
     margin: 20,

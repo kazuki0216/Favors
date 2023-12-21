@@ -38,6 +38,10 @@ const ControlBar: React.FC<Props> = ({
     icon3: "#E2D7C6",
   });
 
+  useEffect(() => {
+    
+  },[])
+
   const handlePress = (iconName: keyof IconColors) => {
     setIconColors((prevColors: any) => {
       const updatedColors: IconColors = Object.keys(prevColors).reduce(
