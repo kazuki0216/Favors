@@ -16,32 +16,33 @@ import ModalView from "../components/BodyJobs/Modal";
 import { useNavigation } from "@react-navigation/native";
 const Message = () => {
   const navigation = useNavigation();
-  
+  const [message, setMessage] = useState<string>("");
+
   const goBackHome = () => {
     navigation.goBack();
   };
-  const ws = new WebSocket(`ws://localhost:8080`)
+  const ws = new WebSocket(`ws://localhost:8080`);
   ws.onopen = () => {
-    ws.send("Hello world")
-  }
+    ws.send("Hello world");
+  };
 
-  ws.onmessage = e => {
+  ws.onmessage = (e) => {
     console.log(e.data);
-  }
+  };
 
-  ws.onerror = e => {
+  ws.onerror = (e) => {
     // an error occurred
     console.log(e);
   };
-  
-  ws.onclose = e => {
+
+  ws.onclose = (e) => {
     // connection closed
     console.log(e.code, e.reason);
   };
 
   const handleSend = () => {
-    console.log("Hello world")
-  }
+    console.log("Hello world");
+  };
 
   return (
     <>
@@ -60,13 +61,19 @@ const Message = () => {
       <View style={style.message_container}>
         <View style={style.main}>
           <Text>Hello World</Text>
-          <SafeAreaView>
-            <TextInput
-            />
-            <Button onPress={handleSend} title="SEND"/>
-          </SafeAreaView>
         </View>
       </View>
+      <SafeAreaView style={style.input_container}>
+        <TextInput
+          style={style.input}
+          onChangeText={(e) => setMessage(e)}
+          value={message}
+          placeholder="useless placeholder"
+          multiline={true}
+          numberOfLines={1}
+        />
+        <Button onPress={handleSend} title="SEND" />
+      </SafeAreaView>
     </>
   );
 };
@@ -75,6 +82,20 @@ const Message = () => {
 export default Message;
 
 const style = StyleSheet.create({
+  input_container: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    borderTopWidth: 1
+  } ,
+  input: {
+    width: 300,
+    height: 40,
+    overflow: 'hidden',
+    margin: 10,
+    borderWidth: 1,
+    padding: 10,
+  },
   header: {
     display: "flex",
     alignSelf: "stretch",
@@ -112,10 +133,7 @@ const style = StyleSheet.create({
     marginLeft: 40,
   },
   main: {
-    backgroundColor: "blue",
-    flex: 1,
-    width: 100,
-    height: 100,
+    height: 650
   },
   left: {
     justifyContent: "space-between",
