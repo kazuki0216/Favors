@@ -9,16 +9,40 @@ import {
   SafeAreaView,
   Button,
   TouchableHighlight,
+  TextInput,
 } from "react-native";
 import ModalView from "../components/BodyJobs/Modal";
 
 import { useNavigation } from "@react-navigation/native";
 const Message = () => {
   const navigation = useNavigation();
-
+  
   const goBackHome = () => {
     navigation.goBack();
   };
+  const ws = new WebSocket(`ws://localhost:8080`)
+  ws.onopen = () => {
+    ws.send("Hello world")
+  }
+
+  ws.onmessage = e => {
+    console.log(e.data);
+  }
+
+  ws.onerror = e => {
+    // an error occurred
+    console.log(e);
+  };
+  
+  ws.onclose = e => {
+    // connection closed
+    console.log(e.code, e.reason);
+  };
+
+  const handleSend = () => {
+    console.log("Hello world")
+  }
+
   return (
     <>
       <View style={style.header}>
@@ -36,6 +60,11 @@ const Message = () => {
       <View style={style.message_container}>
         <View style={style.main}>
           <Text>Hello World</Text>
+          <SafeAreaView>
+            <TextInput
+            />
+            <Button onPress={handleSend} title="SEND"/>
+          </SafeAreaView>
         </View>
       </View>
     </>
