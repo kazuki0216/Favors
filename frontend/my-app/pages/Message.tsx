@@ -21,10 +21,21 @@ const Message = () => {
   };
   return (
     <>
-      <View style={style.container}>
-        <Text style={style.text}>Message Page</Text>
-        <View>
-          <Button onPress={goBackHome} title="Go Back Home" />
+      <View style={style.header}>
+        <View style={style.backhome}>
+          <View style={style.button_container}>
+            <View>
+              <Button onPress={goBackHome} title="<" />
+            </View>
+            <View>
+              <Text>Justin Beiber</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View style={style.message_container}>
+        <View style={style.main}>
+          <Text>Hello World</Text>
         </View>
       </View>
     </>
@@ -35,12 +46,72 @@ const Message = () => {
 export default Message;
 
 const style = StyleSheet.create({
-  container: {
-    flex: 1,
+  header: {
+    display: "flex",
     alignSelf: "stretch",
-    justifyContent: "center",
+    paddingVertical: 20,
+    backgroundColor: "#ffffff",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    borderBottomWidth: 1,
   },
-  text: {
+  backhome: {
+    flex: 1,
+  },
+  button_container: {
+    display: "flex",
+    paddingTop: 30,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  message_container: {
+    display: "flex",
+  },
+  image_logo: {
+    width: 120,
+    height: 50,
+    resizeMode: "contain",
+    marginLeft: 10,
+    marginTop: 15,
+  },
+
+  left_flex: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginLeft: 40,
+  },
+  main: {
+    backgroundColor: "blue",
+    flex: 1,
+    width: 100,
+    height: 100,
+  },
+  left: {
+    justifyContent: "space-between",
     textAlign: "center",
+    alignContent: "stretch",
+    marginTop: 30,
+    fontWeight: "bold",
+    //fontFamily: "Preahvihear-Regular",
+    color: "#E2D7C6",
+    fontSize: 15,
+  },
+  counter: {
+    color: "red",
+  },
+  logo: {
+    marginLeft: 10,
+  },
+  searchIcon: {
+    marginBottom: 2,
+  },
+  button: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    left: 0,
+    marginBottom: 30,
   },
 });

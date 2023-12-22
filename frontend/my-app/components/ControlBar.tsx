@@ -1,18 +1,26 @@
 import React from "react";
-import { useEffect, useState, Dispatch, SetStateAction, FC } from "react";
+import {
+  useEffect,
+  useState,
+  Dispatch,
+  SetStateAction,
+  FC,
+  useRef,
+} from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import BookMark from "react-native-vector-icons/FontAwesome";
+import HomeIcon from "react-native-vector-icons/Ionicons";
+import Account from "react-native-vector-icons/MaterialCommunityIcons";
+import ChatIcon from "react-native-vector-icons/Entypo";
+import AddIcon from "react-native-vector-icons/AntDesign";
 import Icon from "react-native-vector-icons/FontAwesome";
-import Icon2 from "react-native-vector-icons/Ionicons";
-import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon4 from "react-native-vector-icons/Entypo";
-import Icon5 from "react-native-vector-icons/AntDesign";
 
 type IconColors = {
-  icon2: string;
-  icon4: string;
-  icon5: string;
-  icon: string;
-  icon3: string;
+  homeIcon: string;
+  messageIcon: string;
+  addIcon: string;
+  bookmarkIcon: string;
+  profileIcon: string;
 };
 
 interface Props {
@@ -31,11 +39,11 @@ const ControlBar: React.FC<Props> = ({
   messageNavigation,
 }) => {
   const [iconColors, setIconColors] = useState<IconColors>({
-    icon2: "#004831",
-    icon4: "#E2D7C6",
-    icon5: "#E2D7C6",
-    icon: "#E2D7C6",
-    icon3: "#E2D7C6",
+    homeIcon: "#004831",
+    messageIcon: "#E2D7C6",
+    addIcon: "#E2D7C6",
+    bookmarkIcon: "#E2D7C6",
+    profileIcon: "#E2D7C6",
   });
 
   const handlePress = (iconName: keyof IconColors) => {
@@ -61,50 +69,58 @@ const ControlBar: React.FC<Props> = ({
         <View style={styles.icons}>
           <TouchableOpacity
             onPress={() => {
-              handlePress("icon2");
+              handlePress("homeIcon");
               homeNavigation();
             }}
           >
-            <Icon2 name="home-outline" size={38} color={iconColors.icon2} />
+            <HomeIcon
+              name="home-outline"
+              size={38}
+              color={iconColors.homeIcon}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              handlePress("icon4");
+              handlePress("messageIcon");
               messageNavigation();
             }}
           >
-            <Icon4 name="chat" size={40} color={iconColors.icon4} />
+            <ChatIcon name="chat" size={40} color={iconColors.messageIcon} />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              handlePress("icon5");
+              handlePress("addIcon");
               addJobNavigation();
             }}
           >
-            <Icon5 name="plus" size={40} color={iconColors.icon5} />
+            <AddIcon name="plus" size={40} color={iconColors.addIcon} />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              handlePress("icon");
+              handlePress("bookmarkIcon");
               bookMarkNavigation();
             }}
           >
-            <Icon name="bookmark-o" size={40} color={iconColors.icon} />
+            <BookMark
+              name="bookmark-o"
+              size={40}
+              color={iconColors.bookmarkIcon}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              handlePress("icon3");
+              handlePress("profileIcon");
               profileNavigation();
             }}
           >
-            <Icon3
+            <Account
               name="account-circle-outline"
               size={40}
-              color={iconColors.icon3}
+              color={iconColors.profileIcon}
             />
           </TouchableOpacity>
         </View>

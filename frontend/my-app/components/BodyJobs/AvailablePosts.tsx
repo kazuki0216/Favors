@@ -23,10 +23,13 @@ import dummyData from "../DummyData";
 
 interface Props {
   homeNavigation: () => void;
-  messageNavigation:() => void
+  messageNavigation: () => void;
 }
 
-const AvailablePosts: React.FC<Props> = ({ homeNavigation, messageNavigation }) => {
+const AvailablePosts: React.FC<Props> = ({
+  homeNavigation,
+  messageNavigation,
+}) => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [selectedPost, setSelectedPost] = useState<PostBody | null>(null);
   const [postFeed, setPostFeed] = useState<PostBody[] | []>(dummyData);
@@ -42,6 +45,7 @@ const AvailablePosts: React.FC<Props> = ({ homeNavigation, messageNavigation }) 
       >
         <View style={styles.card_styling}>
           <View style={styles.card_header}>
+            {/* <Image source={require("../../assets/icons/profile1.png")}/> */}
             <Icon3 name="account-circle-outline" size={40} />
             <Text style={styles.text}>{feed.title}</Text>
           </View>
