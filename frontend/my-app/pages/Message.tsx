@@ -10,38 +10,72 @@ import {
   Button,
   TouchableHighlight,
   TextInput,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Platform,
+  Pressable,
 } from "react-native";
 import ModalView from "../components/BodyJobs/Modal";
+import Account from "react-native-vector-icons/MaterialCommunityIcons";
+import SEND from "react-native-vector-icons/FontAwesome";
 
 import { useNavigation } from "@react-navigation/native";
 const Message = () => {
   const navigation = useNavigation();
   const [message, setMessage] = useState<string>("");
+  const [inputOpen, setInputOpen] = useState<boolean>(false);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  const openInput = () => {
+    setInputOpen(!inputOpen);
+  };
+
+  const handleFocus = () => {
+    setInputOpen(true);
+  };
+
+  const handleBlur = () => {
+    setInputOpen(false);
+  };
 
   const goBackHome = () => {
     navigation.goBack();
   };
   const ws = new WebSocket(`ws://localhost:8080`);
-  ws.onopen = () => {
-    ws.send("Hello world");
-  };
+  // ws.onopen = () => {
+  //   ws.send("Hello world");
+  // };
 
-  ws.onmessage = (e) => {
-    console.log(e.data);
-  };
+  // ws.onmessage = (e) => {
+  //   console.log(e.data);
+  // };
 
-  ws.onerror = (e) => {
-    // an error occurred
-    console.log(e);
-  };
+  // ws.onerror = (e) => {
+  //   // an error occurred
+  //   console.log(e);
+  // };
 
-  ws.onclose = (e) => {
-    // connection closed
-    console.log(e.code, e.reason);
-  };
+  // ws.onclose = (e) => {
+  //   // connection closed
+  //   console.log(e.code, e.reason);
+  // };
 
   const handleSend = () => {
     console.log("Hello world");
+  };
+
+  const handleScroll = (event: any) => {
+    const scrollY = event.nativeEvent.contentOffset.y;
+    const viewThreshold = 500;
+
+    const scrollViewBottom =
+      scrollY + event.nativeEvent.layoutMeasurement.height;
+
+    // Check if the scroll position is within the threshold of your view
+    if (scrollY >= viewThreshold) {
+      Keyboard.dismiss();
+    }
   };
 
   return (
@@ -49,57 +83,191 @@ const Message = () => {
       <View style={style.header}>
         <View style={style.backhome}>
           <View style={style.button_container}>
-            <View>
-              <Button onPress={goBackHome} title="<" />
-            </View>
-            <View>
-              <Text>Justin Beiber</Text>
+            <Pressable onPress={goBackHome}>
+              <Text
+                style={{ fontWeight: "bold", fontSize: 20, marginLeft: 10 }}
+              >
+                {" "}
+                ＜
+              </Text>
+            </Pressable>
+            <View style={style.name}>
+              <Text
+                style={{ fontWeight: "bold", fontSize: 20, marginRight: 10 }}
+              >
+                Justin Beiber
+              </Text>
             </View>
           </View>
         </View>
       </View>
-      <View style={style.message_container}>
-        <View style={style.main}>
-          <Text>Hello World</Text>
-        </View>
-      </View>
-      <SafeAreaView style={style.input_container}>
+      {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss}> */}
+      <TouchableWithoutFeedback>
+        <ScrollView
+          style={style.container}
+          // keyboardShouldPersistTaps="handled"
+          onScroll={(e) => handleScroll(e)}
+          scrollEventThrottle={100}
+        >
+          <View style={style.incoming_message}>
+            <Account
+              name="account-circle-outline"
+              size={34}
+              color={"#E2D7C6"}
+              style={{ marginHorizontal: 20, marginVertical: 10 }}
+            />
+            <Text style={style.message_content}>How have you been lately?</Text>
+          </View>
+          <View style={style.incoming_message}>
+            <Account
+              name="account-circle-outline"
+              size={34}
+              color={"#E2D7C6"}
+              style={{ marginHorizontal: 20, marginVertical: 10 }}
+            />
+            <Text style={style.message_content}>How have you been lately?</Text>
+          </View>
+          <View style={style.incoming_message}>
+            <Account
+              name="account-circle-outline"
+              size={34}
+              color={"#E2D7C6"}
+              style={{ marginHorizontal: 20, marginVertical: 10 }}
+            />
+            <Text style={style.message_content}>
+              This is the way that people should interact with eachother. In a
+              way that we can make eachother better to strive for a better
+              future.
+            </Text>
+          </View>
+          <View style={style.incoming_message}>
+            <Account
+              name="account-circle-outline"
+              size={34}
+              color={"#E2D7C6"}
+              style={{ marginHorizontal: 20, marginVertical: 10 }}
+            />
+            <Text style={style.message_content}>How have you been lately?</Text>
+          </View>
+          <View style={style.incoming_message}>
+            <Account
+              name="account-circle-outline"
+              size={34}
+              color={"#E2D7C6"}
+              style={{ marginHorizontal: 20, marginVertical: 10 }}
+            />
+            <Text style={style.message_content}>How have you been lately?</Text>
+          </View>
+          <View style={style.incoming_message}>
+            <Account
+              name="account-circle-outline"
+              size={34}
+              color={"#E2D7C6"}
+              style={{ marginHorizontal: 20, marginVertical: 10 }}
+            />
+            <Text style={style.message_content}>How have you been lately?</Text>
+          </View>
+
+          <View style={style.outgoing_message}>
+            <Account
+              name="account-circle-outline"
+              size={34}
+              color={"#E2D7C6"}
+              style={{ marginHorizontal: 20, marginVertical: 10 }}
+            />
+            <Text style={style.message_content}>I've been doing good!</Text>
+          </View>
+          <View style={style.outgoing_message}>
+            <Account
+              name="account-circle-outline"
+              size={34}
+              color={"#E2D7C6"}
+              style={{ marginHorizontal: 20, marginVertical: 10 }}
+            />
+            <Text style={style.message_content}>
+              You are amaing for becoming an engineer!! I remember the days you
+              told me that it seeme dimpossible because it was the case that you
+              did not start programming from a young age.
+            </Text>
+          </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={style.input_container}
+      >
         <TextInput
           style={style.input}
           onChangeText={(e) => setMessage(e)}
           value={message}
-          placeholder="useless placeholder"
+          placeholder="Aa"
           multiline={true}
           numberOfLines={1}
+          //onPressIn={openInput}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
-        <Button onPress={handleSend} title="SEND" />
-      </SafeAreaView>
+        <Pressable style={style.sendButton} onPress={handleSend}>
+          {inputOpen && <SEND name="send" size={22} color="#004831" />}
+        </Pressable>
+      </KeyboardAvoidingView>
     </>
   );
 };
-//<ModalView/>
 
 export default Message;
 
 const style = StyleSheet.create({
+  name: { flex: 1, alignItems: "center" },
+  container: {
+    position: "relative",
+    height: "85%",
+  },
+  incoming_message: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 5,
+  },
+  message_content: {
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 10,
+    maxWidth: "75%",
+  },
+  outgoing_message: {
+    display: "flex",
+    flexDirection: "row-reverse",
+    alignItems: "center",
+    marginBottom: 5,
+  },
   input_container: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    borderTopWidth: 1
-  } ,
+    borderTopWidth: 1,
+    marginBottom: 10,
+    padding: 10,
+  },
   input: {
-    width: 300,
+    flex: 1,
+    //width: 300,
     height: 40,
-    overflow: 'hidden',
+    overflow: "hidden",
     margin: 10,
     borderWidth: 1,
     padding: 10,
+    paddingTop: 10,
+    alignItems: "center",
+    borderRadius: 15,
+  },
+  sendButton: {
+    marginRight: 10,
   },
   header: {
     display: "flex",
     alignSelf: "stretch",
-    paddingVertical: 20,
+    paddingVertical: 22,
     backgroundColor: "#ffffff",
     flexDirection: "row",
     justifyContent: "space-around",
@@ -109,56 +277,8 @@ const style = StyleSheet.create({
     flex: 1,
   },
   button_container: {
-    display: "flex",
     paddingTop: 30,
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-  message_container: {
-    display: "flex",
-  },
-  image_logo: {
-    width: 120,
-    height: 50,
-    resizeMode: "contain",
-    marginLeft: 10,
-    marginTop: 15,
-  },
-
-  left_flex: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    marginLeft: 40,
-  },
-  main: {
-    height: 650
-  },
-  left: {
-    justifyContent: "space-between",
-    textAlign: "center",
-    alignContent: "stretch",
-    marginTop: 30,
-    fontWeight: "bold",
-    //fontFamily: "Preahvihear-Regular",
-    color: "#E2D7C6",
-    fontSize: 15,
-  },
-  counter: {
-    color: "red",
-  },
-  logo: {
-    marginLeft: 10,
-  },
-  searchIcon: {
-    marginBottom: 2,
-  },
-  button: {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
-    left: 0,
-    marginBottom: 30,
+    justifyContent: "space-evenly",
   },
 });
