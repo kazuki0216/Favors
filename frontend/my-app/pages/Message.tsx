@@ -78,6 +78,13 @@ const Message = () => {
     }
   };
 
+  const getCurrentTime = () => {
+    let today = new Date();
+    let hours = (today.getHours() < 10 ? "0" : "") + today.getHours();
+    let minutes = (today.getMinutes() < 10 ? "0" : "") + today.getMinutes();
+    return hours + ":" + minutes;
+  };
+
   return (
     <>
       <View style={style.header}>
@@ -93,9 +100,9 @@ const Message = () => {
             </Pressable>
             <View style={style.name}>
               <Text
-                style={{ fontWeight: "bold", fontSize: 20, marginRight: 10 }}
+                style={{ fontWeight: "bold", fontSize: 20, marginRight: 30 }}
               >
-                Justin Beiber
+                Justin Bieber
               </Text>
             </View>
           </View>
@@ -107,65 +114,26 @@ const Message = () => {
           style={style.container}
           // keyboardShouldPersistTaps="handled"
           onScroll={(e) => handleScroll(e)}
-          scrollEventThrottle={100}
+          //scrollEventThrottle={100}
         >
           <View style={style.incoming_message}>
             <Account
               name="account-circle-outline"
               size={34}
               color={"#E2D7C6"}
-              style={{ marginHorizontal: 20, marginVertical: 10 }}
+              style={{ marginLeft: 20, marginRight: 8, marginVertical: 10 }}
             />
             <Text style={style.message_content}>How have you been lately?</Text>
-          </View>
-          <View style={style.incoming_message}>
-            <Account
-              name="account-circle-outline"
-              size={34}
-              color={"#E2D7C6"}
-              style={{ marginHorizontal: 20, marginVertical: 10 }}
-            />
-            <Text style={style.message_content}>How have you been lately?</Text>
-          </View>
-          <View style={style.incoming_message}>
-            <Account
-              name="account-circle-outline"
-              size={34}
-              color={"#E2D7C6"}
-              style={{ marginHorizontal: 20, marginVertical: 10 }}
-            />
-            <Text style={style.message_content}>
-              This is the way that people should interact with eachother. In a
-              way that we can make eachother better to strive for a better
-              future.
+            <Text
+              style={{
+                fontWeight: "200",
+                fontSize: 10,
+                marginLeft: 5,
+                paddingTop: 25,
+              }}
+            >
+              {getCurrentTime()}
             </Text>
-          </View>
-          <View style={style.incoming_message}>
-            <Account
-              name="account-circle-outline"
-              size={34}
-              color={"#E2D7C6"}
-              style={{ marginHorizontal: 20, marginVertical: 10 }}
-            />
-            <Text style={style.message_content}>How have you been lately?</Text>
-          </View>
-          <View style={style.incoming_message}>
-            <Account
-              name="account-circle-outline"
-              size={34}
-              color={"#E2D7C6"}
-              style={{ marginHorizontal: 20, marginVertical: 10 }}
-            />
-            <Text style={style.message_content}>How have you been lately?</Text>
-          </View>
-          <View style={style.incoming_message}>
-            <Account
-              name="account-circle-outline"
-              size={34}
-              color={"#E2D7C6"}
-              style={{ marginHorizontal: 20, marginVertical: 10 }}
-            />
-            <Text style={style.message_content}>How have you been lately?</Text>
           </View>
 
           <View style={style.outgoing_message}>
@@ -173,21 +141,114 @@ const Message = () => {
               name="account-circle-outline"
               size={34}
               color={"#E2D7C6"}
-              style={{ marginHorizontal: 20, marginVertical: 10 }}
+              style={{ marginLeft: 10, marginRight: 8, marginVertical: 10 }}
             />
-            <Text style={style.message_content}>I've been doing good!</Text>
+            <Text style={style.message_content}>
+              How's things with Mr's Hailey??
+            </Text>
+            <Text
+              style={{
+                fontWeight: "200",
+                fontSize: 10,
+                marginRight: 5,
+                paddingTop: 25,
+              }}
+            >
+              {getCurrentTime()}
+            </Text>
+          </View>
+          <View style={style.incoming_message}>
+            <Account
+              name="account-circle-outline"
+              size={34}
+              color={"#E2D7C6"}
+              style={{ marginLeft: 20, marginRight: 8, marginVertical: 10 }}
+            />
+            <Text style={style.message_content}>It's pretty chill❤️</Text>
           </View>
           <View style={style.outgoing_message}>
             <Account
               name="account-circle-outline"
               size={34}
               color={"#E2D7C6"}
-              style={{ marginHorizontal: 20, marginVertical: 10 }}
+              style={{ marginLeft: 10, marginRight: 8, marginVertical: 10 }}
+            />
+            <Text style={style.message_content}>That's good to hear 🔥</Text>
+            <Text
+              style={{
+                fontWeight: "200",
+                fontSize: 10,
+                marginRight: 5,
+                paddingTop: 25,
+              }}
+            >
+              {getCurrentTime()}
+            </Text>
+          </View>
+          <View style={style.outgoing_message}>
+            <Account
+              name="account-circle-outline"
+              size={34}
+              color={"#E2D7C6"}
+              style={{ marginLeft: 10, marginRight: 8, marginVertical: 10 }}
             />
             <Text style={style.message_content}>
-              You are amaing for becoming an engineer!! I remember the days you
-              told me that it seeme dimpossible because it was the case that you
-              did not start programming from a young age.
+              I'm waiting on that Drew merch you promised me haha
+            </Text>
+            <Text
+              style={{
+                fontWeight: "200",
+                fontSize: 10,
+                marginRight: 5,
+                paddingTop: 25,
+              }}
+            >
+              {getCurrentTime()}
+            </Text>
+          </View>
+          <View style={style.incoming_message}>
+            <Account
+              name="account-circle-outline"
+              size={34}
+              color={"#E2D7C6"}
+              style={{ marginLeft: 20, marginRight: 8, marginVertical: 10 }}
+            />
+            <Text style={style.message_content}>
+              Let me remind my manager to send it to you.
+            </Text>
+          </View>
+          <View style={style.outgoing_message}>
+            <Account
+              name="account-circle-outline"
+              size={34}
+              color={"#E2D7C6"}
+              style={{ marginLeft: 10, marginRight: 8, marginVertical: 10 }}
+            />
+            <Text style={style.message_content}>
+              You coming to Japan anytime soon?🇯🇵
+            </Text>
+            <Text
+              style={{
+                fontWeight: "200",
+                fontSize: 10,
+                marginRight: 5,
+                paddingTop: 25,
+              }}
+            >
+              {getCurrentTime()}
+            </Text>
+          </View>
+          <View style={style.incoming_message}>
+            <Account
+              name="account-circle-outline"
+              size={34}
+              color={"#E2D7C6"}
+              style={{ marginLeft: 20, marginRight: 8, marginVertical: 10 }}
+            />
+            <Text style={style.message_content}>
+              This is the way that people should interact with eachother. In a
+              way that we can make eachother better to strive for a better
+              future.
             </Text>
           </View>
         </ScrollView>
@@ -246,7 +307,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderTopWidth: 1,
-    marginBottom: 10,
+    marginBottom: 15,
     padding: 10,
   },
   input: {
@@ -258,6 +319,7 @@ const style = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     paddingTop: 10,
+    marginBottom: 15,
     alignItems: "center",
     borderRadius: 15,
   },
