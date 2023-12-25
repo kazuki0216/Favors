@@ -32,7 +32,7 @@ const ModalView: React.FC<Props> = ({
   if (selectedPost) {
     return (
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
