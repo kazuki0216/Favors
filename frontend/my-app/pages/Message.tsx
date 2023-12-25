@@ -19,6 +19,7 @@ import {
 import ModalView from "../components/BodyJobs/Modal";
 import Account from "react-native-vector-icons/MaterialCommunityIcons";
 import SEND from "react-native-vector-icons/FontAwesome";
+import AddIcon from "react-native-vector-icons/AntDesign";
 
 import { useNavigation } from "@react-navigation/native";
 const Message = () => {
@@ -257,6 +258,7 @@ const Message = () => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={style.input_container}
       >
+        <AddIcon name="plus" size={24} style={{marginBottom: 5,marginLeft: 5}}/>
         <TextInput
           style={style.input}
           onChangeText={(e) => setMessage(e)}
