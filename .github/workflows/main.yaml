@@ -1,0 +1,21 @@
+name: Format Checker
+run-name: ${{ github.actor }} is testing out GitHub Actions🚀
+on: [push]
+
+jobs:
+  conventional-commits-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+      - run: cd .github/conventionalcommits && npm install
+      - run: cd .github/conventionalcommits && npm run build --if-present
+
+      - name: conventional-commits-checker
+        id: hello
+        uses: ./.github/conventionalcommits/
