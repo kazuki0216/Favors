@@ -5,16 +5,8 @@ import {
   Text,
   View,
   Image,
-  ScrollView,
-  SafeAreaView,
-  Button,
-  TouchableHighlight,
-  TextInput,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Platform,
   Pressable,
+  TextInput,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/Ionicons";
@@ -30,20 +22,7 @@ const Header = () => {
     <>
       {showSearchBar ? (
         <View style={styles.search}>
-          <SearchBar
-            lightTheme={true}
-            showCancel={true}
-            // showLoading={true}
-            searchIcon={false}
-            inputContainerStyle={{ borderRadius: 10 }}
-            containerStyle={{
-              padding: 5,
-              marginHorizontal: 10,
-              borderRadius: 10,
-              marginTop: 5,
-              backgroundColor: "#fffff"
-            }}
-          />
+          <TextInput />
         </View>
       ) : (
         <View style={styles.header}>
