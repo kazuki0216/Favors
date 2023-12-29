@@ -1,20 +1,8 @@
 import React from "react";
-import { useEffect, useState, Dispatch, SetStateAction, FC } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-  SafeAreaView,
-  Button,
-  TouchableHighlight,
-  Modal,
-} from "react-native";
-import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
+import { useEffect, useState } from "react";
+import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 import AvailablePosts from "./BodyJobs/AvailablePosts";
 import MyJobs from "./BodyJobs/MyJobs";
-import ModalView from "./BodyJobs/Modal";
 
 interface Props {
   homeNavigation: () => void;
@@ -27,8 +15,8 @@ const Body: React.FC<Props> = ({ homeNavigation, messageNavigation }) => {
   const [myPost, setMyPost] = useState<boolean>(false);
 
   useEffect(() => {
-    handlePress("投稿")
-  },[])
+    handlePress("投稿");
+  }, []);
 
   const handlePress = (button: string) => {
     setSelectedButton(button);

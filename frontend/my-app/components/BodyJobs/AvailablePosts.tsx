@@ -1,21 +1,15 @@
 import React from "react";
-import { useEffect, useState, Dispatch, SetStateAction, FC } from "react";
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
-  Image,
   ScrollView,
   SafeAreaView,
-  Button,
-  TouchableHighlight,
-  Modal,
   Pressable,
-  Alert,
 } from "react-native";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/Ionicons";
-import Icon1 from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import ModalView from "./Modal";
 import { PostBody } from "../../types/post";

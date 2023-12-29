@@ -1,13 +1,5 @@
-import React, { Dispatch, useState, SetStateAction } from "react";
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  Text,
-  Pressable,
-  View,
-  ImageBackground,
-} from "react-native";
+import React, { Dispatch, SetStateAction } from "react";
+import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { PostBody } from "../../types/post";
 import Icon1 from "react-native-vector-icons/FontAwesome";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
@@ -128,7 +120,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     top: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)'
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
   modalView: {
     margin: 20,
