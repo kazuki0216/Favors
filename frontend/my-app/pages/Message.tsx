@@ -1,14 +1,10 @@
 import React from "react";
-import { useEffect, useState, Dispatch, SetStateAction, FC } from "react";
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
-  Image,
   ScrollView,
-  SafeAreaView,
-  Button,
-  TouchableHighlight,
   TextInput,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,

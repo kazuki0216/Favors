@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/Ionicons";
-import { SearchBar } from "@rneui/themed";
 
 const Header = () => {
   const [showSearchBar, setShowSearchBar] = useState<boolean>(false);

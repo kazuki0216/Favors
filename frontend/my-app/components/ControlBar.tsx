@@ -1,19 +1,11 @@
 import React from "react";
-import {
-  useEffect,
-  useState,
-  Dispatch,
-  SetStateAction,
-  FC,
-  useRef,
-} from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { useState } from "react";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import BookMark from "react-native-vector-icons/FontAwesome";
 import HomeIcon from "react-native-vector-icons/Ionicons";
 import Account from "react-native-vector-icons/MaterialCommunityIcons";
 import ChatIcon from "react-native-vector-icons/Entypo";
 import AddIcon from "react-native-vector-icons/AntDesign";
-import Icon from "react-native-vector-icons/FontAwesome";
 
 type IconColors = {
   homeIcon: string;
