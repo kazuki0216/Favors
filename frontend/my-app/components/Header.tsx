@@ -21,7 +21,20 @@ const Header = () => {
     <>
       {showSearchBar ? (
         <View style={styles.search}>
-          <TextInput />
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              flex: 1,
+              alignContent: "center",
+            }}
+          >
+            <TextInput style={styles.searchbar} placeholder="Whatup" />
+            <Pressable onPress={pressSearch} style={styles.searchbar_icon}>
+              <Icon name="search" size={20} color="#E2D7C6" />
+            </Pressable>
+          </View>
         </View>
       ) : (
         <View style={styles.header}>
@@ -56,6 +69,13 @@ const Header = () => {
 };
 
 const styles = StyleSheet.create({
+  searchbar: {
+    borderRadius: 15,
+    height: 40,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    border: 1,
+  },
   header: {
     position: "relative",
     alignSelf: "stretch",
@@ -68,6 +88,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   search: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: "row",
     alignSelf: "stretch",
     paddingVertical: 50,
     paddingBottom: 0,
@@ -89,7 +112,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginTop: 15,
   },
-
   left_flex: {
     display: "flex",
     flexDirection: "row",
@@ -115,6 +137,10 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     marginBottom: 2,
+  },
+  searchbar_icon: {
+    marginRight: 20,
+    paddingVertical: 10,
   },
 });
 
