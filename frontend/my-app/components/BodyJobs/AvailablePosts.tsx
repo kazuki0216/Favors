@@ -13,7 +13,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import ModalView from "./Modal";
 import { PostBody } from "../../types/post";
-import dummyData from "../DummyData";
+import {dummyData} from "../DummyData";
 
 interface Props {
   homeNavigation: () => void;

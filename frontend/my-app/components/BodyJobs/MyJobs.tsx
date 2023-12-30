@@ -1,44 +1,69 @@
 import React from "react";
-import { useEffect, useState, Dispatch, SetStateAction, FC } from "react";
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
-  Image,
   ScrollView,
   SafeAreaView,
-  Button,
-  TouchableHighlight,
+  Pressable,
 } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
+import ModalView from "./Modal";
+import { PostBody, myJobs } from "../../types/post";
+import { myDummyData } from "../DummyData";
+
+interface Props {
+  homeNavigation: () => void;
+  messageNavigation: () => void;
+}
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 
 const MyJobs = () => {
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [selectedPost, setSelectedPost] = useState<myJobs | null>(null);
+  const [postFeed, setPostFeed] = useState<myJobs[] | []>(myDummyData);
+  const renderPosts = postFeed.map((feed, index) => {
+    if (!feed.status) {
+      return (
+        <Pressable
+          onPress={() => {
+            setSelectedPost(postFeed[index]);
+            setModalVisible(true);
+          }}
+          key={index}
+        >
+          <View style={styles.card_styling}>
+            <View style={styles.card_header}>
+              {/* <Image source={require("../../assets/icons/profile1.png")}/> */}
+              <Icon3 name="account-circle-outline" size={40} />
+              <Text style={styles.text}>{feed.title}</Text>
+            </View>
+            <View style={styles.card_body}>
+              <Text style={styles.card_text}>{feed.description}</Text>
+            </View>
+            <View style={styles.card_footer}>
+              <View style={styles.location}>
+                <Icon name="location-sharp" size={19} color="#004831" />
+                <Text style={styles.footer_text}> {feed.location}</Text>
+              </View>
+              <View>
+                <Text>￥{feed.price}</Text>
+              </View>
+            </View>
+            <View>{feed.status}</View>
+          </View>
+        </Pressable>
+      );
+    }
+  });
+
   return (
     <>
       <SafeAreaView style={styles.body}>
         <ScrollView style={styles.card_section}>
-          <View style={styles.container}>
-            <View style={styles.card_styling}>
-              <Icon3 name="account-circle-outline" size={40} />
-              <Text style={styles.text}>My Motherfucking Jobs!!!</Text>
-            </View>
-            <View style={styles.card_styling}>
-              <Icon3 name="account-circle-outline" size={40} />
-              <Text style={styles.text}>My Motherfucking Jobs!!!</Text>
-            </View>
-            <View style={styles.card_styling}>
-              <Icon3 name="account-circle-outline" size={40} />
-              <Text style={styles.text}>My Motherfucking Jobs!!!</Text>
-            </View>
-            <View style={styles.card_styling}>
-              <Icon3 name="account-circle-outline" size={40} />
-              <Text style={styles.text}>My Motherfucking Jobs!!!</Text>
-            </View>
-            <View style={styles.card_styling}>
-              <Icon3 name="account-circle-outline" size={40} />
-              <Text style={styles.text}>My Motherfucking Jobs!!!</Text>
-            </View>
-          </View>
+          <View style={styles.container}>{renderPosts}</View>
         </ScrollView>
       </SafeAreaView>
     </>
@@ -61,6 +86,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1.25,
     shadowRadius: 5,
     elevation: 5,
+    position: "relative",
   },
   card_section: {
     borderWidth: 0.3,
@@ -80,13 +106,11 @@ const styles = StyleSheet.create({
   },
   card_styling: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     backgroundColor: "#ffffff",
     borderRadius: 20,
-    alignItems: "flex-start",
-    justifyContent: "space-evenly",
     width: 300,
-    height: 150,
+    height: 200,
     marginTop: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -98,11 +122,52 @@ const styles = StyleSheet.create({
     elevation: 5,
     marginBottom: 40,
   },
+  card_header: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "flex-start",
+    width: 300,
+    marginLeft: 10,
+    marginTop: 5,
+  },
+  card_body: {
+    marginHorizontal: 25,
+  },
+  card_text: {
+    marginTop: 20,
+    fontWeight: "300",
+  },
+  card_footer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 20,
+    marginHorizontal: 25,
+    alignItems: "center",
+  },
+  location: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  contact: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  contact_text: {
+    marginRight: 5,
+    fontSize: 12,
+  },
+  footer_text: {
+    fontWeight: "600",
+  },
   text: {
     fontWeight: "bold",
     color: "#004831",
     marginTop: 10,
     fontSize: 20,
+    marginLeft: 20,
   },
   view_button: {
     display: "flex",

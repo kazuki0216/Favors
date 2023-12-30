@@ -1,6 +1,6 @@
-import { PostBody } from "../types/post";
+import { PostBody, myJobs } from "../types/post";
 
-const dummyData: PostBody[] = [
+export const dummyData: PostBody[] = [
   {
     profile: "test",
     name: "Kobe",
@@ -10,6 +10,7 @@ const dummyData: PostBody[] = [
     location: "慶應義塾大学",
     coordinates: "test",
     price: 1900,
+    status: false,
   },
   {
     profile: "test",
@@ -20,6 +21,7 @@ const dummyData: PostBody[] = [
     location: "早稲田大学",
     coordinates: "test",
     price: 1000,
+    status: false,
   },
   {
     profile: "test",
@@ -30,7 +32,29 @@ const dummyData: PostBody[] = [
     location: "一橋大学",
     coordinates: "test",
     price: 2500,
+    status: false,
   },
 ];
 
-export default dummyData;
+export const myDummyData: myJobs[] = [
+  {
+    name: "kazuki",
+    title: "Walk my Dogs",
+    description:
+      "I have a beautiful pet named Birolo, he is quite a chubby fellow! I would like for someone to take care of him for the entire day.",
+    location: "Yokosuka",
+    coordinates: "test",
+    price: 8000,
+    status: false,
+  },
+  {
+    name: "kazuki",
+    title: "Buy me Medicine",
+    description:
+      "I have a cold, and I need for someone to go the pharmacy to grab me some medicine called 'Nyquil'. The color of those tablets are blue. Will mail you details if you take the job.",
+    location: "Hemi",
+    coordinates: "test",
+    price: 1000,
+    status: false,
+  },
+];
