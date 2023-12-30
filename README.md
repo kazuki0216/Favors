@@ -1,5 +1,5 @@
 # Favors
-An easy way for individuals to post favors and others to contribute for compensation. 
+An app for individuals to post simple or big favors and for others to get an opportunity to make some money in the side!
 
 Techstack;
 Frontend:
