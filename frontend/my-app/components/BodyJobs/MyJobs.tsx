@@ -52,7 +52,6 @@ const MyJobs = () => {
                 <Text>￥{feed.price}</Text>
               </View>
             </View>
-            <View>{feed.status}</View>
           </View>
         </Pressable>
       );
@@ -132,6 +131,7 @@ const styles = StyleSheet.create({
   },
   card_body: {
     marginHorizontal: 25,
+    marginBottom: 10
   },
   card_text: {
     marginTop: 20,
@@ -141,7 +141,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 20,
     marginHorizontal: 25,
     alignItems: "center",
   },

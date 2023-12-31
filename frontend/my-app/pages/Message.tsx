@@ -39,23 +39,24 @@ const Message = () => {
     navigation.goBack();
   };
   const ws = new WebSocket(`ws://localhost:8080`);
-  // ws.onopen = () => {
-  //   ws.send("Hello world");
-  // };
 
-  // ws.onmessage = (e) => {
-  //   console.log(e.data);
-  // };
+  ws.onopen = () => {
+    ws.send("Hello world");
+  };
 
-  // ws.onerror = (e) => {
-  //   // an error occurred
-  //   console.log(e);
-  // };
+  ws.onmessage = (e) => {
+    console.log(e.data);
+  };
 
-  // ws.onclose = (e) => {
-  //   // connection closed
-  //   console.log(e.code, e.reason);
-  // };
+  ws.onerror = (e) => {
+    // an error occurred
+    console.log(e);
+  };
+
+  ws.onclose = (e) => {
+    // connection closed
+    console.log(e.code, e.reason);
+  };
 
   const handleSend = () => {
     console.log("Hello world");

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -13,17 +13,12 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import ModalView from "./Modal";
 import { PostBody } from "../../types/post";
-import {dummyData} from "../DummyData";
+import { dummyData } from "../DummyData";
+import AppContext from "../../context/Context";
 
-interface Props {
-  homeNavigation: () => void;
-  messageNavigation: () => void;
-}
-
-const AvailablePosts: React.FC<Props> = ({
-  homeNavigation,
-  messageNavigation,
-}) => {
+const AvailablePosts = ({}) => {
+  const context = useContext(AppContext);
+  const { homeNavigation, messageNavigation } = context;
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [selectedPost, setSelectedPost] = useState<PostBody | null>(null);
   const [postFeed, setPostFeed] = useState<PostBody[] | []>(dummyData);

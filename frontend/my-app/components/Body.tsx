@@ -1,15 +1,11 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 import AvailablePosts from "./BodyJobs/AvailablePosts";
 import MyJobs from "./BodyJobs/MyJobs";
+import AppContext from "../context/Context";
 
-interface Props {
-  homeNavigation: () => void;
-  messageNavigation: () => void;
-}
-
-const Body: React.FC<Props> = ({ homeNavigation, messageNavigation }) => {
+const Body = () => {
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
   const [homePosts, setHomePosts] = useState<boolean>(true);
   const [myPost, setMyPost] = useState<boolean>(false);
@@ -60,12 +56,7 @@ const Body: React.FC<Props> = ({ homeNavigation, messageNavigation }) => {
           </Text>
         </TouchableHighlight>
       </View>
-      {homePosts && !myPost && (
-        <AvailablePosts
-          homeNavigation={homeNavigation}
-          messageNavigation={messageNavigation}
-        />
-      )}
+      {homePosts && !myPost && <AvailablePosts />}
       {!homePosts && myPost && <MyJobs />}
     </>
   );
