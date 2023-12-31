@@ -4,5 +4,5 @@
     "jsx": "react",
     "strict": true
   },
-  "include": ["./*", "my-app/custom"]
+  "include": ["./*", "my-app/custom", "context/Context.ts"]
 }
