@@ -1,43 +1,32 @@
 import React from "react";
-import { useEffect, useState, Dispatch, SetStateAction, FC } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-  SafeAreaView,
-  Button,
-  TouchableHighlight,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
+import AppContext from "../context/Context";
 
 const Profile = () => {
-    const navigation = useNavigation();
-    const goBackHome = () => {
-        navigation.goBack();
-      };
-      return (
-        <>
-          <View style={style.container}>
-            <Text style={style.text}>Profile Page</Text>
-            <View>
-              <Button onPress={goBackHome} title="Go Back Home" />
-            </View>
-          </View>
-        </>
-      );
+  const context = useContext(AppContext);
+  const { goBackHome } = context;
+  return (
+    <>
+      <View style={style.container}>
+        <Text style={style.text}>Profile Page</Text>
+        <View>
+          <Button onPress={goBackHome} title="Go Back Home" />
+        </View>
+      </View>
+    </>
+  );
 };
 
 const style = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignSelf: "stretch",
-      justifyContent: "center",
-    },
-    text: {
-      textAlign: "center",
-    },
-  });
+  container: {
+    flex: 1,
+    alignSelf: "stretch",
+    justifyContent: "center",
+  },
+  text: {
+    textAlign: "center",
+  },
+});
 
 export default Profile;

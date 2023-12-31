@@ -34,20 +34,29 @@ export default function App() {
   const [username, setUserName] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const navigation = useNavigation<HomeScreenNavigationProp>();
+
   const homeNavigation = () => {
     navigation.navigate("Home");
   };
+
   const addJobNavigation = () => {
     navigation.navigate("AddJob");
   };
+
   const profileNavigation = () => {
     navigation.navigate("Profile");
   };
+
   const bookMarkNavigation = () => {
     navigation.navigate("BookMark");
   };
+
   const messageNavigation = () => {
     navigation.navigate("Message");
+  };
+
+  const goBackHome = () => {
+    navigation.goBack();
   };
 
   return (
@@ -62,6 +71,7 @@ export default function App() {
         profileNavigation: profileNavigation,
         bookMarkNavigation: bookMarkNavigation,
         messageNavigation: messageNavigation,
+        goBackHome: goBackHome
       }}
     >
       <NavigationContainer>

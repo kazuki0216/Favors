@@ -1,23 +1,18 @@
 import React from "react";
-import { useEffect, useState, Dispatch, SetStateAction, FC } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
   View,
-  Image,
-  ScrollView,
-  SafeAreaView,
   Button,
   TouchableHighlight,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import AppContext from "../context/Context";
 
 const BookMark = () => {
-  const navigation = useNavigation();
+  const context = useContext(AppContext);
+  const { goBackHome } = context;
 
-  const goBackHome = () => {
-    navigation.goBack();
-  };
   return (
     <>
       <View style={style.container}>

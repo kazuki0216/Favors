@@ -1,4 +1,5 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useContext } from "react";
+import AppContext from "../../context/Context";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { PostBody } from "../../types/post";
 import Icon1 from "react-native-vector-icons/FontAwesome";
@@ -10,17 +11,22 @@ interface Props {
   setModalVisible: Dispatch<SetStateAction<boolean>>;
   selectedPost: PostBody | null;
   setSelectedPost: Dispatch<SetStateAction<PostBody | null>>;
-  homeNavigation: () => void;
-  messageNavigation: () => void;
 }
 const ModalView: React.FC<Props> = ({
   modalVisible,
   setModalVisible,
   selectedPost,
   setSelectedPost,
-  homeNavigation,
-  messageNavigation,
 }) => {
+  const context = useContext(AppContext);
+  const {
+    homeNavigation,
+    addJobNavigation,
+    messageNavigation,
+    bookMarkNavigation,
+    profileNavigation,
+  } = context;
+
   if (selectedPost) {
     return (
       <Modal
