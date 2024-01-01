@@ -1,22 +1,10 @@
 import React from "react";
-import { useEffect, useState, Dispatch, SetStateAction, FC } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-  SafeAreaView,
-  Button,
-  TouchableHighlight,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
+import AppContext from "../context/Context";
 const AddJobPage = () => {
-  const navigation = useNavigation();
-
-  const goBackHome = () => {
-    navigation.goBack();
-  };
+  const context = useContext(AppContext);
+  const { goBackHome } = context;
   return (
     <>
       <View style={style.container}>

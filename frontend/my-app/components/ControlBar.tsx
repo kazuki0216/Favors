@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AppContext from "../context/Context";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import BookMark from "react-native-vector-icons/FontAwesome";
 import HomeIcon from "react-native-vector-icons/Ionicons";
@@ -15,21 +16,7 @@ type IconColors = {
   profileIcon: string;
 };
 
-interface Props {
-  homeNavigation: () => void;
-  addJobNavigation: () => void;
-  profileNavigation: () => void;
-  bookMarkNavigation: () => void;
-  messageNavigation: () => void;
-}
-
-const ControlBar: React.FC<Props> = ({
-  homeNavigation,
-  addJobNavigation,
-  profileNavigation,
-  bookMarkNavigation,
-  messageNavigation,
-}) => {
+const ControlBar = () => {
   const [iconColors, setIconColors] = useState<IconColors>({
     homeIcon: "#004831",
     messageIcon: "#E2D7C6",
@@ -37,6 +24,14 @@ const ControlBar: React.FC<Props> = ({
     bookmarkIcon: "#E2D7C6",
     profileIcon: "#E2D7C6",
   });
+  const context = useContext(AppContext);
+  const {
+    homeNavigation,
+    addJobNavigation,
+    messageNavigation,
+    bookMarkNavigation,
+    profileNavigation,
+  } = context;
 
   const handlePress = (iconName: keyof IconColors) => {
     setIconColors((prevColors: any) => {

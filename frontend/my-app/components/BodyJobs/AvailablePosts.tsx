@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/Ionicons";
-import { useNavigation } from "@react-navigation/native";
 import ModalView from "./Modal";
 import { PostBody } from "../../types/post";
 import { dummyData } from "../DummyData";
@@ -67,8 +66,6 @@ const AvailablePosts = ({}) => {
         setModalVisible={setModalVisible}
         selectedPost={selectedPost}
         setSelectedPost={setSelectedPost}
-        homeNavigation={homeNavigation}
-        messageNavigation={messageNavigation}
       />
     </>
   );

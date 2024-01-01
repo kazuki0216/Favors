@@ -1,10 +1,10 @@
-import React, { useState, useContext, createContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
 import {
   NavigationContainer,
   StackActions,
   useNavigation,
 } from "@react-navigation/native";
+import { useCustomNavigation } from "./hooks/CustomNavigation";
 import {
   createStackNavigator,
   StackNavigationProp,
@@ -29,26 +29,45 @@ type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+const NavigationProvider = ({ children }) => {
+  const navigationFunctions = useCustomNavigation();
+
+  return (
+    <AppContext.Provider value={navigationFunctions}>
+      {children}
+    </AppContext.Provider>
+  );
+};
+
 export default function App() {
   const [counter, setCounter] = useState<number>(0);
   const [username, setUserName] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
-  const navigation = useNavigation<HomeScreenNavigationProp>();
-  const homeNavigation = () => {
-    navigation.navigate("Home");
-  };
-  const addJobNavigation = () => {
-    navigation.navigate("AddJob");
-  };
-  const profileNavigation = () => {
-    navigation.navigate("Profile");
-  };
-  const bookMarkNavigation = () => {
-    navigation.navigate("BookMark");
-  };
-  const messageNavigation = () => {
-    navigation.navigate("Message");
-  };
+  //const navigation = useNavigation<HomeScreenNavigationProp>();
+
+  // const homeNavigation = () => {
+  //   navigation.navigate("Home");
+  // };
+
+  // const addJobNavigation = () => {
+  //   navigation.navigate("AddJob");
+  // };
+
+  // const profileNavigation = () => {
+  //   navigation.navigate("Profile");
+  // };
+
+  // const bookMarkNavigation = () => {
+  //   navigation.navigate("BookMark");
+  // };
+
+  // const messageNavigation = () => {
+  //   navigation.navigate("Message");
+  // };
+
+  // const goBackHome = () => {
+  //   navigation.goBack();
+  // };
 
   return (
     <AppContext.Provider
@@ -57,41 +76,38 @@ export default function App() {
         setUserName: setUserName,
         userId: userId,
         setUserId: setUserId,
-        homeNavigation: homeNavigation,
-        addJobNavigation: addJobNavigation,
-        profileNavigation: profileNavigation,
-        bookMarkNavigation: bookMarkNavigation,
-        messageNavigation: messageNavigation,
       }}
     >
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="AddJob"
-            component={AddJob}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Profile"
-            component={Profile}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Message"
-            component={Message}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="BookMark"
-            component={BookMark}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
+        <NavigationProvider>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="AddJob"
+              component={AddJob}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Profile"
+              component={Profile}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Message"
+              component={Message}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="BookMark"
+              component={BookMark}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        </NavigationProvider>
       </NavigationContainer>
     </AppContext.Provider>
   );

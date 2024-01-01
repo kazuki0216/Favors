@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -15,10 +15,11 @@ import {
 import ModalView from "../components/BodyJobs/Modal";
 import Account from "react-native-vector-icons/MaterialCommunityIcons";
 import SEND from "react-native-vector-icons/FontAwesome";
+import AppContext from "../context/Context";
 
-import { useNavigation } from "@react-navigation/native";
 const Message = () => {
-  const navigation = useNavigation();
+  const context = useContext(AppContext);
+  const { goBackHome } = context;
   const [message, setMessage] = useState<string>("");
   const [inputOpen, setInputOpen] = useState<boolean>(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -35,9 +36,6 @@ const Message = () => {
     setInputOpen(false);
   };
 
-  const goBackHome = () => {
-    navigation.goBack();
-  };
   const ws = new WebSocket(`ws://localhost:8080`);
 
   ws.onopen = () => {

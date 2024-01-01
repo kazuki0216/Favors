@@ -9,15 +9,10 @@ import {
   Pressable,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import { useNavigation } from "@react-navigation/native";
 import ModalView from "./Modal";
 import { PostBody, myJobs } from "../../types/post";
 import { myDummyData } from "../DummyData";
 
-interface Props {
-  homeNavigation: () => void;
-  messageNavigation: () => void;
-}
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 
 const MyJobs = () => {
@@ -131,7 +126,7 @@ const styles = StyleSheet.create({
   },
   card_body: {
     marginHorizontal: 25,
-    marginBottom: 10
+    marginBottom: 10,
   },
   card_text: {
     marginTop: 20,
