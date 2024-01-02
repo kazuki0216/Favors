@@ -16,6 +16,7 @@ type RootStackParamList = {
   Profile: undefined;
   Message: undefined;
   BookMark: undefined;
+  ContactList: undefined;
 };
 
 export function useCustomNavigation() {
@@ -41,6 +42,10 @@ export function useCustomNavigation() {
     navigation.navigate("Message");
   };
 
+  const contactlistNavigation = () => {
+    navigation.navigate("ContactList");
+  };
+
   const goBackHome = () => {
     navigation.goBack();
   };
@@ -52,5 +57,6 @@ export function useCustomNavigation() {
     messageNavigation,
     goBackHome,
     bookMarkNavigation,
+    contactlistNavigation,
   };
 }
