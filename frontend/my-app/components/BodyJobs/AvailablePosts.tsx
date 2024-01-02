@@ -1,13 +1,6 @@
 import React from "react";
 import { useState, useContext } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  SafeAreaView,
-  Pressable,
-} from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/Ionicons";
 import ModalView from "./Modal";
@@ -33,7 +26,6 @@ const AvailablePosts = ({}) => {
       >
         <View style={styles.card_styling}>
           <View style={styles.card_header}>
-            {/* <Image source={require("../../assets/icons/profile1.png")}/> */}
             <Icon3 name="account-circle-outline" size={40} />
             <Text style={styles.text}>{feed.title}</Text>
           </View>
@@ -56,11 +48,7 @@ const AvailablePosts = ({}) => {
 
   return (
     <>
-      <SafeAreaView style={styles.body}>
-        <ScrollView style={styles.card_section}>
-          <View style={styles.container}>{renderPosts}</View>
-        </ScrollView>
-      </SafeAreaView>
+      <View style={styles.container}>{renderPosts}</View>
       <ModalView
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
@@ -74,21 +62,6 @@ const AvailablePosts = ({}) => {
 export default AvailablePosts;
 
 const styles = StyleSheet.create({
-  body: {
-    margin: 0,
-    alignItems: "center",
-    justifyContent: "flex-end",
-    flex: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 1.25,
-    shadowRadius: 5,
-    elevation: 5,
-    position: "relative",
-  },
   card_section: {
     borderWidth: 0.3,
     flex: 0.95,

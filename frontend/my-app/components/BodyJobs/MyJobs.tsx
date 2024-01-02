@@ -55,11 +55,7 @@ const MyJobs = () => {
 
   return (
     <>
-      <SafeAreaView style={styles.body}>
-        <ScrollView style={styles.card_section}>
-          <View style={styles.container}>{renderPosts}</View>
-        </ScrollView>
-      </SafeAreaView>
+      <View style={styles.container}>{renderPosts}</View>
     </>
   );
 };
@@ -67,34 +63,6 @@ const MyJobs = () => {
 export default MyJobs;
 
 const styles = StyleSheet.create({
-  body: {
-    margin: 0,
-    alignItems: "center",
-    justifyContent: "flex-end",
-    flex: 1,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 1.25,
-    shadowRadius: 5,
-    elevation: 5,
-    position: "relative",
-  },
-  card_section: {
-    borderWidth: 0.3,
-    flex: 0.95,
-    width: 350,
-    backgroundColor: "#004832",
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    display: "flex",
-    flexDirection: "column",
-    overflow: "scroll",
-    maxHeight: 600,
-    padding: 10,
-  },
   container: {
     alignItems: "center",
   },

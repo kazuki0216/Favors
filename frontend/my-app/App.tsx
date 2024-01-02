@@ -16,6 +16,7 @@ import BookMark from "./pages/BookMark";
 import Message from "./pages/Message";
 import Profile from "./pages/Profile";
 import AppContext from "./context/Context";
+import ContactList from "./components/ContactList";
 
 type RootStackParamList = {
   Home: undefined;
@@ -23,9 +24,8 @@ type RootStackParamList = {
   Profile: undefined;
   Message: undefined;
   BookMark: undefined;
+  ContactList: undefined;
 };
-
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -94,6 +94,11 @@ export default function App() {
             <Stack.Screen
               name="Profile"
               component={Profile}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ContactList"
+              component={ContactList}
               options={{ headerShown: false }}
             />
             <Stack.Screen

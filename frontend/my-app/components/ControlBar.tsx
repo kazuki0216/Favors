@@ -31,6 +31,7 @@ const ControlBar = () => {
     messageNavigation,
     bookMarkNavigation,
     profileNavigation,
+    contactlistNavigation,
   } = context;
 
   const handlePress = (iconName: keyof IconColors) => {
@@ -70,7 +71,7 @@ const ControlBar = () => {
           <TouchableOpacity
             onPress={() => {
               handlePress("messageIcon");
-              messageNavigation();
+              contactlistNavigation();
             }}
           >
             <ChatIcon name="chat" size={40} color={iconColors.messageIcon} />

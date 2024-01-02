@@ -58,3 +58,33 @@ export const myDummyData: myJobs[] = [
     status: false,
   },
 ];
+
+export const contactList: { name: string }[] = [
+  {
+    name: "emily",
+  },
+  {
+    name: "Blake",
+  },
+  {
+    name: "Aron",
+  },
+  {
+    name: "Samantha",
+  },
+  {
+    name: "Jessica",
+  },
+  {
+    name: "Mei",
+  },
+  {
+    name: "Kenta",
+  },
+  {
+    name: "Jesse",
+  },
+  {
+    name: "Sky",
+  },
+];
