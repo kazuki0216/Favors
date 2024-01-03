@@ -35,7 +35,7 @@ const NavigationProvider = ({ children }) => {
 export default function App() {
   const [username, setUserName] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
-  const controlMenu = useRef<string>("Home");
+  const [activeIcon, setActiveIcon] = useState<string>("home");
 
   return (
     <AppContext.Provider
@@ -44,7 +44,8 @@ export default function App() {
         setUserName,
         userId,
         setUserId,
-        controlMenu,
+        activeIcon,
+        setActiveIcon,
       }}
     >
       <NavigationContainer>

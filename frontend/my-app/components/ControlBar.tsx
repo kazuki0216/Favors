@@ -28,83 +28,82 @@ const ControlBar = () => {
     contactlistNavigation,
   } = navigation;
 
-  const [iconColors, setIconColors] = useState<IconColors>({
-    home: "#004831",
-    message: "#E2D7C6",
-    add: "#E2D7C6",
-    bookmark: "#E2D7C6",
-    profile: "#E2D7C6",
-  });
   const value = useContext(AppContext);
-  const { controlMenu } = value;
+  const { activeIcon, setActiveIcon } = value;
 
   const handlePress = (iconName: keyof IconColors) => {
-    setIconColors((prevColors: any) => {
-      const updatedColors: IconColors = Object.keys(prevColors).reduce(
-        (acc, key) => {
-          acc[key as keyof IconColors] =
-            key === iconName
-              ? prevColors[key as keyof IconColors] === "#E2D7C6"
-                ? "#004831"
-                : "#E2D7C6"
-              : "#E2D7C6"; // Reset the color for other icons
-          return acc;
-        },
-        {} as IconColors
-      );
-      return updatedColors;
-    });
+    setActiveIcon(iconName);
+    switch (iconName) {
+      case "home":
+        homeNavigation();
+        break;
+      case "message":
+        contactlistNavigation();
+        break;
+      case "add":
+        addJobNavigation();
+        break;
+      case "bookmark":
+        bookMarkNavigation();
+        break;
+      case "profile":
+        profileNavigation();
+        break;
+    }
   };
+
+  const iconColor = (iconName) =>
+    activeIcon === iconName ? "#004831" : "#E2D7C6";
+
   return (
     <>
       <View style={styles.body}>
         <View style={styles.icons}>
           <TouchableOpacity
             onPress={() => {
-              homeNavigation();
-              handlePress(controlMenu.current);
+              handlePress("home");
             }}
           >
-            <HomeIcon name="home-outline" size={38} color={iconColors.home} />
+            <HomeIcon name="home-outline" size={38} color={iconColor("home")} />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              contactlistNavigation();
-              handlePress(controlMenu.current);
+              handlePress("message");
             }}
           >
-            <ChatIcon name="chat" size={40} color={iconColors.message} />
+            <ChatIcon name="chat" size={40} color={iconColor("message")} />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              addJobNavigation();
-              handlePress(controlMenu.current);
+              handlePress("add");
             }}
           >
-            <AddIcon name="plus" size={40} color={iconColors.add} />
+            <AddIcon name="plus" size={40} color={iconColor("add")} />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              bookMarkNavigation();
-              handlePress(controlMenu.current);
+              handlePress("bookmark");
             }}
           >
-            <BookMark name="bookmark-o" size={40} color={iconColors.bookmark} />
+            <BookMark
+              name="bookmark-o"
+              size={40}
+              color={iconColor("bookmark")}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              profileNavigation();
-              handlePress(controlMenu.current);
+              handlePress("profile");
             }}
           >
             <Account
               name="account-circle-outline"
               size={40}
-              color={iconColors.profile}
+              color={iconColor("profile")}
             />
           </TouchableOpacity>
         </View>
