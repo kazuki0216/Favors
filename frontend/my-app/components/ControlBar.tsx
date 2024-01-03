@@ -7,6 +7,7 @@ import HomeIcon from "react-native-vector-icons/Ionicons";
 import Account from "react-native-vector-icons/MaterialCommunityIcons";
 import ChatIcon from "react-native-vector-icons/Entypo";
 import AddIcon from "react-native-vector-icons/AntDesign";
+import NavigationContext from "../context/NavigationContext";
 
 type IconColors = {
   homeIcon: string;
@@ -24,7 +25,7 @@ const ControlBar = () => {
     bookmarkIcon: "#E2D7C6",
     profileIcon: "#E2D7C6",
   });
-  const context = useContext(AppContext);
+  const navigation = useContext(NavigationContext);
   const {
     homeNavigation,
     addJobNavigation,
@@ -32,7 +33,7 @@ const ControlBar = () => {
     bookMarkNavigation,
     profileNavigation,
     contactlistNavigation,
-  } = context;
+  } = navigation;
 
   const handlePress = (iconName: keyof IconColors) => {
     setIconColors((prevColors: any) => {

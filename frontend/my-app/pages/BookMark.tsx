@@ -8,10 +8,12 @@ import {
   TouchableHighlight,
 } from "react-native";
 import AppContext from "../context/Context";
+import NavigationContext from "../context/NavigationContext";
 
 const BookMark = () => {
   const context = useContext(AppContext);
-  const { goBackHome } = context;
+  const navigation = useContext(NavigationContext);
+  const { goBackHome } = navigation;
 
   return (
     <>

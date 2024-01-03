@@ -16,10 +16,13 @@ import ModalView from "../components/BodyJobs/Modal";
 import Account from "react-native-vector-icons/MaterialCommunityIcons";
 import SEND from "react-native-vector-icons/FontAwesome";
 import AppContext from "../context/Context";
+import NavigationContext from "../context/NavigationContext";
 
 const Message = () => {
   const context = useContext(AppContext);
-  const { goBackHome } = context;
+  const { username } = context;
+  const navigation = useContext(NavigationContext);
+  const { goBackHome } = navigation;
   const [message, setMessage] = useState<string>("");
   const [inputOpen, setInputOpen] = useState<boolean>(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -97,7 +100,7 @@ const Message = () => {
               <Text
                 style={{ fontWeight: "bold", fontSize: 20, marginRight: 30 }}
               >
-                Justin Bieber
+                {username}
               </Text>
             </View>
           </View>

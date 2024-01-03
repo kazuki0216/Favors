@@ -2,9 +2,11 @@ import React from "react";
 import { useContext } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import AppContext from "../context/Context";
+import NavigationContext from "../context/NavigationContext";
 const AddJobPage = () => {
   const context = useContext(AppContext);
-  const { goBackHome } = context;
+  const navigation = useContext(NavigationContext);
+  const { goBackHome } = navigation;
   return (
     <>
       <View style={style.container}>

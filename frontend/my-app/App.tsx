@@ -1,14 +1,6 @@
 import React, { useState } from "react";
-import {
-  NavigationContainer,
-  StackActions,
-  useNavigation,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { useCustomNavigation } from "./hooks/CustomNavigation";
-import {
-  createStackNavigator,
-  StackNavigationProp,
-} from "@react-navigation/stack";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./pages/Home";
 import AddJob from "./pages/AddJob";
@@ -17,6 +9,7 @@ import Message from "./pages/Message";
 import Profile from "./pages/Profile";
 import AppContext from "./context/Context";
 import ContactList from "./components/ContactList";
+import NavigationContext from "./context/NavigationContext";
 
 type RootStackParamList = {
   Home: undefined;
@@ -33,51 +26,18 @@ const NavigationProvider = ({ children }) => {
   const navigationFunctions = useCustomNavigation();
 
   return (
-    <AppContext.Provider value={navigationFunctions}>
+    <NavigationContext.Provider value={navigationFunctions}>
       {children}
-    </AppContext.Provider>
+    </NavigationContext.Provider>
   );
 };
 
 export default function App() {
-  const [counter, setCounter] = useState<number>(0);
   const [username, setUserName] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
-  //const navigation = useNavigation<HomeScreenNavigationProp>();
-
-  // const homeNavigation = () => {
-  //   navigation.navigate("Home");
-  // };
-
-  // const addJobNavigation = () => {
-  //   navigation.navigate("AddJob");
-  // };
-
-  // const profileNavigation = () => {
-  //   navigation.navigate("Profile");
-  // };
-
-  // const bookMarkNavigation = () => {
-  //   navigation.navigate("BookMark");
-  // };
-
-  // const messageNavigation = () => {
-  //   navigation.navigate("Message");
-  // };
-
-  // const goBackHome = () => {
-  //   navigation.goBack();
-  // };
 
   return (
-    <AppContext.Provider
-      value={{
-        username: username,
-        setUserName: setUserName,
-        userId: userId,
-        setUserId: setUserId,
-      }}
-    >
+    <AppContext.Provider value={{ username, setUserName, userId, setUserId }}>
       <NavigationContainer>
         <NavigationProvider>
           <Stack.Navigator>
