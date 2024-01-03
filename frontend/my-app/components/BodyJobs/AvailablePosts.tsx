@@ -6,11 +6,11 @@ import Icon from "react-native-vector-icons/Ionicons";
 import ModalView from "./Modal";
 import { PostBody } from "../../types/post";
 import { dummyData } from "../DummyData";
-import AppContext from "../../context/Context";
+import NavigationContext from "../../context/NavigationContext";
 
 const AvailablePosts = ({}) => {
-  const context = useContext(AppContext);
-  const { homeNavigation, messageNavigation } = context;
+  const navigation = useContext(NavigationContext);
+  const { messageNavigation } = navigation;
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [selectedPost, setSelectedPost] = useState<PostBody | null>(null);
   const [postFeed, setPostFeed] = useState<PostBody[] | []>(dummyData);

@@ -5,32 +5,39 @@ import {
   Text,
   View,
   ScrollView,
-  TextInput,
-  KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Keyboard,
-  Platform,
-  Pressable,
 } from "react-native";
-import ModalView from "../components/BodyJobs/Modal";
 import Account from "react-native-vector-icons/MaterialCommunityIcons";
-import SEND from "react-native-vector-icons/FontAwesome";
 import AppContext from "../context/Context";
 import { contactList } from "./DummyData";
 import ControlBar from "./ControlBar";
+import NavigationContext from "../context/NavigationContext";
 
 const ContactList = () => {
   const context = useContext(AppContext);
-  const { goBackHome } = context;
+  const navigation = useContext(NavigationContext);
+  const { messageNavigation } = navigation;
+  const { goBackHome, setUserName } = context;
   const [userList, setUserList] = useState(contactList);
 
   //   useEffect(() => {
   //     setUserList(contactList);
   //   }, []);
 
+  const handleUserClick = (user: string) => {
+    setUserName(user);
+    messageNavigation();
+  };
+
   const renderContactList = userList.map((user, index) => {
     return (
-      <TouchableWithoutFeedback key={index}>
+      <TouchableWithoutFeedback
+        key={index}
+        onPress={() => {
+          console.log(user.name, "was clicked");
+          handleUserClick(user.name);
+        }}
+      >
         <View style={style.listStyling}>
           <View style={style.name_container}>
             <Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 20 }}>
@@ -50,7 +57,7 @@ const ContactList = () => {
           </Text>
         </View>
       </View>
-      <ScrollView>
+      <ScrollView style={style.scroll_container}>
         <View style={style.contactlist_container}>
           <View>{renderContactList}</View>
         </View>
@@ -63,6 +70,9 @@ const ContactList = () => {
 export default ContactList;
 
 const style = StyleSheet.create({
+  scroll_container: {
+    maxHeight: "76.5%",
+  },
   contactlist_container: {
     flex: 1,
     alignItems: "flex-start",
@@ -77,13 +87,13 @@ const style = StyleSheet.create({
     width: 500,
   },
   name_container: {
-    marginVertical: 30,
+    marginVertical: 20,
     verticalAlign: "center",
   },
   header: {
     display: "flex",
     alignSelf: "stretch",
-    paddingVertical: 20,
+    paddingVertical: 25,
     backgroundColor: "#ffffff",
     flexDirection: "row",
     justifyContent: "space-around",

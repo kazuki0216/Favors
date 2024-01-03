@@ -7,24 +7,18 @@ import HomeIcon from "react-native-vector-icons/Ionicons";
 import Account from "react-native-vector-icons/MaterialCommunityIcons";
 import ChatIcon from "react-native-vector-icons/Entypo";
 import AddIcon from "react-native-vector-icons/AntDesign";
+import NavigationContext from "../context/NavigationContext";
 
 type IconColors = {
-  homeIcon: string;
-  messageIcon: string;
-  addIcon: string;
-  bookmarkIcon: string;
-  profileIcon: string;
+  home: string;
+  message: string;
+  add: string;
+  bookmark: string;
+  profile: string;
 };
 
 const ControlBar = () => {
-  const [iconColors, setIconColors] = useState<IconColors>({
-    homeIcon: "#004831",
-    messageIcon: "#E2D7C6",
-    addIcon: "#E2D7C6",
-    bookmarkIcon: "#E2D7C6",
-    profileIcon: "#E2D7C6",
-  });
-  const context = useContext(AppContext);
+  const navigation = useContext(NavigationContext);
   const {
     homeNavigation,
     addJobNavigation,
@@ -32,83 +26,84 @@ const ControlBar = () => {
     bookMarkNavigation,
     profileNavigation,
     contactlistNavigation,
-  } = context;
+  } = navigation;
+
+  const value = useContext(AppContext);
+  const { activeIcon, setActiveIcon } = value;
 
   const handlePress = (iconName: keyof IconColors) => {
-    setIconColors((prevColors: any) => {
-      const updatedColors: IconColors = Object.keys(prevColors).reduce(
-        (acc, key) => {
-          acc[key as keyof IconColors] =
-            key === iconName
-              ? prevColors[key as keyof IconColors] === "#E2D7C6"
-                ? "#004831"
-                : "#E2D7C6"
-              : "#E2D7C6"; // Reset the color for other icons
-          return acc;
-        },
-        {} as IconColors
-      );
-      return updatedColors;
-    });
+    setActiveIcon(iconName);
+    switch (iconName) {
+      case "home":
+        homeNavigation();
+        break;
+      case "message":
+        contactlistNavigation();
+        break;
+      case "add":
+        addJobNavigation();
+        break;
+      case "bookmark":
+        bookMarkNavigation();
+        break;
+      case "profile":
+        profileNavigation();
+        break;
+    }
   };
+
+  const iconColor = (iconName) =>
+    activeIcon === iconName ? "#004831" : "#E2D7C6";
+
   return (
     <>
       <View style={styles.body}>
         <View style={styles.icons}>
           <TouchableOpacity
             onPress={() => {
-              handlePress("homeIcon");
-              homeNavigation();
+              handlePress("home");
             }}
           >
-            <HomeIcon
-              name="home-outline"
-              size={38}
-              color={iconColors.homeIcon}
-            />
+            <HomeIcon name="home-outline" size={38} color={iconColor("home")} />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              handlePress("messageIcon");
-              contactlistNavigation();
+              handlePress("message");
             }}
           >
-            <ChatIcon name="chat" size={40} color={iconColors.messageIcon} />
+            <ChatIcon name="chat" size={40} color={iconColor("message")} />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              handlePress("addIcon");
-              addJobNavigation();
+              handlePress("add");
             }}
           >
-            <AddIcon name="plus" size={40} color={iconColors.addIcon} />
+            <AddIcon name="plus" size={40} color={iconColor("add")} />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              handlePress("bookmarkIcon");
-              bookMarkNavigation();
+              handlePress("bookmark");
             }}
           >
             <BookMark
               name="bookmark-o"
               size={40}
-              color={iconColors.bookmarkIcon}
+              color={iconColor("bookmark")}
             />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              handlePress("profileIcon");
-              profileNavigation();
+              handlePress("profile");
             }}
           >
             <Account
               name="account-circle-outline"
               size={40}
-              color={iconColors.profileIcon}
+              color={iconColor("profile")}
             />
           </TouchableOpacity>
         </View>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   NavigationContainer,
   StackActions,
@@ -9,6 +9,7 @@ import {
   StackNavigationProp,
 } from "@react-navigation/stack";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AppContext from "../context/Context";
 
 type RootStackParamList = {
   Home: undefined;
@@ -20,6 +21,8 @@ type RootStackParamList = {
 };
 
 export function useCustomNavigation() {
+  const value = useContext(AppContext);
+  const { controlMenu, setControlMenu } = value;
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const homeNavigation = () => {
@@ -45,6 +48,7 @@ export function useCustomNavigation() {
   const contactlistNavigation = () => {
     navigation.navigate("ContactList");
   };
+  
 
   const goBackHome = () => {
     navigation.goBack();

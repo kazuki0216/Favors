@@ -5,6 +5,7 @@ import { PostBody } from "../../types/post";
 import Icon1 from "react-native-vector-icons/FontAwesome";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/Ionicons";
+import NavigationContext from "../../context/NavigationContext";
 
 interface Props {
   modalVisible: boolean;
@@ -18,14 +19,8 @@ const ModalView: React.FC<Props> = ({
   selectedPost,
   setSelectedPost,
 }) => {
-  const context = useContext(AppContext);
-  const {
-    homeNavigation,
-    addJobNavigation,
-    messageNavigation,
-    bookMarkNavigation,
-    profileNavigation,
-  } = context;
+  const navigation = useContext(NavigationContext);
+  const { messageNavigation } = navigation;
 
   if (selectedPost) {
     return (
