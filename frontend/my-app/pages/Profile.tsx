@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import AppContext from "../context/Context";
 import NavigationContext from "../context/NavigationContext";
+import ControlBar from "../components/ControlBar";
 
 const Profile = () => {
   const context = useContext(AppContext);
@@ -16,6 +17,7 @@ const Profile = () => {
           <Button onPress={goBackHome} title="Go Back Home" />
         </View>
       </View>
+      <ControlBar />
     </>
   );
 };

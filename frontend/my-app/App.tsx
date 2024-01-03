@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useCustomNavigation } from "./hooks/CustomNavigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -35,9 +35,18 @@ const NavigationProvider = ({ children }) => {
 export default function App() {
   const [username, setUserName] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
+  const controlMenu = useRef<string>("Home");
 
   return (
-    <AppContext.Provider value={{ username, setUserName, userId, setUserId }}>
+    <AppContext.Provider
+      value={{
+        username,
+        setUserName,
+        userId,
+        setUserId,
+        controlMenu,
+      }}
+    >
       <NavigationContainer>
         <NavigationProvider>
           <Stack.Navigator>

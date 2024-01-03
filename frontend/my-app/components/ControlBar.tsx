@@ -10,21 +10,14 @@ import AddIcon from "react-native-vector-icons/AntDesign";
 import NavigationContext from "../context/NavigationContext";
 
 type IconColors = {
-  homeIcon: string;
-  messageIcon: string;
-  addIcon: string;
-  bookmarkIcon: string;
-  profileIcon: string;
+  home: string;
+  message: string;
+  add: string;
+  bookmark: string;
+  profile: string;
 };
 
 const ControlBar = () => {
-  const [iconColors, setIconColors] = useState<IconColors>({
-    homeIcon: "#004831",
-    messageIcon: "#E2D7C6",
-    addIcon: "#E2D7C6",
-    bookmarkIcon: "#E2D7C6",
-    profileIcon: "#E2D7C6",
-  });
   const navigation = useContext(NavigationContext);
   const {
     homeNavigation,
@@ -34,6 +27,16 @@ const ControlBar = () => {
     profileNavigation,
     contactlistNavigation,
   } = navigation;
+
+  const [iconColors, setIconColors] = useState<IconColors>({
+    home: "#004831",
+    message: "#E2D7C6",
+    add: "#E2D7C6",
+    bookmark: "#E2D7C6",
+    profile: "#E2D7C6",
+  });
+  const value = useContext(AppContext);
+  const { controlMenu } = value;
 
   const handlePress = (iconName: keyof IconColors) => {
     setIconColors((prevColors: any) => {
@@ -58,58 +61,50 @@ const ControlBar = () => {
         <View style={styles.icons}>
           <TouchableOpacity
             onPress={() => {
-              handlePress("homeIcon");
               homeNavigation();
+              handlePress(controlMenu.current);
             }}
           >
-            <HomeIcon
-              name="home-outline"
-              size={38}
-              color={iconColors.homeIcon}
-            />
+            <HomeIcon name="home-outline" size={38} color={iconColors.home} />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              handlePress("messageIcon");
               contactlistNavigation();
+              handlePress(controlMenu.current);
             }}
           >
-            <ChatIcon name="chat" size={40} color={iconColors.messageIcon} />
+            <ChatIcon name="chat" size={40} color={iconColors.message} />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              handlePress("addIcon");
               addJobNavigation();
+              handlePress(controlMenu.current);
             }}
           >
-            <AddIcon name="plus" size={40} color={iconColors.addIcon} />
+            <AddIcon name="plus" size={40} color={iconColors.add} />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              handlePress("bookmarkIcon");
               bookMarkNavigation();
+              handlePress(controlMenu.current);
             }}
           >
-            <BookMark
-              name="bookmark-o"
-              size={40}
-              color={iconColors.bookmarkIcon}
-            />
+            <BookMark name="bookmark-o" size={40} color={iconColors.bookmark} />
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
-              handlePress("profileIcon");
               profileNavigation();
+              handlePress(controlMenu.current);
             }}
           >
             <Account
               name="account-circle-outline"
               size={40}
-              color={iconColors.profileIcon}
+              color={iconColors.profile}
             />
           </TouchableOpacity>
         </View>
