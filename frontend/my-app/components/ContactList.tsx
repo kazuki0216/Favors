@@ -85,6 +85,7 @@ const style = StyleSheet.create({
   listStyling: {
     borderBottomWidth: 1,
     width: 500,
+    borderColor: "gray"
   },
   name_container: {
     marginVertical: 20,
