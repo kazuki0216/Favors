@@ -52,7 +52,7 @@ const ControlBar = () => {
     }
   };
 
-  const iconColor = (iconName) =>
+  const iconColor = (iconName: string) =>
     activeIcon === iconName ? "#004831" : "#E2D7C6";
 
   return (
