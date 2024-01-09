@@ -17,7 +17,7 @@ const ContactList = () => {
   const context = useContext(AppContext);
   const navigation = useContext(NavigationContext);
   const { messageNavigation } = navigation;
-  const { goBackHome, setUserName } = context;
+  const { goBackHome, setConnectedUser } = context;
   const [userList, setUserList] = useState(contactList);
 
   //   useEffect(() => {
@@ -25,7 +25,7 @@ const ContactList = () => {
   //   }, []);
 
   const handleUserClick = (user: string) => {
-    setUserName(user);
+    setConnectedUser(user);
     messageNavigation();
   };
 

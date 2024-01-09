@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, ReactNode } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useCustomNavigation } from "./hooks/CustomNavigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -20,9 +20,13 @@ type RootStackParamList = {
   ContactList: undefined;
 };
 
+interface Props {
+  children: ReactNode;
+}
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const NavigationProvider = ({ children }) => {
+const NavigationProvider = ({ children }: Props) => {
   const navigationFunctions = useCustomNavigation();
 
   return (
@@ -36,6 +40,11 @@ export default function App() {
   const [username, setUserName] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const [activeIcon, setActiveIcon] = useState<string>("home");
+  const [connectedUser, setConnectedUser] = useState<string>("");
+
+  useEffect(() => {
+    setUserName("Kazuki");
+  }, []);
 
   return (
     <AppContext.Provider
@@ -46,6 +55,8 @@ export default function App() {
         setUserId,
         activeIcon,
         setActiveIcon,
+        connectedUser,
+        setConnectedUser,
       }}
     >
       <NavigationContainer>
