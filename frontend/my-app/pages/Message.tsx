@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,21 +11,57 @@ import {
   Keyboard,
   Platform,
   Pressable,
+  FlatList,
 } from "react-native";
 import ModalView from "../components/BodyJobs/Modal";
 import Account from "react-native-vector-icons/MaterialCommunityIcons";
 import SEND from "react-native-vector-icons/FontAwesome";
 import AppContext from "../context/Context";
 import NavigationContext from "../context/NavigationContext";
+import { MessageType } from "../types/message";
 
 const Message = () => {
   const context = useContext(AppContext);
-  const { username } = context;
+  const { username, connectedUser } = context;
   const navigation = useContext(NavigationContext);
   const { goBackHome } = navigation;
   const [message, setMessage] = useState<string>("");
+  const [messages, setMessages] = useState<MessageType[] | []>([]);
   const [inputOpen, setInputOpen] = useState<boolean>(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const [messageArr, setMessageArr] = useState([]);
+  const [ws, setWs] = useState<WebSocket | null>(null);
+
+  useEffect(() => {
+    console.log("This is the username", username);
+    console.log("You are connected with ", connectedUser);
+
+    const webSocket = new WebSocket(`ws://127.0.0.1:8000/ws/${username}`);
+
+    webSocket.onopen = () => {
+      console.log("WebSocket Connected");
+    };
+
+    //This is the section for recieving the message from the other person
+    webSocket.onmessage = (e) => {
+      console.log(e.data);
+      setMessage(e.data);
+    };
+
+    webSocket.onerror = (e) => {
+      console.log("WebSocket Error: ", e);
+    };
+
+    webSocket.onclose = (e) => {
+      console.log("WebSocket Closed: ", e.code, e.reason);
+    };
+
+    setWs(webSocket);
+
+    return () => {
+      webSocket.close();
+    };
+  }, [connectedUser]);
 
   const openInput = () => {
     setInputOpen(!inputOpen);
@@ -39,28 +75,11 @@ const Message = () => {
     setInputOpen(false);
   };
 
-  const ws = new WebSocket(`ws://localhost:8080`);
-
-  ws.onopen = () => {
-    ws.send("Hello world");
-  };
-
-  ws.onmessage = (e) => {
-    console.log(e.data);
-  };
-
-  ws.onerror = (e) => {
-    // an error occurred
-    console.log(e);
-  };
-
-  ws.onclose = (e) => {
-    // connection closed
-    console.log(e.code, e.reason);
-  };
-
   const handleSend = () => {
-    console.log("Hello world");
+    if (ws && message !== "") {
+      ws.send(JSON.stringify({ message }));
+      setMessage("");
+    }
   };
 
   const handleScroll = (event: any) => {
