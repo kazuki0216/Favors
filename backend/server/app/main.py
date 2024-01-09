@@ -34,8 +34,7 @@ async def websocket_endpoint(user_id: str, websocket: WebSocket):
             for user, user_ws in connected_users.items():
                 if user != user_id:
                     await user_ws.send_text(data)
-    except:
-        # If a user disconnects, remove them from the dictionary
+    except WebSocketDisconnect:
         del connected_users[user_id]
         await websocket.close()
 
