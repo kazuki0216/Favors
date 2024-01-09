@@ -14,3 +14,5 @@ Externals
     Firebase
     Docker
     
+Github Actions for CI
+Have not decided yet what I want to use for Deploying the app. (Maybe Heroku.)
