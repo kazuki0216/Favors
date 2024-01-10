@@ -28,12 +28,20 @@ async def websocket_endpoint(user_id: str, websocket: WebSocket):
 
     try:
         while True:
+            sender_data = None
             data = await websocket.receive_text()
-            print('🔥 This is ', data, " sent from", user_id)
+            if data:
+                sender_data = {
+                    "text": data,
+                    "userid": user_id
+                }
+
+            # Convert sender_data to a JSON string before sending
+            json_data = json.dumps({"object":data, "senderid":user_id})
             # Send the received data to the other user
             for user, user_ws in connected_users.items():
                 if user != user_id:
-                    await user_ws.send_text(data)
+                    await user_ws.send_text(json_data)
     except WebSocketDisconnect:
         del connected_users[user_id]
         await websocket.close()
@@ -43,3 +51,6 @@ if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+# uvicorn main:app --reload
