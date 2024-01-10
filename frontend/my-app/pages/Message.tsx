@@ -19,6 +19,7 @@ import SEND from "react-native-vector-icons/FontAwesome";
 import AppContext from "../context/Context";
 import NavigationContext from "../context/NavigationContext";
 import { MessageType } from "../types/message";
+import uuid from 'react-native-uuid';
 
 const Message = () => {
   const context = useContext(AppContext);
@@ -32,6 +33,17 @@ const Message = () => {
   const [messageArr, setMessageArr] = useState([]);
   const [ws, setWs] = useState<WebSocket | null>(null);
 
+  const getCurrentTime = () => {
+    let today = new Date();
+    let hours = (today.getHours() < 10 ? "0" : "") + today.getHours();
+    let minutes = (today.getMinutes() < 10 ? "0" : "") + today.getMinutes();
+    return hours + ":" + minutes;
+  };
+
+  useEffect(() => {
+    console.log("This useEffect will be used to fetch initially the messages and set the messageArr to that value.");
+  },[])
+
   useEffect(() => {
     console.log("This is the username", username);
     console.log("You are connected with ", connectedUser);
@@ -44,8 +56,11 @@ const Message = () => {
 
     //This is the section for recieving the message from the other person
     webSocket.onmessage = (e) => {
-      console.log(e.data);
-      setMessage(e.data);
+      const parsedData = JSON.parse(e.data);
+      const innerObject = JSON.parse(parsedData.object);
+
+      console.log(parsedData.senderid);
+      console.log(innerObject)
     };
 
     webSocket.onerror = (e) => {
@@ -77,7 +92,7 @@ const Message = () => {
 
   const handleSend = () => {
     if (ws && message !== "") {
-      ws.send(JSON.stringify({ message }));
+      ws.send(JSON.stringify({ messageid: uuid.v4(),message: message, senderid: username, timestamp: getCurrentTime() }));
       setMessage("");
     }
   };
@@ -95,12 +110,8 @@ const Message = () => {
     }
   };
 
-  const getCurrentTime = () => {
-    let today = new Date();
-    let hours = (today.getHours() < 10 ? "0" : "") + today.getHours();
-    let minutes = (today.getMinutes() < 10 ? "0" : "") + today.getMinutes();
-    return hours + ":" + minutes;
-  };
+
+
 
   return (
     <>
@@ -204,7 +215,7 @@ const Message = () => {
           </View>
           <View style={style.outgoing_message}>
             <Account
-              name="account-circle-outline"
+              name="account-circle-outline" 
               size={34}
               color={"#E2D7C6"}
               style={{ marginLeft: 10, marginRight: 8, marginVertical: 10 }}
