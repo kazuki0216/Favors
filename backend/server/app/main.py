@@ -37,7 +37,7 @@ async def websocket_endpoint(user_id: str, websocket: WebSocket):
                 }
 
             # Convert sender_data to a JSON string before sending
-            json_data = json.dumps({"object":data, "senderid":user_id})
+            json_data = json.dumps({"object":data, "senderId":user_id})
             # Send the received data to the other user
             for user, user_ws in connected_users.items():
                 if user != user_id:

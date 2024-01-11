@@ -7,7 +7,7 @@ export type MessageType = {
   messageId: string, 
   senderId: string, 
   timestamp: Date,
-  receiverId: string, 
-  content: string,
-  isRead: boolean
+  receiverid: string, 
+  message: string,
+  isRead?: boolean
 }

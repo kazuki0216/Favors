@@ -19,7 +19,7 @@ import SEND from "react-native-vector-icons/FontAwesome";
 import AppContext from "../context/Context";
 import NavigationContext from "../context/NavigationContext";
 import { MessageType } from "../types/message";
-import uuid from 'react-native-uuid';
+import uuid from "react-native-uuid";
 
 const Message = () => {
   const context = useContext(AppContext);
@@ -41,8 +41,10 @@ const Message = () => {
   };
 
   useEffect(() => {
-    console.log("This useEffect will be used to fetch initially the messages and set the messageArr to that value.");
-  },[])
+    console.log(
+      "This useEffect will be used to fetch initially the messages and set the messageArr to that value."
+    );
+  }, []);
 
   useEffect(() => {
     console.log("This is the username", username);
@@ -60,7 +62,7 @@ const Message = () => {
       const innerObject = JSON.parse(parsedData.object);
 
       console.log(parsedData.senderid);
-      console.log(innerObject)
+      console.log(innerObject);
     };
 
     webSocket.onerror = (e) => {
@@ -92,7 +94,13 @@ const Message = () => {
 
   const handleSend = () => {
     if (ws && message !== "") {
-      ws.send(JSON.stringify({ messageid: uuid.v4(),message: message, senderid: username, timestamp: getCurrentTime() }));
+      ws.send(
+        JSON.stringify({
+          messageId: uuid.v4(),
+          message: message,
+          timestamp: getCurrentTime(),
+        })
+      );
       setMessage("");
     }
   };
@@ -109,9 +117,6 @@ const Message = () => {
       Keyboard.dismiss();
     }
   };
-
-
-
 
   return (
     <>
@@ -215,7 +220,7 @@ const Message = () => {
           </View>
           <View style={style.outgoing_message}>
             <Account
-              name="account-circle-outline" 
+              name="account-circle-outline"
               size={34}
               color={"#E2D7C6"}
               style={{ marginLeft: 10, marginRight: 8, marginVertical: 10 }}
