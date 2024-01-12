@@ -30,14 +30,14 @@ async def websocket_endpoint(user_id: str, websocket: WebSocket):
         while True:
             sender_data = None
             data = await websocket.receive_text()
+            print(data)
+            data_dict = None
             if data:
-                sender_data = {
-                    "text": data,
-                    "userid": user_id
-                }
+                data_dict = json.loads(data)
+                data_dict["senderId"] = user_id
 
             # Convert sender_data to a JSON string before sending
-            json_data = json.dumps({"object":data, "senderid":user_id})
+            json_data = json.dumps(data_dict)
             # Send the received data to the other user
             for user, user_ws in connected_users.items():
                 if user != user_id:
