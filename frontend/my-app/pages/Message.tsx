@@ -20,6 +20,7 @@ import AppContext from "../context/Context";
 import NavigationContext from "../context/NavigationContext";
 import { MessageType } from "../types/message";
 import uuid from "react-native-uuid";
+import { dummyMessage } from "../components/DummyData";
 
 const Message = () => {
   const context = useContext(AppContext);
@@ -30,7 +31,7 @@ const Message = () => {
   const [messages, setMessages] = useState<MessageType[] | []>([]);
   const [inputOpen, setInputOpen] = useState<boolean>(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const [messageArr, setMessageArr] = useState([]);
+  const [messageArr, setMessageArr] = useState(dummyMessage);
   const [ws, setWs] = useState<WebSocket | null>(null);
 
   const getCurrentTime = () => {
@@ -59,10 +60,7 @@ const Message = () => {
     //This is the section for recieving the message from the other person
     webSocket.onmessage = (e) => {
       const parsedData = JSON.parse(e.data);
-      const innerObject = JSON.parse(parsedData.object);
-
-      console.log(parsedData.senderid);
-      console.log(innerObject);
+      setMessageArr((prev) => [...prev, parsedData]);
     };
 
     webSocket.onerror = (e) => {
@@ -118,6 +116,27 @@ const Message = () => {
     }
   };
 
+  const renderItem = ({ item }: { item: MessageType }) => {
+    const messageStyle =
+      item.senderId === username
+        ? style.outgoing_message
+        : style.incoming_message;
+
+    return (
+      <View style={messageStyle}>
+        <Account
+          name="account-circle-outline"
+          size={34}
+          color={"#E2D7C6"}
+          style={{ marginLeft: 20, marginRight: 8, marginVertical: 10 }}
+        />
+        <View style={style.message_content}>
+          <Text>{item.message}</Text>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <>
       <View style={style.header}>
@@ -141,150 +160,18 @@ const Message = () => {
           </View>
         </View>
       </View>
-      {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss}> */}
       <TouchableWithoutFeedback>
-        <ScrollView
+        {/* <ScrollView
+          scrollEnabled={false}
           style={style.container}
-          // keyboardShouldPersistTaps="handled"
           onScroll={(e) => handleScroll(e)}
-          //scrollEventThrottle={100}
-        >
-          <View style={style.incoming_message}>
-            <Account
-              name="account-circle-outline"
-              size={34}
-              color={"#E2D7C6"}
-              style={{ marginLeft: 20, marginRight: 8, marginVertical: 10 }}
-            />
-            <Text style={style.message_content}>How have you been lately?</Text>
-            <Text
-              style={{
-                fontWeight: "200",
-                fontSize: 10,
-                marginLeft: 5,
-                paddingTop: 25,
-              }}
-            >
-              {getCurrentTime()}
-            </Text>
-          </View>
-
-          <View style={style.outgoing_message}>
-            <Account
-              name="account-circle-outline"
-              size={34}
-              color={"#E2D7C6"}
-              style={{ marginLeft: 10, marginRight: 8, marginVertical: 10 }}
-            />
-            <Text style={style.message_content}>
-              How's things with Mr's Hailey??
-            </Text>
-            <Text
-              style={{
-                fontWeight: "200",
-                fontSize: 10,
-                marginRight: 5,
-                paddingTop: 25,
-              }}
-            >
-              {getCurrentTime()}
-            </Text>
-          </View>
-          <View style={style.incoming_message}>
-            <Account
-              name="account-circle-outline"
-              size={34}
-              color={"#E2D7C6"}
-              style={{ marginLeft: 20, marginRight: 8, marginVertical: 10 }}
-            />
-            <Text style={style.message_content}>It's pretty chill❤️</Text>
-          </View>
-          <View style={style.outgoing_message}>
-            <Account
-              name="account-circle-outline"
-              size={34}
-              color={"#E2D7C6"}
-              style={{ marginLeft: 10, marginRight: 8, marginVertical: 10 }}
-            />
-            <Text style={style.message_content}>That's good to hear 🔥</Text>
-            <Text
-              style={{
-                fontWeight: "200",
-                fontSize: 10,
-                marginRight: 5,
-                paddingTop: 25,
-              }}
-            >
-              {getCurrentTime()}
-            </Text>
-          </View>
-          <View style={style.outgoing_message}>
-            <Account
-              name="account-circle-outline"
-              size={34}
-              color={"#E2D7C6"}
-              style={{ marginLeft: 10, marginRight: 8, marginVertical: 10 }}
-            />
-            <Text style={style.message_content}>
-              I'm waiting on that Drew merch you promised me haha
-            </Text>
-            <Text
-              style={{
-                fontWeight: "200",
-                fontSize: 10,
-                marginRight: 5,
-                paddingTop: 25,
-              }}
-            >
-              {getCurrentTime()}
-            </Text>
-          </View>
-          <View style={style.incoming_message}>
-            <Account
-              name="account-circle-outline"
-              size={34}
-              color={"#E2D7C6"}
-              style={{ marginLeft: 20, marginRight: 8, marginVertical: 10 }}
-            />
-            <Text style={style.message_content}>
-              Let me remind my manager to send it to you.
-            </Text>
-          </View>
-          <View style={style.outgoing_message}>
-            <Account
-              name="account-circle-outline"
-              size={34}
-              color={"#E2D7C6"}
-              style={{ marginLeft: 10, marginRight: 8, marginVertical: 10 }}
-            />
-            <Text style={style.message_content}>
-              You coming to Japan anytime soon?🇯🇵
-            </Text>
-            <Text
-              style={{
-                fontWeight: "200",
-                fontSize: 10,
-                marginRight: 5,
-                paddingTop: 25,
-              }}
-            >
-              {getCurrentTime()}
-            </Text>
-          </View>
-          <View style={style.incoming_message}>
-            <Account
-              name="account-circle-outline"
-              size={34}
-              color={"#E2D7C6"}
-              style={{ marginLeft: 20, marginRight: 8, marginVertical: 10 }}
-            />
-            <Text style={style.message_content}>
-              This is the way that people should interact with eachother. In a
-              way that we can make eachother better to strive for a better
-              future.
-            </Text>
-          </View>
-        </ScrollView>
+        > */}
+        <FlatList
+          data={messageArr}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.messageId}
+        />
+        {/* </ScrollView> */}
       </TouchableWithoutFeedback>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}

@@ -1,5 +1,5 @@
 import { PostBody, myJobs } from "../types/post";
-import { Message } from "../types/message";
+import { MessageType } from "../types/message";
 
 export const dummyData: PostBody[] = [
   {
@@ -102,53 +102,21 @@ export const contactList: { name: string }[] = [
   },
 ];
 
-export const dummyMessage: Message[] = [
+export const dummyMessage: MessageType[] = [
   {
     messageId: "1",
-    senderId: "user1",
+    senderId: "mei",
     timestamp: new Date("2022-01-08T12:00:00"),
-    receiverId: "user2",
-    content: "Hello there!",
+    receiverId: "Kazuki",
+    message: "Hello there!",
     isRead: false,
   },
   {
     messageId: "2",
-    senderId: "user2",
-    timestamp: new Date("2022-01-08T12:05:00"),
-    receiverId: "user1",
-    content: "Hi! How are you?",
-    isRead: true,
-  },
-  {
-    messageId: "3",
-    senderId: "user1",
-    timestamp: new Date("2022-01-08T12:10:00"),
-    receiverId: "user2",
-    content: "I'm doing well, thanks!",
+    senderId: "Kazuki",
+    timestamp: new Date("2022-01-08T12:00:00"),
+    receiverId: "mei",
+    message: "Why is it that we never decided to date Mei?",
     isRead: false,
-  },
-  {
-    messageId: "4",
-    senderId: "user2",
-    timestamp: new Date("2022-01-08T12:15:00"),
-    receiverId: "user1",
-    content: "That's great!",
-    isRead: true,
-  },
-  {
-    messageId: "5",
-    senderId: "user1",
-    timestamp: new Date("2022-01-08T12:20:00"),
-    receiverId: "user2",
-    content: "What are you up to?",
-    isRead: false,
-  },
-  {
-    messageId: "6",
-    senderId: "user2",
-    timestamp: new Date("2022-01-08T12:25:00"),
-    receiverId: "user1",
-    content: "Just working on some projects. How about you?",
-    isRead: true,
   },
 ];
