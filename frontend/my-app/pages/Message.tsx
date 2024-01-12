@@ -31,7 +31,7 @@ const Message = () => {
   const [messages, setMessages] = useState<MessageType[] | []>([]);
   const [inputOpen, setInputOpen] = useState<boolean>(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const [messageArr, setMessageArr] = useState(dummyMessage);
+  const [messageArr, setMessageArr] = useState<MessageType[]>(dummyMessage);
   const [ws, setWs] = useState<WebSocket | null>(null);
 
   const getCurrentTime = () => {
@@ -92,13 +92,16 @@ const Message = () => {
 
   const handleSend = () => {
     if (ws && message !== "") {
-      ws.send(
-        JSON.stringify({
-          messageId: uuid.v4(),
-          message: message,
-          timestamp: getCurrentTime(),
-        })
-      );
+      const messageObj: MessageType = {
+        messageId: uuid.v4() as string,
+        senderId: username,
+        message: message,
+        timestamp: getCurrentTime(),
+        receiverId: connectedUser,
+      };
+
+      setMessageArr((prev) => [...prev, messageObj]);
+      ws.send(JSON.stringify(messageObj));
       setMessage("");
     }
   };

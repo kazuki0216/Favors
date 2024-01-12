@@ -88,25 +88,13 @@ export const contactList: { name: string }[] = [
   {
     name: "Sky",
   },
-  {
-    name: "Sky",
-  },
-  {
-    name: "Sky",
-  },
-  {
-    name: "Sky",
-  },
-  {
-    name: "Sky",
-  },
 ];
 
 export const dummyMessage: MessageType[] = [
   {
     messageId: "1",
     senderId: "mei",
-    timestamp: new Date("2022-01-08T12:00:00"),
+    timestamp: "22:04",
     receiverId: "Kazuki",
     message: "Hello there!",
     isRead: false,
@@ -114,7 +102,7 @@ export const dummyMessage: MessageType[] = [
   {
     messageId: "2",
     senderId: "Kazuki",
-    timestamp: new Date("2022-01-08T12:00:00"),
+    timestamp: "22:34",
     receiverId: "mei",
     message: "Why is it that we never decided to date Mei?",
     isRead: false,

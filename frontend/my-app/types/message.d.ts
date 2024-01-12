@@ -4,10 +4,10 @@ export type AppContext = {
 };
 
 export type MessageType = {
-  messageId: string, 
-  senderId: string, 
-  timestamp: Date,
-  receiverId: string, 
-  message: string,
-  isRead?: boolean
-}
+  messageId: string;
+  senderId: string;
+  timestamp: string;
+  receiverId: string;
+  message: string;
+  isRead?: boolean;
+};
