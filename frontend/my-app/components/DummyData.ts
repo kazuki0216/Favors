@@ -103,8 +103,8 @@ export const dummyMessage: MessageType[] = [
     messageId: "2",
     senderId: "Kazuki",
     timestamp: "22:34",
-    receiverId: "mei",
-    message: "Why is it that we never decided to date Mei?",
+    receiverId: "Yahoo",
+    message: "Hello, this is the first message",
     isRead: false,
   },
 ];
