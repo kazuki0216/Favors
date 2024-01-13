@@ -19,6 +19,10 @@ app.add_middleware(
 )
 
 
+@app.get("/")
+async def root():
+    return {"message": "Hello world"}
+
 @app.websocket("/ws/{user_id}")
 async def websocket_endpoint(user_id: str, websocket: WebSocket):
     await websocket.accept()
