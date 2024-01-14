@@ -1,19 +1,15 @@
-FROM python:3.9-alpine
-
-ENV LANG C.UTF-8
-ENV TZ Asia/Tokyo
+FROM python:3
 
 WORKDIR /app
 
 # pip installs
-COPY ./requirements.txt requirements.txt
+COPY requirements.txt ./
 
-RUN apk add --no-cache postgresql-libs \
- && apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev \
- && python3 -m pip install -r /app/requirements.txt --no-cache-dir \
- && apk --purge del .build-deps
+RUN pip install --no-cache-dir -r requirements.txt
+RUN apt-get update && apt install -y tzdata && apt-get clean && rm -rf /var/lib/apt/lists/* 
 
-COPY . /app
+ENV TZ Asia/Tokyo
 
-# FastAPIの起動
-CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+COPY . .
+
+CMD ["uvicorn", "main:app", "--reload"]
