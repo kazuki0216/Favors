@@ -1,15 +1,26 @@
 from fastapi import FastAPI, WebSocket
-
-app = FastAPI()
+from database import Database
 from typing import List
-
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
-from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
-from datetime import datetime
 import json
+from contextlib import asynccontextmanager
 
-connected_users = {}
+# Database URL: postgresql://<username>:<password>@<host>:<port>/<database_name>
+DATABASE_URL = "postgresql://postgres:Kazuki123@postgres:5432/FavorsDB"
+database = Database(DATABASE_URL)
+USE_LIFESPAN = True
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # This will run when the app opens
+    await database.connect()
+    yield
+    # This will run after the app is closed
+    await database.disconnect()
+
+app = FastAPI(lifespan=lifespan)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # can alter with time
@@ -18,6 +29,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+connected_users = {}
+
+@app.post("/dummy_message")
+async def root():
+    query = """
+    INSERT INTO messages (messageId, senderId, timestamp, receiverId, message, isRead) VALUES ('msg_001', 'Kazuki', '2024-01-13 15:00:00', 'Mei', 'Hello this is a test message!', FALSE);
+    """
+    await database.execute(query)
+    return {"message": "Dummy message inserted successfully"}
+
+@app.get("/dummy_data")
+async def get_dummy():
+    query = "SELECT * FROM messages WHERE senderId = Kazuki"
+    return await database.fetch_all(query)
 
 @app.websocket("/ws/{user_id}")
 async def websocket_endpoint(user_id: str, websocket: WebSocket):

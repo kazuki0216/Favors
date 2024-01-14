@@ -1,11 +1,15 @@
-FROM python:3.11
+FROM python:3
 
 WORKDIR /app
 
-COPY /requirements.txt ./
+# pip installs
+COPY requirements.txt ./
 
-RUN pip install --no-cache-dir --upgrade -r ./app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+RUN apt-get update && apt install -y tzdata && apt-get clean && rm -rf /var/lib/apt/lists/* 
 
-COPY ./app .
+ENV TZ Asia/Tokyo
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+COPY . .
+
+CMD ["uvicorn", "main:app", "--reload"]

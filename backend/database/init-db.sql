@@ -1,0 +1,15 @@
+CREATE TABLE users (
+    id INT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Messages (
+    messageId VARCHAR(255) PRIMARY KEY,
+    senderId VARCHAR(255) NOT NULL,
+    timestamp TIMESTAMP NOT NULL,
+    receiverId VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    isRead BOOLEAN DEFAULT FALSE
+);
