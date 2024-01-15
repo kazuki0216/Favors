@@ -136,6 +136,9 @@ const Message = () => {
         <View style={style.message_content}>
           <Text>{item.message}</Text>
         </View>
+        <View style={{}}>
+          <Text>{item.timestamp}</Text>
+        </View>
       </View>
     );
   };

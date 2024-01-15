@@ -1,25 +1,27 @@
 from fastapi import FastAPI, WebSocket
-from database import Database
+from databases import Database
 from typing import List
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 import json
 from contextlib import asynccontextmanager
+import psycopg2
 
 # Database URL: postgresql://<username>:<password>@<host>:<port>/<database_name>
-DATABASE_URL = "postgresql://postgres:Kazuki123@postgres:5432/FavorsDB"
-database = Database(DATABASE_URL)
-USE_LIFESPAN = True
+# DATABASE_URL = "postgresql://postgres:Kazuki123@localhost:5432/FavorsDB"
+# database = Database(DATABASE_URL)
+# USE_LIFESPAN = True
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # This will run when the app opens
-    await database.connect()
-    yield
-    # This will run after the app is closed
-    await database.disconnect()
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     # This will run when the app opens
+#     await database.connect()
+#     yield
+#     # This will run after the app is closed
+#     await database.disconnect()
 
-app = FastAPI(lifespan=lifespan)
+# app = FastAPI(lifespan=lifespan)
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -28,6 +30,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
 
 connected_users = {}
 
