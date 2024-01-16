@@ -43,7 +43,7 @@ export default function App() {
   const [userId, setUserId] = useState<string | null>(null);
   const [activeIcon, setActiveIcon] = useState<string>("home");
   const [connectedUser, setConnectedUser] = useState<string>("");
-  const { user } = useAuth();
+  const [user, setUser] = useState<string | null>(null);
 
   if (user) {
     return (
@@ -57,6 +57,8 @@ export default function App() {
           setActiveIcon,
           connectedUser,
           setConnectedUser,
+          user,
+          setUser,
         }}
       >
         <NavigationContainer>
@@ -109,6 +111,8 @@ export default function App() {
           setActiveIcon,
           connectedUser,
           setConnectedUser,
+          user,
+          setUser,
         }}
       >
         <NavigationContainer>

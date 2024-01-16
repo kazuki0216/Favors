@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
 import { View } from "react-native";
+import AppContext from "../context/Context";
 
 const Authentication = () => {
+  const context = useContext(AppContext);
+  const { user, setUserName } = context;
+  const [authPage, setAuthPage] = useState<string>("Login");
+  const authenticationType = () => {
+    if (authPage === "Login") {
+      setAuthPage("Signup");
+    } else {
+      setAuthPage("Login");
+    }
+  };
   return (
     <>
-      <Login />
-      <Signup />
+      {authPage === "Login" ? (
+        <Login authenticationType={authenticationType} />
+      ) : (
+        <Signup authenticationType={authenticationType} />
+      )}
     </>
   );
 };
