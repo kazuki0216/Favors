@@ -1,26 +1,31 @@
 import React, { useState } from "react";
-import { useContext } from "react";
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import AppContext from "../context/Context";
-import NavigationContext from "../context/NavigationContext";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../config/firebase";
 
 interface Props {
   authenticationType: () => void;
 }
 
 const Signup: React.FC<Props> = ({ authenticationType }) => {
-  const context = useContext(AppContext);
-  const navigation = useContext(NavigationContext);
-  const { goBackHome } = navigation;
   const [form, setForm] = useState({
     fullname: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+  const handleSubmit = async () => {
+    if (form.fullname && form.email && form.password && form.confirmPassword) {
+      try {
+        await createUserWithEmailAndPassword(auth, form.email, form.password);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <View style={styles.container}>
@@ -37,7 +42,7 @@ const Signup: React.FC<Props> = ({ authenticationType }) => {
 
               <TextInput
                 onChangeText={(fullname) => setForm({ ...form, fullname })}
-                placeholder="John Doe"
+                placeholder="name"
                 placeholderTextColor="#6b7280"
                 style={styles.inputControl}
                 value={form.fullname}
@@ -52,7 +57,7 @@ const Signup: React.FC<Props> = ({ authenticationType }) => {
                 autoCorrect={false}
                 keyboardType="email-address"
                 onChangeText={(email) => setForm({ ...form, email })}
-                placeholder="john@example.com"
+                placeholder="example@gmail.com"
                 placeholderTextColor="#6b7280"
                 style={styles.inputControl}
                 value={form.email}
@@ -92,7 +97,7 @@ const Signup: React.FC<Props> = ({ authenticationType }) => {
             <View style={styles.formAction}>
               <TouchableOpacity
                 onPress={() => {
-                  // handle onPress
+                  handleSubmit();
                 }}
               >
                 <View style={styles.btn}>

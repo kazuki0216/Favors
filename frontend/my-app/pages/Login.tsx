@@ -1,26 +1,29 @@
 import React, { useState } from "react";
-import { useContext } from "react";
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import AppContext from "../context/Context";
-import NavigationContext from "../context/NavigationContext";
+import { auth } from "../config/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 interface Props {
   authenticationType: () => void;
 }
 
 const Login: React.FC<Props> = ({ authenticationType }) => {
-  const context = useContext(AppContext);
-  const navigation = useContext(NavigationContext);
-  const { goBackHome } = navigation;
   const [form, setForm] = useState({
-    fullname: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
+  const handleLogin = async () => {
+    if (form.email && form.password) {
+      try {
+        await signInWithEmailAndPassword(auth, form.email, form.password);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <View style={styles.container}>
@@ -62,7 +65,7 @@ const Login: React.FC<Props> = ({ authenticationType }) => {
             <View style={styles.formAction}>
               <TouchableOpacity
                 onPress={() => {
-                  // handle onPress
+                  handleLogin()
                 }}
               >
                 <View style={styles.btn}>

@@ -8,6 +8,7 @@ const useAuth = () => {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
+      console.log(user)
       if (user) {
         setUser(user);
       } else {

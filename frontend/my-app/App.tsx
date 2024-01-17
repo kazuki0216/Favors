@@ -43,7 +43,7 @@ export default function App() {
   const [userId, setUserId] = useState<string | null>(null);
   const [activeIcon, setActiveIcon] = useState<string>("home");
   const [connectedUser, setConnectedUser] = useState<string>("");
-  const [user, setUser] = useState<string | null>(null);
+  const { user } = useAuth();
 
   if (user) {
     return (
@@ -57,8 +57,6 @@ export default function App() {
           setActiveIcon,
           connectedUser,
           setConnectedUser,
-          user,
-          setUser,
         }}
       >
         <NavigationContainer>
@@ -101,66 +99,17 @@ export default function App() {
     );
   } else {
     return (
-      <AppContext.Provider
-        value={{
-          username,
-          setUserName,
-          userId,
-          setUserId,
-          activeIcon,
-          setActiveIcon,
-          connectedUser,
-          setConnectedUser,
-          user,
-          setUser,
-        }}
-      >
-        <NavigationContainer>
-          <NavigationProvider>
-            <Stack.Navigator initialRouteName="Authentication">
-              <Stack.Screen
-                name="Authentication"
-                component={Authentication}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Home"
-                component={Home}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="AddJob"
-                component={AddJob}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Profile"
-                component={Profile}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="ContactList"
-                component={ContactList}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Message"
-                component={Message}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="BookMark"
-                component={BookMark}
-                options={{ headerShown: false }}
-              />
-            </Stack.Navigator>
-          </NavigationProvider>
-        </NavigationContainer>
-      </AppContext.Provider>
+      <NavigationContainer>
+        <NavigationProvider>
+          <Stack.Navigator initialRouteName="Authentication">
+            <Stack.Screen
+              name="Authentication"
+              component={Authentication}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        </NavigationProvider>
+      </NavigationContainer>
     );
   }
-
-  useEffect(() => {
-    setUserName("Kazuki");
-  }, []);
 }
