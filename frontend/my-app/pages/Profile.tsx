@@ -1,21 +1,22 @@
 import React from "react";
 import { useContext } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import AppContext from "../context/Context";
-import NavigationContext from "../context/NavigationContext";
 import ControlBar from "../components/ControlBar";
+import { auth } from "../config/firebase";
+import { signOut } from "firebase/auth";
 
 const Profile = () => {
   const context = useContext(AppContext);
-  const navigation = useContext(NavigationContext);
-  const { goBackHome } = navigation;
+  const handleLogout = async () => {
+    await signOut(auth);
+  };
   return (
     <>
       <View style={style.container}>
-        <Text style={style.text}>Profile Page</Text>
-        <View>
-          <Button onPress={goBackHome} title="Go Back Home" />
-        </View>
+        <TouchableOpacity onPress={handleLogout}>
+          <Text style={style.text}>Logout</Text>
+        </TouchableOpacity>
       </View>
       <ControlBar />
     </>
@@ -30,6 +31,8 @@ const style = StyleSheet.create({
   },
   text: {
     textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 20,
   },
 });
 

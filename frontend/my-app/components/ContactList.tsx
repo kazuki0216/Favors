@@ -20,10 +20,6 @@ const ContactList = () => {
   const { goBackHome, setConnectedUser } = context;
   const [userList, setUserList] = useState(contactList);
 
-  //   useEffect(() => {
-  //     setUserList(contactList);
-  //   }, []);
-
   const handleUserClick = (user: string) => {
     setConnectedUser(user);
     messageNavigation();
