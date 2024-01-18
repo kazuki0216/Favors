@@ -1,10 +1,19 @@
 import React from "react";
 import { useContext } from "react";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import AppContext from "../context/Context";
 import NavigationContext from "../context/NavigationContext";
 import ControlBar from "../components/ControlBar";
 import Header from "../components/Header";
+import DateModal from "../components/DateModal";
+
 const AddJobPage = () => {
   const context = useContext(AppContext);
   const navigation = useContext(NavigationContext);
@@ -13,17 +22,26 @@ const AddJobPage = () => {
     <>
       <Header />
       <View style={style.container}>
+        <Text style={style.title}>Favorsの追加</Text>
         <View style={style.input_container}>
-          <View style={style.addjob_title}>
-            {/* <Text style={{}}>Add a Job</Text> */}
-          </View>
-          <TextInput placeholder="Name" style={style.input_styling} />
-          <TextInput placeholder="Location" style={style.input_styling} />
-          <TextInput placeholder="Description" style={style.input_styling} />
-          <TextInput placeholder="Price" style={style.input_styling} />
-          <View style={style.button_container}>
-            <Button onPress={() => console.log("Pressed")} title="Cancel" />
-            <Button onPress={() => console.log("Pressed")} title="Add" />
+          <TextInput
+            placeholder="Favorsタイトル"
+            style={style.input_container}
+          />
+          <TextInput placeholder="詳細" style={style.input_container} />
+          <TextInput placeholder="値段" style={style.input_container} />
+          <DateModal />
+          <View style={style.formAction}>
+            <TouchableOpacity>
+              <View style={style.btn}>
+                <Text style={style.btnText}>Add</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={style.btn}>
+                <Text style={style.btnText}>Cancel</Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -35,37 +53,60 @@ const AddJobPage = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    alignSelf: "stretch",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     textAlign: "center",
   },
   input_container: {
     display: "flex",
     justifyContent: "center",
     borderWidth: 1,
-    paddingVertical: 20,
+    paddingVertical: 15,
     margin: 10,
     borderRadius: 10,
+    paddingLeft: 5,
+    fontWeight: "bold",
   },
-  input_styling: {
-    borderColor: "black",
-    borderWidth: 1,
-    padding: 10,
-    marginHorizontal: 10,
-    marginBottom: 10,
-  },
+
   addjob_title: {
     display: "flex",
     justifyContent: "center",
   },
-  button_container: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
+  formAction: {
+    marginTop: 24,
   },
-  button_styling: {
-    borderWidth: 1,
-    borderColor: "black",
+  btn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 4,
+    paddingVertical: 8,
+    backgroundColor: "#004831",
+    borderColor: "#004831",
+    marginVertical: 5,
+    marginHorizontal: 10,
+  },
+  btnText: {
+    fontSize: 17,
+    lineHeight: 24,
+    fontWeight: "600",
+    color: "#fff",
+  },
+  inputControl: {
+    height: 44,
+    backgroundColor: "#f1f5f9",
+    paddingHorizontal: 16,
+    borderRadius: 12,
+    fontSize: 15,
+    fontWeight: "500",
+    color: "#222",
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#1d1d1d",
+    marginBottom: 6,
+    textAlign: "left",
+    marginLeft: 20,
   },
 });
 
