@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,7 +12,6 @@ import AppContext from "../context/Context";
 import NavigationContext from "../context/NavigationContext";
 import ControlBar from "../components/ControlBar";
 import Header from "../components/Header";
-import DateModal from "../components/DateModal";
 
 const AddJobPage = () => {
   const context = useContext(AppContext);
@@ -30,7 +29,6 @@ const AddJobPage = () => {
           />
           <TextInput placeholder="詳細" style={style.input_container} />
           <TextInput placeholder="値段" style={style.input_container} />
-          <DateModal />
           <View style={style.formAction}>
             <TouchableOpacity>
               <View style={style.btn}>
