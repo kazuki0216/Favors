@@ -13,24 +13,75 @@ import NavigationContext from "../context/NavigationContext";
 import ControlBar from "../components/ControlBar";
 import Header from "../components/Header";
 
+type JobForm = {
+  title: string;
+  description: string;
+  price: string;
+  location: string;
+  status: boolean;
+};
+
 const AddJobPage = () => {
   const context = useContext(AppContext);
   const navigation = useContext(NavigationContext);
-  const { goBackHome } = navigation;
+  const { myPostFeed, setMyPostFeed } = context;
+  const { goBackHome, homeNavigation } = navigation;
+
+  const [jobForm, setJobForm] = useState<JobForm>({
+    title: "",
+    description: "",
+    price: "",
+    location: "",
+    status: false,
+  });
+
+  // should do an api call to save the job to the database,
+  // and also should add the job to my jobs.
+  const addJob = () => {
+    setMyPostFeed(jobForm);
+    homeNavigation();
+  };
+
   return (
     <>
       <Header />
       <View style={style.container}>
-        <Text style={style.title}>Favorsの追加</Text>
         <View style={style.input_container}>
+          <Text style={style.title}>Favorsの追加</Text>
           <TextInput
             placeholder="Favorsタイトル"
             style={style.input_container}
+            value={jobForm.title}
+            onChangeText={(title: string) => setJobForm({ ...jobForm, title })}
           />
-          <TextInput placeholder="詳細" style={style.input_container} />
-          <TextInput placeholder="値段" style={style.input_container} />
+          <TextInput
+            placeholder="詳細"
+            style={style.input_container}
+            value={jobForm.description}
+            onChangeText={(description: string) =>
+              setJobForm({ ...jobForm, description })
+            }
+          />
+          <TextInput
+            placeholder="値段"
+            style={style.input_container}
+            value={jobForm.price}
+            onChangeText={(price: string) => setJobForm({ ...jobForm, price })}
+          />
+          <TextInput
+            placeholder="場所"
+            style={style.input_container}
+            value={jobForm.location}
+            onChangeText={(location: string) =>
+              setJobForm({ ...jobForm, location })
+            }
+          />
           <View style={style.formAction}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                addJob();
+              }}
+            >
               <View style={style.btn}>
                 <Text style={style.btnText}>Add</Text>
               </View>
@@ -51,7 +102,7 @@ const AddJobPage = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
     textAlign: "center",
   },
   input_container: {
@@ -103,8 +154,7 @@ const style = StyleSheet.create({
     fontWeight: "bold",
     color: "#1d1d1d",
     marginBottom: 6,
-    textAlign: "left",
-    marginLeft: 20,
+    textAlign: "center",
   },
 });
 

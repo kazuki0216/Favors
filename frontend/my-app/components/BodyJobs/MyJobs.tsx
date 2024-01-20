@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AppContext from "../../context/Context";
 import {
   StyleSheet,
   Text,
@@ -16,15 +17,16 @@ import { myDummyData } from "../DummyData";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 
 const MyJobs = () => {
+  const value = useContext(AppContext);
+  const { myPostFeed, setMyPostFeed } = value;
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [selectedPost, setSelectedPost] = useState<myJobs | null>(null);
-  const [postFeed, setPostFeed] = useState<myJobs[] | []>(myDummyData);
-  const renderPosts = postFeed.map((feed, index) => {
+  const renderPosts = myPostFeed.map((feed: any, index: any) => {
     if (!feed.status) {
       return (
         <Pressable
           onPress={() => {
-            setSelectedPost(postFeed[index]);
+            setSelectedPost(myPostFeed[index]);
             setModalVisible(true);
           }}
           key={index}
