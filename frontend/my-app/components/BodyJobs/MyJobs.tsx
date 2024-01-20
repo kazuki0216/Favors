@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import AppContext from "../../context/Context";
 import {
   StyleSheet,
@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView,
   Pressable,
+  FlatList,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import ModalView from "./Modal";
@@ -21,6 +22,11 @@ const MyJobs = () => {
   const { myPostFeed, setMyPostFeed } = value;
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [selectedPost, setSelectedPost] = useState<myJobs | null>(null);
+
+  useEffect(() => {
+    console.log(myPostFeed[myPostFeed.length - 1]);
+  }, []);
+
   const renderPosts = myPostFeed.map((feed: any, index: any) => {
     if (!feed.status) {
       return (
@@ -104,6 +110,7 @@ const styles = StyleSheet.create({
   },
   card_footer: {
     display: "flex",
+    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     marginHorizontal: 25,

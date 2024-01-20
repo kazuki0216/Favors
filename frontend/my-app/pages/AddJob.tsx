@@ -7,11 +7,13 @@ import {
   Button,
   TextInput,
   TouchableOpacity,
+  FlatList
 } from "react-native";
 import AppContext from "../context/Context";
 import NavigationContext from "../context/NavigationContext";
 import ControlBar from "../components/ControlBar";
 import Header from "../components/Header";
+import { myJobs } from "../types/post";
 
 type JobForm = {
   title: string;
@@ -26,11 +28,12 @@ const AddJobPage = () => {
   const navigation = useContext(NavigationContext);
   const { myPostFeed, setMyPostFeed } = context;
   const { goBackHome, homeNavigation } = navigation;
+  const [compensation, setCompensation] = useState<string>("");
 
-  const [jobForm, setJobForm] = useState<JobForm>({
+  const [jobForm, setJobForm] = useState<myJobs>({
     title: "",
     description: "",
-    price: "",
+    price: 0,
     location: "",
     status: false,
   });
@@ -38,7 +41,18 @@ const AddJobPage = () => {
   // should do an api call to save the job to the database,
   // and also should add the job to my jobs.
   const addJob = () => {
-    setMyPostFeed(jobForm);
+    const price = Number(compensation);
+
+    // Update jobForm state and then update myPostFeed
+    setJobForm((prev) => {
+      const updatedJobForm = { ...prev, price: price };
+
+      // Use the updated job form here
+      setMyPostFeed((prevPosts: any) => [...prevPosts, updatedJobForm]);
+
+      return updatedJobForm;
+    });
+
     homeNavigation();
   };
 
@@ -63,10 +77,11 @@ const AddJobPage = () => {
             }
           />
           <TextInput
-            placeholder="値段"
+            placeholder="￥"
+            keyboardType="numeric"
             style={style.input_container}
-            value={jobForm.price}
-            onChangeText={(price: string) => setJobForm({ ...jobForm, price })}
+            value={compensation}
+            onChangeText={(text) => setCompensation(text)}
           />
           <TextInput
             placeholder="場所"
@@ -79,6 +94,7 @@ const AddJobPage = () => {
           <View style={style.formAction}>
             <TouchableOpacity
               onPress={() => {
+                console.log(compensation);
                 addJob();
               }}
             >
