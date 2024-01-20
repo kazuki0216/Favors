@@ -13,13 +13,15 @@ const AvailablePosts = ({}) => {
   const { messageNavigation } = navigation;
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [selectedPost, setSelectedPost] = useState<PostBody | null>(null);
-  const [postFeed, setPostFeed] = useState<PostBody[] | []>(dummyData);
+  const [publicPostFeed, setpublicPostFeed] = useState<PostBody[] | []>(
+    dummyData
+  );
 
-  const renderPosts = postFeed.map((feed, index) => {
+  const renderPosts = publicPostFeed.map((feed, index) => {
     return (
       <Pressable
         onPress={() => {
-          setSelectedPost(postFeed[index]);
+          setSelectedPost(publicPostFeed[index]);
           setModalVisible(true);
         }}
         key={index}

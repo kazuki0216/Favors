@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import AppContext from "../../context/Context";
 import {
   StyleSheet,
   Text,
@@ -7,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView,
   Pressable,
+  FlatList,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import ModalView from "./Modal";
@@ -16,15 +18,21 @@ import { myDummyData } from "../DummyData";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 
 const MyJobs = () => {
+  const value = useContext(AppContext);
+  const { myPostFeed, setMyPostFeed } = value;
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [selectedPost, setSelectedPost] = useState<myJobs | null>(null);
-  const [postFeed, setPostFeed] = useState<myJobs[] | []>(myDummyData);
-  const renderPosts = postFeed.map((feed, index) => {
+
+  useEffect(() => {
+    console.log(myPostFeed[myPostFeed.length - 1]);
+  }, []);
+
+  const renderPosts = myPostFeed.map((feed: any, index: any) => {
     if (!feed.status) {
       return (
         <Pressable
           onPress={() => {
-            setSelectedPost(postFeed[index]);
+            setSelectedPost(myPostFeed[index]);
             setModalVisible(true);
           }}
           key={index}
@@ -102,6 +110,7 @@ const styles = StyleSheet.create({
   },
   card_footer: {
     display: "flex",
+    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     marginHorizontal: 25,

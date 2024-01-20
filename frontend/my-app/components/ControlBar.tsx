@@ -66,6 +66,7 @@ const ControlBar = () => {
           >
             <HomeIcon name="home-outline" size={38} color={iconColor("home")} />
           </TouchableOpacity>
+          
 
           <TouchableOpacity
             onPress={() => {

@@ -10,11 +10,11 @@ export type PostBody = {
 };
 
 export type myJobs = {
-  name: string;
+  name?: string;
   title: string;
   description: string;
-  location: string;
-  coordinates: string;
-  price: number;
-  status: boolean;
+  location?: string;
+  coordinates?: string;
+  price?: number;
+  status?: boolean;
 };
