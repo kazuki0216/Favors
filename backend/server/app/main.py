@@ -1,11 +1,12 @@
 from fastapi import FastAPI, WebSocket
-from databases import Database
+from database import Database
 from typing import List
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 import json
 from contextlib import asynccontextmanager
-import psycopg2
+# import psycopg2
+from backend.server.app.crud.post import PostMethod
+from backend.server.app.api.websocket_manager import WebSocketManager
 
 # Database URL: postgresql://<username>:<password>@<host>:<port>/<database_name>
 # DATABASE_URL = "postgresql://postgres:Kazuki123@localhost:5432/FavorsDB"
@@ -30,50 +31,24 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-
-connected_users = {}
+websocket_manager = WebSocketManager()
 
 @app.post("/dummy_message")
 async def root():
-    query = """
-    INSERT INTO messages (messageId, senderId, timestamp, receiverId, message, isRead) VALUES ('msg_001', 'Kazuki', '2024-01-13 15:00:00', 'Mei', 'Hello this is a test message!', FALSE);
-    """
-    await database.execute(query)
-    return {"message": "Dummy message inserted successfully"}
+    PostMethod.save_message()
 
-@app.get("/dummy_data")
-async def get_dummy():
-    query = "SELECT * FROM messages WHERE senderId = Kazuki"
-    return await database.fetch_all(query)
+@app.post("/postjob/:userid")
+async def post_job():
+    PostMethod.postJob()
+
+# @app.get("/dummy_data")
+# async def get_dummy():
+#     query = "SELECT * FROM messages WHERE senderId = Kazuki"
+#     return await Database.fetch_all(query)
 
 @app.websocket("/ws/{user_id}")
 async def websocket_endpoint(user_id: str, websocket: WebSocket):
-    await websocket.accept()
-
-    # Store the WebSocket connection in the dictionary
-    connected_users[user_id] = websocket
-
-    try:
-        while True:
-            sender_data = None
-            data = await websocket.receive_text()
-            print(data)
-            data_dict = None
-            if data:
-                data_dict = json.loads(data)
-                data_dict["senderId"] = user_id
-
-            # Convert sender_data to a JSON string before sending
-            json_data = json.dumps(data_dict)
-            # Send the received data to the other user
-            for user, user_ws in connected_users.items():
-                if user != user_id:
-                    await user_ws.send_text(json_data)
-    except WebSocketDisconnect:
-        del connected_users[user_id]
-        await websocket.close()
+    await websocket_manager.handle_websocket(user_id, websocket)
 
 
 if __name__ == "__main__":

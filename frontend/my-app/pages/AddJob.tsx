@@ -7,26 +7,19 @@ import {
   Button,
   TextInput,
   TouchableOpacity,
-  FlatList
+  FlatList,
 } from "react-native";
 import AppContext from "../context/Context";
 import NavigationContext from "../context/NavigationContext";
 import ControlBar from "../components/ControlBar";
 import Header from "../components/Header";
 import { myJobs } from "../types/post";
-
-type JobForm = {
-  title: string;
-  description: string;
-  price: string;
-  location: string;
-  status: boolean;
-};
+import axios from "axios";
 
 const AddJobPage = () => {
   const context = useContext(AppContext);
   const navigation = useContext(NavigationContext);
-  const { myPostFeed, setMyPostFeed } = context;
+  const { myPostFeed, setMyPostFeed, userid } = context;
   const { goBackHome, homeNavigation } = navigation;
   const [compensation, setCompensation] = useState<string>("");
 
@@ -38,15 +31,24 @@ const AddJobPage = () => {
     status: false,
   });
 
+  const postjob = async (postbody: myJobs) => {
+    if (postbody) {
+      JSON.stringify(postbody);
+      const result = await axios.post(
+        `http://localhost:8080/postjob/${userid}`,
+        postbody
+      );
+      return result;
+    }
+  };
   // should do an api call to save the job to the database,
   // and also should add the job to my jobs.
-  const addJob = () => {
+  const addJob = async () => {
     const price = Number(compensation);
-
     // Update jobForm state and then update myPostFeed
     setJobForm((prev) => {
       const updatedJobForm = { ...prev, price: price };
-
+      postjob(updatedJobForm);
       // Use the updated job form here
       setMyPostFeed((prevPosts: any) => [...prevPosts, updatedJobForm]);
 
