@@ -19,9 +19,8 @@ import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 
 const MyJobs = () => {
   const value = useContext(AppContext);
-  const { myPostFeed, setMyPostFeed } = value;
+  const { myPostFeed, setMyPostFeed, selectedPost, setSelectedPost } = value;
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [selectedPost, setSelectedPost] = useState<myJobs | null>(null);
 
   useEffect(() => {
     console.log(myPostFeed[myPostFeed.length - 1]);
@@ -44,7 +43,10 @@ const MyJobs = () => {
               <Text style={styles.text}>{feed.title}</Text>
             </View>
             <View style={styles.card_body}>
-              <Text style={styles.card_text}>{feed.description}</Text>
+              <Text style={styles.card_text}>{`${feed.description.substring(
+                0,
+                120
+              )}...`}</Text>
             </View>
             <View style={styles.card_footer}>
               <View style={styles.location}>
@@ -64,6 +66,12 @@ const MyJobs = () => {
   return (
     <>
       <View style={styles.container}>{renderPosts}</View>
+      <ModalView
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        selectedPost={selectedPost}
+        setSelectedPost={setSelectedPost}
+      />
     </>
   );
 };

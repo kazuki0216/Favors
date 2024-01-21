@@ -7,17 +7,30 @@ import ModalView from "./Modal";
 import { PostBody } from "../../types/post";
 import { dummyData } from "../DummyData";
 import NavigationContext from "../../context/NavigationContext";
+import AppContext from "../../context/Context";
 
 const AvailablePosts = ({}) => {
+  const value = useContext(AppContext);
+  const { myPostFeed, setMyPostFeed, selectedPost, setSelectedPost } = value;
   const navigation = useContext(NavigationContext);
   const { messageNavigation } = navigation;
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [selectedPost, setSelectedPost] = useState<PostBody | null>(null);
   const [publicPostFeed, setpublicPostFeed] = useState<PostBody[] | []>(
     dummyData
   );
 
   const renderPosts = publicPostFeed.map((feed, index) => {
+    const descriptionLength = () => {
+      if (feed.description.length > 70) {
+        return (
+          <Text style={styles.card_text}>
+            {`${feed.description.substring(0, 50)}...`}
+          </Text>
+        );
+      } else {
+        return <Text style={styles.card_text}>{feed.description}</Text>;
+      }
+    };
     return (
       <Pressable
         onPress={() => {
@@ -31,9 +44,7 @@ const AvailablePosts = ({}) => {
             <Icon3 name="account-circle-outline" size={40} />
             <Text style={styles.text}>{feed.title}</Text>
           </View>
-          <View style={styles.card_body}>
-            <Text style={styles.card_text}>{feed.description}</Text>
-          </View>
+          <View style={styles.card_body}>{descriptionLength()}</View>
           <View style={styles.card_footer}>
             <View style={styles.location}>
               <Icon name="location-sharp" size={19} color="#004831" />

@@ -4,10 +4,10 @@ import { MessageType } from "../types/message";
 export const dummyData: PostBody[] = [
   {
     profile: "test",
-    name: "Kobe",
+    name: "鈴木里佳",
     title: "コーヒーのデリバリー",
     description:
-      "Starbucks元町・中華街店舗でアイスのホワイトモカVentiサイズのピックアップをお願いいたします。",
+      "Starbucks元町・中華街店舗でアイスのホワイトモカVentiサイズのピックアップをお願いいたします。これから始まるあなたの物語。カフェドクリエでは本当に最高な人たちと出会うことができた。",
     location: "慶應義塾大学",
     coordinates: "test",
     price: 1900,
@@ -15,7 +15,7 @@ export const dummyData: PostBody[] = [
   },
   {
     profile: "test",
-    name: "alexis",
+    name: "尾形結衣奈",
     title: "経済学Iの出席",
     description:
       "木曜日２限目・鈴木教授の授業で出席のカードを押して、授業後に記入する感想用紙の提出をお願いします。",
@@ -26,7 +26,7 @@ export const dummyData: PostBody[] = [
   },
   {
     profile: "test",
-    name: "moriyama",
+    name: "藤若千晴",
     title: "誕生日のサプライズ",
     description:
       "金曜日４限目・８号館でサプライズバースデーを開催するので、それに必要な部品を買ってきてほしいです。",
@@ -39,7 +39,7 @@ export const dummyData: PostBody[] = [
 
 export const myDummyData: myJobs[] = [
   {
-    name: "kazuki",
+    name: "かずき",
     title: "Walk my Dogs",
     description:
       "I have a beautiful pet named Birolo, he is quite a chubby fellow! I would like for someone to take care of him for the entire day.",
@@ -49,7 +49,7 @@ export const myDummyData: myJobs[] = [
     status: false,
   },
   {
-    name: "kazuki",
+    name: "かずき",
     title: "Buy me Medicine",
     description:
       "I have a cold, and I need for someone to go the pharmacy to grab me some medicine called 'Nyquil'. The color of those tablets are blue. Will mail you details if you take the job.",

@@ -14,6 +14,7 @@ import NavigationContext from "./context/NavigationContext";
 import useAuth from "./hooks/useAuth";
 import { myDummyData } from "./components/DummyData";
 import { myJobs } from "./types/post";
+import { PostBody } from "./types/post";
 
 type RootStackParamList = {
   Home: undefined;
@@ -46,6 +47,7 @@ export default function App() {
   const [activeIcon, setActiveIcon] = useState<string>("home");
   const [connectedUser, setConnectedUser] = useState<string>("");
   const [myPostFeed, setMyPostFeed] = useState<myJobs[] | []>(myDummyData);
+  const [selectedPost, setSelectedPost] = useState<PostBody | null>(null);
   const { user } = useAuth();
 
   if (user) {
@@ -62,6 +64,8 @@ export default function App() {
           setConnectedUser,
           myPostFeed,
           setMyPostFeed,
+          selectedPost,
+          setSelectedPost,
         }}
       >
         <NavigationContainer>
