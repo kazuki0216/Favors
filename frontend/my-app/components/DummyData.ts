@@ -12,6 +12,7 @@ export const dummyData: PostBody[] = [
     coordinates: "test",
     price: 1900,
     status: false,
+    bookmarked: false,
   },
   {
     profile: "test",
@@ -23,6 +24,7 @@ export const dummyData: PostBody[] = [
     coordinates: "test",
     price: 1000,
     status: false,
+    bookmarked: false,
   },
   {
     profile: "test",
@@ -34,6 +36,7 @@ export const dummyData: PostBody[] = [
     coordinates: "test",
     price: 2500,
     status: false,
+    bookmarked: false,
   },
 ];
 

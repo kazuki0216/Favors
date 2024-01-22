@@ -7,6 +7,7 @@ export type PostBody = {
   coordinates: string;
   price: number;
   status: boolean;
+  bookmarked: boolean;
 };
 
 export type myJobs = {

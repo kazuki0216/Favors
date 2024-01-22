@@ -1,6 +1,12 @@
 import React from "react";
 import { useState, useContext } from "react";
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/Ionicons";
 import ModalView from "./Modal";
@@ -8,6 +14,7 @@ import { PostBody } from "../../types/post";
 import { dummyData } from "../DummyData";
 import NavigationContext from "../../context/NavigationContext";
 import AppContext from "../../context/Context";
+import BookMark from "react-native-vector-icons/FontAwesome";
 
 const AvailablePosts = ({}) => {
   const value = useContext(AppContext);
@@ -46,12 +53,33 @@ const AvailablePosts = ({}) => {
           </View>
           <View style={styles.card_body}>{descriptionLength()}</View>
           <View style={styles.card_footer}>
-            <View style={styles.location}>
-              <Icon name="location-sharp" size={19} color="#004831" />
-              <Text style={styles.footer_text}> {feed.location}</Text>
+            <View>
+              <View style={styles.location}>
+                <View style={styles.location}>
+                  <Icon name="location-sharp" size={19} color="#004831" />
+                  <Text style={styles.footer_text}> {feed.location}</Text>
+                </View>
+                <Text>￥{feed.price}</Text>
+              </View>
             </View>
             <View>
-              <Text>￥{feed.price}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  //make the bookmark change to true
+                  const bookmark = true;
+                  const updatedFeed = { ...feed, bookmark };
+                  setpublicPostFeed((prev) => [
+                    ...prev,
+                    (publicPostFeed[index] = updatedFeed),
+                  ]);
+                }}
+              >
+                {!feed.bookmarked ? (
+                  <BookMark name="bookmark-o" size={25} />
+                ) : (
+                  <BookMark name="bookmark" size={25} />
+                )}
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -128,7 +156,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 45,
+    marginTop: 30,
     marginHorizontal: 25,
     alignItems: "center",
   },
@@ -136,6 +164,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    marginRight: 10,
   },
   contact: {
     display: "flex",
