@@ -50,6 +50,15 @@ export default function App() {
   const [selectedPost, setSelectedPost] = useState<PostBody | null>(null);
   const { user } = useAuth();
 
+  useEffect(() => {
+    console.log(user);
+    if (user) {
+      setUserName(user.displayName);
+      setUserId(user.uid);
+    }
+    console.log(userId);
+  }, [user]);
+
   if (user) {
     return (
       <AppContext.Provider

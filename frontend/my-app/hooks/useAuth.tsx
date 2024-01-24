@@ -8,13 +8,11 @@ const useAuth = () => {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      console.log(user)
-      setUser("Kazuki")
-      // if (user) {
-      //   setUser(user);
-      // } else {
-      //   setUser(null);
-      // }
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
     });
     return unsub;
   }, []);

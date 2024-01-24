@@ -17,8 +17,18 @@ const ContactList = () => {
   const context = useContext(AppContext);
   const navigation = useContext(NavigationContext);
   const { messageNavigation } = navigation;
-  const { goBackHome, setConnectedUser } = context;
-  const [userList, setUserList] = useState(contactList);
+  const { goBackHome, setConnectedUser, userId, username } = context;
+  // const [userList, setUserList] = useState(contactList);
+  const [userList, setUserList] = useState([
+    {
+      name: "Ryo",
+      userid: "w4RHTvKTMCNcBcfoRZ8Uivgub5N2",
+    },
+    {
+      name: "Kazuki",
+      userid: "Z8NjD0csXmShaTlSAHyuMFwfj4K3",
+    },
+  ]);
 
   const handleUserClick = (user: string) => {
     setConnectedUser(user);
@@ -31,7 +41,7 @@ const ContactList = () => {
         key={index}
         onPress={() => {
           console.log(user.name, "was clicked");
-          handleUserClick(user.name);
+          handleUserClick(user.userid);
         }}
       >
         <View style={style.listStyling}>

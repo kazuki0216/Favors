@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../config/firebase";
 
 interface Props {
@@ -20,7 +20,18 @@ const Signup: React.FC<Props> = ({ authenticationType }) => {
   const handleSubmit = async () => {
     if (form.fullname && form.email && form.password && form.confirmPassword) {
       try {
-        await createUserWithEmailAndPassword(auth, form.email, form.password);
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          form.email,
+          form.password
+        );
+        const user = userCredential.user;
+
+        await updateProfile(user, {
+          displayName: form.fullname,
+        });
+
+        console.log("User registered with display name:", user.displayName);
       } catch (err) {
         console.error(err);
       }

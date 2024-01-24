@@ -21,10 +21,11 @@ import NavigationContext from "../context/NavigationContext";
 import { MessageType } from "../types/message";
 import uuid from "react-native-uuid";
 import { dummyMessage } from "../components/DummyData";
+import useAuth from "../hooks/useAuth";
 
 const Message = () => {
   const context = useContext(AppContext);
-  const { username, connectedUser } = context;
+  const { username, connectedUser, setUserName, userId } = context;
   const navigation = useContext(NavigationContext);
   const { goBackHome } = navigation;
   const [message, setMessage] = useState<string>("");
@@ -33,6 +34,7 @@ const Message = () => {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [messageArr, setMessageArr] = useState<MessageType[]>(dummyMessage);
   const [ws, setWs] = useState<WebSocket | null>(null);
+  const { user } = useAuth();
 
   const getCurrentTime = () => {
     let today = new Date();
@@ -42,16 +44,8 @@ const Message = () => {
   };
 
   useEffect(() => {
-    console.log(
-      "This useEffect will be used to fetch initially the messages and set the messageArr to that value."
-    );
-  }, []);
-
-  useEffect(() => {
-    console.log("This is the username", username);
-    console.log("You are connected with ", connectedUser);
-
-    const webSocket = new WebSocket(`ws://127.0.0.1:8000/ws/${username}`);
+    console.log(connectedUser);
+    const webSocket = new WebSocket(`ws://localhost:8000/ws/${connectedUser}`);
 
     webSocket.onopen = () => {
       console.log("WebSocket Connected");
@@ -60,7 +54,8 @@ const Message = () => {
     //This is the section for recieving the message from the other person
     webSocket.onmessage = (e) => {
       const parsedData = JSON.parse(e.data);
-      setMessageArr((prev) => [...prev, parsedData]);
+      const message = JSON.parse((parsedData.message))
+      setMessageArr((prev) => [...prev, message]);
     };
 
     webSocket.onerror = (e) => {
@@ -121,12 +116,11 @@ const Message = () => {
 
   const renderItem = ({ item }: { item: MessageType }) => {
     const messageStyle =
-      item.senderId === username
+      item.senderId === userId
         ? style.outgoing_message
         : style.incoming_message;
-
     return (
-      <View style={messageStyle}>
+      <View style={messageStyle} key={item.messageId}>
         <Account
           name="account-circle-outline"
           size={34}
@@ -167,11 +161,6 @@ const Message = () => {
         </View>
       </View>
       <TouchableWithoutFeedback>
-        {/* <ScrollView
-          scrollEnabled={false}
-          style={style.container}
-          onScroll={(e) => handleScroll(e)}
-        > */}
         <FlatList
           data={messageArr}
           renderItem={renderItem}

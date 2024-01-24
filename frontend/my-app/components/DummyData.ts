@@ -83,7 +83,7 @@ export const contactList: { name: string }[] = [
     name: "Mei",
   },
   {
-    name: "Kenta",
+    name: "Kazuki",
   },
   {
     name: "Jesse",

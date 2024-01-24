@@ -8,6 +8,9 @@ import {
   TextInput,
   TouchableOpacity,
   FlatList,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import AppContext from "../context/Context";
 import NavigationContext from "../context/NavigationContext";
@@ -61,57 +64,61 @@ const AddJobPage = () => {
   return (
     <>
       <Header />
-      <View style={style.container}>
-        <View style={style.input_container}>
-          <Text style={style.title}>Favorsの追加</Text>
-          <TextInput
-            placeholder="Favorsタイトル"
-            style={style.input_container}
-            value={jobForm.title}
-            onChangeText={(title: string) => setJobForm({ ...jobForm, title })}
-          />
-          <TextInput
-            placeholder="詳細"
-            style={style.input_container}
-            value={jobForm.description}
-            onChangeText={(description: string) =>
-              setJobForm({ ...jobForm, description })
-            }
-          />
-          <TextInput
-            placeholder="￥"
-            keyboardType="numeric"
-            style={style.input_container}
-            value={compensation}
-            onChangeText={(text) => setCompensation(text)}
-          />
-          <TextInput
-            placeholder="場所"
-            style={style.input_container}
-            value={jobForm.location}
-            onChangeText={(location: string) =>
-              setJobForm({ ...jobForm, location })
-            }
-          />
-          <View style={style.formAction}>
-            <TouchableOpacity
-              onPress={() => {
-                console.log(compensation);
-                addJob();
-              }}
-            >
-              <View style={style.btn}>
-                <Text style={style.btnText}>Add</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={style.btn}>
-                <Text style={style.btnText}>Cancel</Text>
-              </View>
-            </TouchableOpacity>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={style.container}>
+          <View style={style.input_container}>
+            <Text style={style.title}>Favorsの追加</Text>
+            <TextInput
+              placeholder="Favorsタイトル"
+              style={style.input_container}
+              value={jobForm.title}
+              onChangeText={(title: string) =>
+                setJobForm({ ...jobForm, title })
+              }
+            />
+            <TextInput
+              placeholder="詳細"
+              style={style.input_container}
+              value={jobForm.description}
+              onChangeText={(description: string) =>
+                setJobForm({ ...jobForm, description })
+              }
+            />
+            <TextInput
+              placeholder="￥"
+              keyboardType="numeric"
+              style={style.input_container}
+              value={compensation}
+              onChangeText={(text) => setCompensation(text)}
+            />
+            <TextInput
+              placeholder="場所"
+              style={style.input_container}
+              value={jobForm.location}
+              onChangeText={(location: string) =>
+                setJobForm({ ...jobForm, location })
+              }
+            />
+            <View style={style.formAction}>
+              <TouchableOpacity
+                onPress={() => {
+                  console.log(compensation);
+                  addJob();
+                }}
+              >
+                <View style={style.btn}>
+                  <Text style={style.btnText}>Add</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <View style={style.btn}>
+                  <Text style={style.btnText}>Cancel</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
       <ControlBar />
     </>
   );
