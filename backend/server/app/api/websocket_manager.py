@@ -21,7 +21,7 @@ class WebSocketManager:
                 await user_ws.send_text(json_data)
 
     async def handle_websocket(self, user_id: str, websocket: WebSocket):
-        await self.connected(user_id, websocket)
+        await self.connect(user_id, websocket)
 
         try: 
             while True: 
