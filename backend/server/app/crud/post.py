@@ -8,6 +8,9 @@ class PostMethod:
 
     async def postJob(self):
         return "post"
+
+    async def postBookMark(self):
+        return "post bookmark job"
     
     # async def save_message():
     #     query = """
