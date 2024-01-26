@@ -48,6 +48,7 @@ export default function App() {
   const [connectedUser, setConnectedUser] = useState<string>("");
   const [myPostFeed, setMyPostFeed] = useState<myJobs[] | []>(myDummyData);
   const [selectedPost, setSelectedPost] = useState<PostBody | null>(null);
+  const [bookmarkedJob, setBookMarkedJob] = useState([]);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -75,6 +76,8 @@ export default function App() {
           setMyPostFeed,
           selectedPost,
           setSelectedPost,
+          bookmarkedJob,
+          setBookMarkedJob,
         }}
       >
         <NavigationContainer>

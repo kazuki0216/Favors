@@ -18,7 +18,13 @@ import BookMark from "react-native-vector-icons/FontAwesome";
 
 const AvailablePosts = ({}) => {
   const value = useContext(AppContext);
-  const { myPostFeed, setMyPostFeed, selectedPost, setSelectedPost } = value;
+  const {
+    myPostFeed,
+    setMyPostFeed,
+    selectedPost,
+    setSelectedPost,
+    setBookMarkedJob,
+  } = value;
   const navigation = useContext(NavigationContext);
   const { messageNavigation } = navigation;
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -65,6 +71,7 @@ const AvailablePosts = ({}) => {
             <View>
               <TouchableOpacity
                 onPress={() => {
+                  //set the setBookMarked to this object here.
                   //make the bookmark change to true
                   const bookmark = true;
                   const updatedFeed = { ...feed, bookmark };
@@ -72,6 +79,7 @@ const AvailablePosts = ({}) => {
                     ...prev,
                     (publicPostFeed[index] = updatedFeed),
                   ]);
+                  setBookMarkedJob((prev: any) => [...prev, feed]);
                 }}
               >
                 {!feed.bookmarked ? (

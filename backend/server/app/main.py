@@ -26,6 +26,11 @@ async def root():
 async def post_job():
     post.postJob()
 
+@app.post("/bookmark/{userid}")
+async def post_bookmark_job():
+    #post jobs to bookmark table.
+    post.post_bookmark_job()
+
 # @app.get("/dummy_data")
 # async def get_dummy():
 #     query = "SELECT * FROM messages WHERE senderId = Kazuki"

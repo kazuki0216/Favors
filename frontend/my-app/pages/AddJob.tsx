@@ -103,7 +103,7 @@ const AddJobPage = () => {
               <TouchableOpacity
                 onPress={() => {
                   console.log(compensation);
-                  addJob();
+                  // addJob();
                 }}
               >
                 <View style={style.btn}>
