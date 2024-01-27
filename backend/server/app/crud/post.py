@@ -1,15 +1,25 @@
-# from database import Database
+from pydantic import BaseModel
 
-
+class Jobs(BaseModel):
+    name: str
+    userId: str
+    title: str
+    description: str
+    location: str
+    coordinates: str
+    price: int
+    status: bool
 
 class PostMethod: 
     def __init__(self) -> None:
         pass
 
-    async def postJob(self):
+    async def postJob(self, job: Jobs):
+        # Connect to psql, and post job.
         return "post"
 
-    async def postBookMark(self):
+    async def postBookMark(self, job: Jobs):
+        # Connect to psql, and save Job.
         return "post bookmark job"
     
     # async def save_message():
