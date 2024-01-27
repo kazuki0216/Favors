@@ -4,6 +4,7 @@ import { MessageType } from "../types/message";
 export const dummyData: PostBody[] = [
   {
     profile: "test",
+    userId: "Test123",
     name: "鈴木里佳",
     title: "コーヒーのデリバリー",
     description:
@@ -16,6 +17,7 @@ export const dummyData: PostBody[] = [
   },
   {
     profile: "test",
+    userId: "Test123",
     name: "尾形結衣奈",
     title: "経済学Iの出席",
     description:
@@ -28,6 +30,7 @@ export const dummyData: PostBody[] = [
   },
   {
     profile: "test",
+    userId: "Test123",
     name: "藤若千晴",
     title: "誕生日のサプライズ",
     description:
@@ -43,6 +46,7 @@ export const dummyData: PostBody[] = [
 export const myDummyData: myJobs[] = [
   {
     name: "かずき",
+    userId: "Z8NjD0csXmShaTlSAHyuMFwfj4K3",
     title: "Walk my Dogs",
     description:
       "I have a beautiful pet named Birolo, he is quite a chubby fellow! I would like for someone to take care of him for the entire day.",
@@ -53,6 +57,7 @@ export const myDummyData: myJobs[] = [
   },
   {
     name: "かずき",
+    userId: "Z8NjD0csXmShaTlSAHyuMFwfj4K3",
     title: "Buy me Medicine",
     description:
       "I have a cold, and I need for someone to go the pharmacy to grab me some medicine called 'Nyquil'. The color of those tablets are blue. Will mail you details if you take the job.",
