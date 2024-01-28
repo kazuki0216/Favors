@@ -1,7 +1,6 @@
 # .gitignore
-favors-env/
+env/
 # Virtual environment
-venv/
 
 # Compiled Python files
 __pycache__/
