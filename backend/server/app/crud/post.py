@@ -1,6 +1,3 @@
-# from database import Database
-
-
 
 class PostMethod: 
     def __init__(self) -> None:
