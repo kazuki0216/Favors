@@ -9,7 +9,7 @@ from api import websocket_manager
 from pydantic import BaseModel
 from typing import List, Annotated
 import models
-from database import engine, SessionLocal
+from database import engine, SessionLocal, get_db
 from sqlalchemy.orm import Session
 
 
@@ -24,6 +24,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+
 class UserBase(BaseModel):
     user_id: str
     name: str
@@ -31,12 +33,17 @@ class UserBase(BaseModel):
 
 class JobBase(BaseModel):
     user_id: str
+    job_id: str
     title: str
     description: str
     location: str
     coordinates: str
     price: int
     created_at: str
+
+class BookMark(BaseModel):
+    user_id: str
+    job_id: str
 
 class MessageBase(BaseModel):
     messageId: str
@@ -45,34 +52,27 @@ class MessageBase(BaseModel):
     receiverId: str
     timestamp: str
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+postmethod = post.PostMethod()
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
 websocket_manager = websocket_manager.WebSocketManager()
 
-@app.post("/postjob/:userid")
+@app.post("/postjob/{userid}")
 async def post_job(job: JobBase, db: db_dependency):
-    db_jobs = models.Jobs(user_id=job.user_id, title=job.title, description=job.description, location=job.location, coordinates=job.coordinates, price=job.price, created_at=job.created_at )
-    db.add(db_jobs)
-    db.commit()
+    await postmethod.postJob(job, db)
 
     # post.postJob()
 
 @app.post("/dummy_message")
-async def root():
-    post.save_message()
+async def root(job: JobBase, db: db_dependency):
+    postmethod.postBookMark()
 
 
 @app.post("/bookmark/{userid}")
 async def post_bookmark_job():
     #post jobs to bookmark table.
-    post.post_bookmark_job()
+    postmethod.postBookMark()
 
 # @app.get("/dummy_data")
 # async def get_dummy():

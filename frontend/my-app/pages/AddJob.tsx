@@ -16,29 +16,31 @@ import AppContext from "../context/Context";
 import NavigationContext from "../context/NavigationContext";
 import ControlBar from "../components/ControlBar";
 import Header from "../components/Header";
-import { myJobs } from "../types/post";
+import { PostBody, myJobs, JobBody } from "../types/post";
 import axios from "axios";
+import uuid from "react-native-uuid";
 
 const AddJobPage = () => {
   const context = useContext(AppContext);
   const navigation = useContext(NavigationContext);
-  const { myPostFeed, setMyPostFeed, userid } = context;
+  const { myPostFeed, setMyPostFeed, userId } = context;
   const { goBackHome, homeNavigation } = navigation;
   const [compensation, setCompensation] = useState<string>("");
 
   const [jobForm, setJobForm] = useState<myJobs>({
     title: "",
+    jobid: "",
     description: "",
     price: 0,
     location: "",
     status: false,
   });
 
-  const postjob = async (postbody: myJobs) => {
+  const postjob = async (postbody: JobBody) => {
     if (postbody) {
       JSON.stringify(postbody);
       const result = await axios.post(
-        `http://localhost:8080/postjob/${userid}`,
+        `http://localhost:8000/postjob/${userId}`,
         postbody
       );
       return result;
@@ -48,10 +50,25 @@ const AddJobPage = () => {
   // and also should add the job to my jobs.
   const addJob = async () => {
     const price = Number(compensation);
+    const jobid = uuid.v4() as string;
+    const postJob: JobBody = {
+      user_id: userId,
+      job_id: jobid,
+      title: jobForm.title,
+      description: jobForm.description,
+      location: jobForm.location,
+      coordinates: "test",
+      price: jobForm.price,
+      created_at: String(Date.now()),
+    };
     // Update jobForm state and then update myPostFeed
     setJobForm((prev) => {
-      const updatedJobForm = { ...prev, price: price };
-      postjob(updatedJobForm);
+      const updatedJobForm = {
+        ...prev,
+        price: price,
+        job_id: jobid,
+      };
+      postjob(postJob);
       // Use the updated job form here
       setMyPostFeed((prevPosts: any) => [...prevPosts, updatedJobForm]);
 
@@ -103,7 +120,7 @@ const AddJobPage = () => {
               <TouchableOpacity
                 onPress={() => {
                   console.log(compensation);
-                  // addJob();
+                  addJob();
                 }}
               >
                 <View style={style.btn}>

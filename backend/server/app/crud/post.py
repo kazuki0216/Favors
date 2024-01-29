@@ -1,13 +1,18 @@
-
+import models
 class PostMethod: 
     def __init__(self) -> None:
         pass
 
-    async def postJob(self):
-        return "post"
+    async def postJob(self, job, db):
+        print("This is the job object ",job)
+        db_jobs = models.Jobs(user_id=job.user_id, job_id=job.job_id, title=job.title, description=job.description, location=job.location, coordinates=job.coordinates, price=job.price, created_at=job.created_at )
+        db.add(db_jobs)
+        db.commit()
 
-    async def postBookMark(self):
-        return "post bookmark job"
+    async def postBookMark(self, job, db):
+        db_jobs = models.Jobs(user_id=job.user_id, title=job.title, description=job.description, location=job.location, coordinates=job.coordinates, price=job.price, created_at=job.created_at )
+        db.add(db_jobs)
+        db.commit()
     
     # async def save_message():
     #     query = """
