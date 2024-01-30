@@ -3,7 +3,7 @@ class GetMethod:
     def __init__(self) -> None:
         pass
 
-    async def initialUserInfoFetch(self, userId, db):
+    async def initialUserInfoFetch(self, db):
         return db.query(models.Jobs).filter(models.Jobs.is_complete == False).all()
 
     #     query = """

@@ -46,9 +46,10 @@ export default function App() {
   const [userId, setUserId] = useState<string | null>(null);
   const [activeIcon, setActiveIcon] = useState<string>("home");
   const [connectedUser, setConnectedUser] = useState<string>("");
-  const [myPostFeed, setMyPostFeed] = useState<myJobs[] | []>(myDummyData);
+  const [myPostFeed, setMyPostFeed] = useState<myJobs[] | []>([]);
   const [selectedPost, setSelectedPost] = useState<PostBody | null>(null);
   const [bookmarkedJob, setBookMarkedJob] = useState([]);
+  const [publicPostFeed, setPublicPostFeed] = useState<PostBody[] | []>([]);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -78,6 +79,8 @@ export default function App() {
           setSelectedPost,
           bookmarkedJob,
           setBookMarkedJob,
+          publicPostFeed,
+          setPublicPostFeed,
         }}
       >
         <NavigationContainer>

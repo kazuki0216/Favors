@@ -9,22 +9,32 @@ import axios from "axios";
 
 const Home: React.FC = () => {
   const context = useContext(AppContext);
-  const { userId } = context;
+  const {
+    userId,
+    setPublicPostFeed,
+    publicPostFeed,
+    myPostFeed,
+    setMyPostFeed,
+  } = context;
   const [initialMount, setInitialMount] = useState<boolean>(false);
-  // const fetchInitialUserJobs = async () => {
-  //   const response = axios
-  //     .get(`http://localhost:8000/home/${userId}`)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       setInitialMount(true);
-  //     });
-  // };
 
-  // useEffect(() => {
-  //   if (!initialMount) {
-  //     fetchInitialUserJobs();
-  //   }
-  // }, []);
+  const fetchInitialUserJobs = async () => {
+    console.log("this is the userId ❤️", userId);
+    const response = await axios
+      .get(`http://localhost:8000/home/${userId}`)
+      .then((response) => {
+        const jobObject = response.data;
+        setPublicPostFeed(jobObject.public_job);
+        setMyPostFeed(jobObject.my_job);
+        setInitialMount(true);
+      });
+  };
+
+  useEffect(() => {
+    if (!initialMount && userId) {
+      fetchInitialUserJobs();
+    }
+  }, [userId]);
   return (
     <>
       <View style={styles.container}>
