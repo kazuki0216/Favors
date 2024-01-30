@@ -24,15 +24,14 @@ const AvailablePosts = ({}) => {
     selectedPost,
     setSelectedPost,
     setBookMarkedJob,
+    publicPostFeed,
+    setPublicPostFeed,
   } = value;
   const navigation = useContext(NavigationContext);
   const { messageNavigation } = navigation;
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [publicPostFeed, setpublicPostFeed] = useState<PostBody[] | []>(
-    dummyData
-  );
 
-  const renderPosts = publicPostFeed.map((feed, index) => {
+  const renderPosts = publicPostFeed.map((feed: any, index: any) => {
     const descriptionLength = () => {
       if (feed.description.length > 70) {
         return (
@@ -75,7 +74,7 @@ const AvailablePosts = ({}) => {
                   //make the bookmark change to true
                   const bookmark = true;
                   const updatedFeed = { ...feed, bookmark };
-                  setpublicPostFeed((prev) => [
+                  setPublicPostFeed((prev: any) => [
                     ...prev,
                     (publicPostFeed[index] = updatedFeed),
                   ]);

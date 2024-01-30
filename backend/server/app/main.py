@@ -75,10 +75,32 @@ async def post_bookmark_job():
     postmethod.postBookMark()
 
 @app.get("/home/{userid}")
-async def fetchInitialUserData(db: db_dependency):
+async def fetchInitialUserData(userid:str, db: db_dependency):
     userid = userid
-    result = await getmethod.initialUserInfoFetch(userid, db)
-    return result
+    response = {
+        "my_job": [],
+        "public_job": []
+    }
+    result = await getmethod.initialUserInfoFetch(db)
+    print("FIRE!!!!! ",result)
+
+    for job in result:
+        print(job)
+        if job.user_id == userid:
+            response["my_job"].append({
+                "user_id": job.user_id,
+                "job_id": job.job_id,
+                "title": job.title,
+                "description": job.description,
+                "coordinates": job.coordinates,
+                "location": job.location,
+                "price": job.price,
+                "created_at": job.created_at,
+                "is_complete": job.is_complete
+            })
+        else:
+            response["public_job"].append(job)
+    return response
 
 @app.websocket("/ws/{user_id}")
 async def websocket_endpoint(user_id: str, websocket: WebSocket):
