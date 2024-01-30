@@ -4,14 +4,13 @@ from fastapi.middleware.cors import CORSMiddleware
 import json
 from contextlib import asynccontextmanager
 # import psycopg2
-from crud import post
+from crud import post, get
 from api import websocket_manager
 from pydantic import BaseModel
 from typing import List, Annotated
 import models
 from database import engine, SessionLocal, get_db
 from sqlalchemy.orm import Session
-
 
 app = FastAPI()
 models.Base.metadata.create_all(bind=engine)
@@ -23,8 +22,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
 
 class UserBase(BaseModel):
     user_id: str
@@ -40,6 +37,7 @@ class JobBase(BaseModel):
     coordinates: str
     price: int
     created_at: str
+    is_complete: bool
 
 class BookMark(BaseModel):
     user_id: str
@@ -53,6 +51,7 @@ class MessageBase(BaseModel):
     timestamp: str
 
 postmethod = post.PostMethod()
+getmethod = get.GetMethod()
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
@@ -60,8 +59,9 @@ websocket_manager = websocket_manager.WebSocketManager()
 
 @app.post("/postjob/{userid}")
 async def post_job(job: JobBase, db: db_dependency):
-    await postmethod.postJob(job, db)
-
+    print(job)
+    response = await postmethod.postJob(job, db)
+    return response
     # post.postJob()
 
 @app.post("/dummy_message")
@@ -74,10 +74,11 @@ async def post_bookmark_job():
     #post jobs to bookmark table.
     postmethod.postBookMark()
 
-# @app.get("/dummy_data")
-# async def get_dummy():
-#     query = "SELECT * FROM messages WHERE senderId = Kazuki"
-#     return await Database.fetch_all(query)
+@app.get("/home/{userid}")
+async def fetchInitialUserData(db: db_dependency):
+    userid = userid
+    result = await getmethod.initialUserInfoFetch(userid, db)
+    return result
 
 @app.websocket("/ws/{user_id}")
 async def websocket_endpoint(user_id: str, websocket: WebSocket):

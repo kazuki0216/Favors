@@ -7,7 +7,6 @@ export type PostBody = {
   location: string;
   coordinates: string;
   price: number;
-  status: boolean;
   bookmarked: boolean;
 };
 
@@ -31,4 +30,5 @@ export type JobBody = {
   coordinates?: string;
   price: number;
   created_at: string;
+  is_complete: boolean;
 };

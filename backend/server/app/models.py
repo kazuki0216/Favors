@@ -12,14 +12,15 @@ class User(Base):
 
 class Jobs(Base):
     __tablename__ = "jobs"
-    user_id = Column(String, primary_key=True)
-    job_id = Column(String, nullable=False, unique=True)
+    user_id = Column(String)
+    job_id = Column(String, nullable=False, unique=True, primary_key=True)
     title = Column(String, nullable=False)
     description = Column(String, nullable=False)
     location = Column(String, nullable=False)
     coordinates = Column(String, nullable=False)
     price = Column(Integer, nullable=False)
     created_at = Column(String, nullable=False)
+    is_complete = Column(Boolean)
 
 class BookMark(Base):
     __tablename__ = "bookmark"

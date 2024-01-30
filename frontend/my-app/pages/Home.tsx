@@ -1,14 +1,30 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Header from "../components/Header";
 import Body from "../components/Body";
 import ControlBar from "../components/ControlBar";
 import { StatusBar } from "expo-status-bar";
 import AppContext from "../context/Context";
+import axios from "axios";
 
 const Home: React.FC = () => {
   const context = useContext(AppContext);
-  const { goBackHome } = context;
+  const { userId } = context;
+  const [initialMount, setInitialMount] = useState<boolean>(false);
+  // const fetchInitialUserJobs = async () => {
+  //   const response = axios
+  //     .get(`http://localhost:8000/home/${userId}`)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setInitialMount(true);
+  //     });
+  // };
+
+  // useEffect(() => {
+  //   if (!initialMount) {
+  //     fetchInitialUserJobs();
+  //   }
+  // }, []);
   return (
     <>
       <View style={styles.container}>

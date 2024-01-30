@@ -37,18 +37,21 @@ const AddJobPage = () => {
   });
 
   const postjob = async (postbody: JobBody) => {
+    console.log("This is the post body -> ",postbody)
     if (postbody) {
       JSON.stringify(postbody);
-      const result = await axios.post(
-        `http://localhost:8000/postjob/${userId}`,
-        postbody
-      );
+      const result = await axios
+        .post(`http://localhost:8000/postjob/${userId}`, postbody)
+        .then((response) => {
+          console.log(response);
+        });
       return result;
     }
   };
   // should do an api call to save the job to the database,
   // and also should add the job to my jobs.
   const addJob = async () => {
+    console.log("userid;", userId);
     const price = Number(compensation);
     const jobid = uuid.v4() as string;
     const postJob: JobBody = {
@@ -60,6 +63,7 @@ const AddJobPage = () => {
       coordinates: "test",
       price: jobForm.price,
       created_at: String(Date.now()),
+      is_complete: false,
     };
     // Update jobForm state and then update myPostFeed
     setJobForm((prev) => {

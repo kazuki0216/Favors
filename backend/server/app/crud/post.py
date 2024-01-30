@@ -5,7 +5,7 @@ class PostMethod:
 
     async def postJob(self, job, db):
         print("This is the job object ",job)
-        db_jobs = models.Jobs(user_id=job.user_id, job_id=job.job_id, title=job.title, description=job.description, location=job.location, coordinates=job.coordinates, price=job.price, created_at=job.created_at )
+        db_jobs = models.Jobs(user_id=job.user_id, job_id=job.job_id, title=job.title, description=job.description, location=job.location, coordinates=job.coordinates, price=job.price, created_at=job.created_at, is_complete=job.is_complete )
         db.add(db_jobs)
         db.commit()
 
