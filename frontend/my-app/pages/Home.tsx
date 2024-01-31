@@ -9,11 +9,10 @@ import axios from "axios";
 
 const Home: React.FC = () => {
   const context = useContext(AppContext);
-  const { userId, setPublicPostFeed, setMyPostFeed } = context;
+  const { userId, setPublicPostFeed, setMyPostFeed, userName } = context;
   const [initialMount, setInitialMount] = useState<boolean>(false);
 
   const fetchInitialUserJobs = async () => {
-    console.log("this is the userId ❤️", userId);
     const response = await axios
       .get(`http://localhost:8000/home/${userId}`)
       .then((response) => {

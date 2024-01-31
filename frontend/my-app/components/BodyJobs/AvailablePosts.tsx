@@ -11,7 +11,6 @@ import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/Ionicons";
 import ModalView from "./Modal";
 import { PostBody } from "../../types/post";
-import { dummyData } from "../DummyData";
 import NavigationContext from "../../context/NavigationContext";
 import AppContext from "../../context/Context";
 import BookMark from "react-native-vector-icons/FontAwesome";

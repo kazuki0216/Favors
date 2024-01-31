@@ -23,13 +23,14 @@ import uuid from "react-native-uuid";
 const AddJobPage = () => {
   const context = useContext(AppContext);
   const navigation = useContext(NavigationContext);
-  const { myPostFeed, setMyPostFeed, userId } = context;
+  const { myPostFeed, setMyPostFeed, userId, setUserName, userName } = context;
   const { goBackHome, homeNavigation } = navigation;
   const [compensation, setCompensation] = useState<string>("");
 
   const [jobForm, setJobForm] = useState<myJobs>({
     title: "",
     jobid: "",
+    name: userName,
     description: "",
     price: 0,
     location: "",
@@ -37,7 +38,7 @@ const AddJobPage = () => {
   });
 
   const postjob = async (postbody: JobBody) => {
-    console.log("This is the post body -> ",postbody)
+    console.log("This is the post body -> ", postbody);
     if (postbody) {
       JSON.stringify(postbody);
       const result = await axios
@@ -57,6 +58,7 @@ const AddJobPage = () => {
     const postJob: JobBody = {
       user_id: userId,
       job_id: jobid,
+      name: userName,
       title: jobForm.title,
       description: jobForm.description,
       location: jobForm.location,
@@ -96,6 +98,7 @@ const AddJobPage = () => {
               onChangeText={(title: string) =>
                 setJobForm({ ...jobForm, title })
               }
+              maxLength={20}
             />
             <TextInput
               placeholder="詳細"

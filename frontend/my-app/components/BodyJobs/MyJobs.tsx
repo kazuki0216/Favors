@@ -13,7 +13,6 @@ import {
 import Icon from "react-native-vector-icons/Ionicons";
 import ModalView from "./Modal";
 import { PostBody, myJobs } from "../../types/post";
-import { myDummyData } from "../DummyData";
 
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 

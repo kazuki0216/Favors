@@ -14,6 +14,7 @@ class Jobs(Base):
     __tablename__ = "jobs"
     user_id = Column(String)
     job_id = Column(String, nullable=False, unique=True, primary_key=True)
+    name = Column(String, nullable=False)
     title = Column(String, nullable=False)
     description = Column(String, nullable=False)
     location = Column(String, nullable=False)

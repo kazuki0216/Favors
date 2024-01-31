@@ -31,6 +31,7 @@ class UserBase(BaseModel):
 class JobBase(BaseModel):
     user_id: str
     job_id: str
+    name: str
     title: str
     description: str
     location: str
@@ -62,12 +63,12 @@ async def post_job(job: JobBase, db: db_dependency):
     print(job)
     response = await postmethod.postJob(job, db)
     return response
-    # post.postJob()
 
-@app.post("/dummy_message")
-async def root(job: JobBase, db: db_dependency):
-    postmethod.postBookMark()
-
+@app.post("/post-dummy/")
+async def post_job(job_array: List[JobBase], db: db_dependency):
+    for job in job_array:
+        await postmethod.postJob(job, db)
+    return "Finished"
 
 @app.post("/bookmark/{userid}")
 async def post_bookmark_job():
