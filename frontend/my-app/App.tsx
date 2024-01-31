@@ -12,7 +12,6 @@ import AppContext from "./context/Context";
 import ContactList from "./components/ContactList";
 import NavigationContext from "./context/NavigationContext";
 import useAuth from "./hooks/useAuth";
-import { myDummyData } from "./components/DummyData";
 import { myJobs } from "./types/post";
 import { PostBody } from "./types/post";
 
@@ -42,7 +41,7 @@ const NavigationProvider = ({ children }: Props) => {
 };
 
 export default function App() {
-  const [username, setUserName] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const [activeIcon, setActiveIcon] = useState<string>("home");
   const [connectedUser, setConnectedUser] = useState<string>("");
@@ -65,7 +64,7 @@ export default function App() {
     return (
       <AppContext.Provider
         value={{
-          username,
+          userName,
           setUserName,
           userId,
           setUserId,

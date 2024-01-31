@@ -24,6 +24,7 @@ export type myJobs = {
 export type JobBody = {
   user_id: string;
   job_id: string;
+  name: string;
   title: string;
   description: string;
   location?: string;

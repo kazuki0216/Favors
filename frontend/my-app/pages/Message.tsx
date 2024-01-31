@@ -20,7 +20,6 @@ import AppContext from "../context/Context";
 import NavigationContext from "../context/NavigationContext";
 import { MessageType } from "../types/message";
 import uuid from "react-native-uuid";
-import { dummyMessage } from "../components/DummyData";
 import useAuth from "../hooks/useAuth";
 
 const Message = () => {
@@ -32,7 +31,7 @@ const Message = () => {
   const [messages, setMessages] = useState<MessageType[] | []>([]);
   const [inputOpen, setInputOpen] = useState<boolean>(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const [messageArr, setMessageArr] = useState<MessageType[]>(dummyMessage);
+  const [messageArr, setMessageArr] = useState<MessageType[] | []>([]);
   const [ws, setWs] = useState<WebSocket | null>(null);
   const { user } = useAuth();
 
@@ -54,7 +53,7 @@ const Message = () => {
     //This is the section for recieving the message from the other person
     webSocket.onmessage = (e) => {
       const parsedData = JSON.parse(e.data);
-      const message = JSON.parse((parsedData.message))
+      const message = JSON.parse(parsedData.message);
       setMessageArr((prev) => [...prev, message]);
     };
 
