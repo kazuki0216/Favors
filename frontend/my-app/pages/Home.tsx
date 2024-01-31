@@ -9,13 +9,7 @@ import axios from "axios";
 
 const Home: React.FC = () => {
   const context = useContext(AppContext);
-  const {
-    userId,
-    setPublicPostFeed,
-    publicPostFeed,
-    myPostFeed,
-    setMyPostFeed,
-  } = context;
+  const { userId, setPublicPostFeed, setMyPostFeed } = context;
   const [initialMount, setInitialMount] = useState<boolean>(false);
 
   const fetchInitialUserJobs = async () => {
