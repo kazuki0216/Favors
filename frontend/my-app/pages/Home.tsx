@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Header from "../components/Header";
 import Body from "../components/Body";
 import ControlBar from "../components/ControlBar";
