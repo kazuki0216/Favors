@@ -5,6 +5,7 @@ import AppContext from "../context/Context";
 import ControlBar from "../components/ControlBar";
 import { auth } from "../config/firebase";
 import { signOut } from "firebase/auth";
+import Header from "../components/Header";
 
 const Profile = () => {
   const context = useContext(AppContext);
@@ -13,11 +14,8 @@ const Profile = () => {
   };
   return (
     <>
-      <View style={style.container}>
-        <TouchableOpacity onPress={handleLogout}>
-          <Text style={style.text}>Logout</Text>
-        </TouchableOpacity>
-      </View>
+      <Header />
+      <View style={style.container}></View>
       <ControlBar />
     </>
   );
