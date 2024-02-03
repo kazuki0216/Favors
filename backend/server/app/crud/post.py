@@ -13,6 +13,9 @@ class PostMethod:
         db_jobs = models.Jobs(user_id=job.user_id, title=job.title, description=job.description, location=job.location, coordinates=job.coordinates, price=job.price, created_at=job.created_at )
         db.add(db_jobs)
         db.commit()
+
+    # async def paypayQR(self, client):
+
     
     # async def save_message():
     #     query = """

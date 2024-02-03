@@ -2,7 +2,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { FIREBASE_APIKEY } from "@env";
-import { API_KEY, API_SECRET, MERCHANT_ID } from "@env";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 

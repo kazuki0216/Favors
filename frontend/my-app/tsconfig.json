@@ -4,12 +4,6 @@
     "jsx": "react",
     "strict": true
   },
-  "include": [
-    "./*",
-    "my-app/custom",
-    "context/Context.ts",
-    "types/env.d.ts",
-    "types/custom.d.ts"
-  ],
+  "include": ["./*", "my-app/custom", "context/Context.ts"],
   "typeRoots": ["./types"]
 }

@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import Account from "react-native-vector-icons/MaterialCommunityIcons";
 import AppContext from "../context/Context";
-import { contactList } from "./DummyData";
 import ControlBar from "./ControlBar";
 import NavigationContext from "../context/NavigationContext";
 

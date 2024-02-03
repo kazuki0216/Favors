@@ -49,6 +49,7 @@ export default function App() {
   const [selectedPost, setSelectedPost] = useState<PostBody | null>(null);
   const [bookmarkedJob, setBookMarkedJob] = useState([]);
   const [publicPostFeed, setPublicPostFeed] = useState<PostBody[] | []>([]);
+  const [email, setEmail] = useState<string | null>(null);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -56,6 +57,7 @@ export default function App() {
     if (user) {
       setUserName(user.displayName);
       setUserId(user.uid);
+      setEmail(user.email);
     }
     console.log(userId);
   }, [user]);
@@ -80,6 +82,8 @@ export default function App() {
           setBookMarkedJob,
           publicPostFeed,
           setPublicPostFeed,
+          setEmail,
+          email,
         }}
       >
         <NavigationContainer>
