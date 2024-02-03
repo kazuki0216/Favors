@@ -190,6 +190,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 20,
     marginLeft: 20,
+    maxWidth: 220
   },
   view_button: {
     display: "flex",
