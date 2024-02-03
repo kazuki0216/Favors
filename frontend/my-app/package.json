@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@paypayopa/paypayopa-sdk-node": "^2.1.0",
     "@react-native-firebase/app": "^18.7.3",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
