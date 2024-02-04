@@ -1,12 +1,6 @@
 import React, { useEffect } from "react";
 import { useState, useContext } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 
 const Credit = () => {
   return (
