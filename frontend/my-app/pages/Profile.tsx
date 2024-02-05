@@ -62,10 +62,6 @@ const Profile = () => {
           </View>
         </View>
         <View style={style.body}>
-          <View>
-            <ProfileButton setClickedButton={setClickedButton} />
-          </View>
-
           {/* <PayPay /> */}
           {clickedButton === "Credit" ? (
             <Credit />
@@ -74,6 +70,9 @@ const Profile = () => {
           ) : (
             <Calendar />
           )}
+          <View style={style.profile_button}>
+            <ProfileButton setClickedButton={setClickedButton} />
+          </View>
         </View>
       </View>
       <ControlBar />
@@ -129,6 +128,9 @@ const style = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
   },
+  profile_button: {
+    marginTop: 140,
+  }
 });
 
 export default Profile;

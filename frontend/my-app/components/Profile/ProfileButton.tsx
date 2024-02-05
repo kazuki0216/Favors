@@ -28,9 +28,6 @@ const ProfileButton: React.FC<Props> = ({ setClickedButton }) => {
               />
             </View>
           </TouchableOpacity>
-          <View style={style.button_label}>
-            <Text style={{ fontWeight: "bold" }}>クレジット</Text>
-          </View>
         </View>
         <View>
           <TouchableOpacity onPress={() => setClickedButton("Calendar")}>
@@ -38,9 +35,6 @@ const ProfileButton: React.FC<Props> = ({ setClickedButton }) => {
               <AntDesign name="calendar" size={40} style={{ color: "grey" }} />
             </View>
           </TouchableOpacity>
-          <View style={style.button_label}>
-            <Text style={{ fontWeight: "bold" }}>カレンダー</Text>
-          </View>
         </View>
         <View>
           <TouchableOpacity onPress={() => setClickedButton("History")}>
@@ -48,9 +42,6 @@ const ProfileButton: React.FC<Props> = ({ setClickedButton }) => {
               <Icon3 name="history" size={35} style={{ color: "grey" }} />
             </View>
           </TouchableOpacity>
-          <View style={style.button_label}>
-            <Text style={{ fontWeight: "bold" }}>履歴</Text>
-          </View>
         </View>
       </View>
     </>
@@ -65,10 +56,6 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    marginTop: 10,
-    paddingBottom: 15,
-    borderBottomWidth: 1,
-    borderColor: "#D8D8D8",
     width: "100%",
   },
   icon_container: {
