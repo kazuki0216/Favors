@@ -14,10 +14,10 @@ const Credit = () => {
             <View style={style.right_wave}></View>
             <View style={style.left_wave}></View>
           </View>
-          <View style={style.card}>
+          {/* <View style={style.card}>
             <Text style={style.credit_text}>残高</Text>
             <Text style={style.credit_text}>￥9000</Text>
-          </View>
+          </View> */}
         </View>
       </View>
     </>
@@ -62,17 +62,20 @@ const style = StyleSheet.create({
   },
   card: {},
   left_wave: {
-    backgroundColor: "#1e1f4d",
-    width: "50%",
+    backgroundColor: "#b2cac4",
+    width: "65%",
     height: "100%",
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 300,
+    position: "absolute",
+    right: 0,
   },
   right_wave: {
-    backgroundColor: "#121244",
-    width: "50%",
+    backgroundColor: "#6e807a",
+    position: "absolute",
+    width: "100%",
     height: "100%",
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
+    borderRadius: 10,
   },
 });

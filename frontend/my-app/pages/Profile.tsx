@@ -43,14 +43,10 @@ const Profile = () => {
               >
                 {userName}
               </Text> */}
-              <Text
-                style={{ fontWeight: "bold", color: "white", fontSize: 25 }}
-              >
+              <Text style={{ fontWeight: "bold", fontSize: 25 }}>
                 ユーザーA
               </Text>
-              <Text
-                style={{ fontWeight: "bold", color: "white", fontSize: 12.5 }}
-              >
+              <Text style={{ fontWeight: "bold", fontSize: 12.5 }}>
                 Email: test123@gmail.com
               </Text>
               {/* <Text
@@ -101,7 +97,7 @@ const style = StyleSheet.create({
     position: "absolute",
     paddingTop: 70,
     paddingBottom: 80,
-    backgroundColor: "#004831",
+    backgroundColor: "#b2cac4",
   },
   profile_pic: {
     width: 120,
@@ -109,13 +105,13 @@ const style = StyleSheet.create({
     borderRadius: 100,
   },
   profile_container: {
-    shadowColor: "white",
+    // shadowColor: "white",
     shadowOffset: {
       width: 1,
       height: 1,
     },
     shadowOpacity: 1.25,
-    shadowRadius: 5,
+    shadowRadius: 2,
   },
   body: {
     zIndex: 1,
@@ -130,7 +126,7 @@ const style = StyleSheet.create({
   },
   profile_button: {
     marginTop: 140,
-  }
+  },
 });
 
 export default Profile;
