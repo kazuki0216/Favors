@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   TextInput,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -13,7 +12,6 @@ import {
   Pressable,
   FlatList,
 } from "react-native";
-import ModalView from "../components/BodyJobs/Modal";
 import Account from "react-native-vector-icons/MaterialCommunityIcons";
 import SEND from "react-native-vector-icons/FontAwesome";
 import AppContext from "../context/Context";

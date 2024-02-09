@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
-import { View } from "react-native";
 import AppContext from "../context/Context";
 
 const Authentication = () => {
